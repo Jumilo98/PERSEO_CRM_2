@@ -1,7 +1,6 @@
 /application/node_modules
 /application/public/hot
 /application/storage/*.key
-/application/storage/logs
 /application/vendor
 /application/.idea
 /application/.vagrant
