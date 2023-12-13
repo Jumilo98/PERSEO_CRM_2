@@ -1,0 +1,15 @@
+/application/node_modules
+/application/public/hot
+/application/storage/*.key
+/application/storage/logs
+/application/vendor
+/application/.idea
+/application/.vagrant
+/application/Homestead.json
+/application/Homestead.yaml
+/application/npm-debug.log
+/application/yarn-error.log
+/application/.env
+/application/composer.lock
+/application/node_modules
+/application/package-lock.json
