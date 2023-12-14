@@ -40,7 +40,7 @@ class WebformRepository {
         $webforms->selectRaw('*');
 
         //joins
-        $webforms->leftJoin('users', 'users.id', '=', 'webforms.webform_creatorid');
+        $webforms->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_webforms.webform_creatorid');
 
         //default where
         $webforms->whereRaw("1 = 1");

@@ -36,7 +36,7 @@ class UnitRepository {
         $units = $this->units->newQuery();
 
         //joins
-        $units->leftJoin('users', 'users.id', '=', 'units.unit_creatorid');
+        $units->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_unidades.unit_creatorid');
 
         // all client fields
         $units->selectRaw('*');

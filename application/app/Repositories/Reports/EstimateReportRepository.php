@@ -110,7 +110,7 @@ class EstimateReportRepository {
         //sorting
         if (in_array(request('sortorder'), array('desc', 'asc')) && request('orderby') != '') {
             //direct column name
-            if (Schema::hasColumn('estimates', request('orderby'))) {
+            if (Schema::hasColumn('crm_estimaciones', request('orderby'))) {
                 $estimates->orderBy(request('orderby'), request('sortorder'));
             }
             //others
@@ -185,12 +185,12 @@ class EstimateReportRepository {
         $estimates->whereRaw("1 = 1");
 
         //sum the values
-        $estimates->selectRaw('COALESCE(SUM(estimates.bill_amount_before_tax), 0) as sum_bill_amount_before_tax');
-        $estimates->selectRaw('COALESCE(SUM(estimates.bill_tax_total_amount), 0) as sum_bill_tax_total_amount');
-        $estimates->selectRaw('COALESCE(SUM(estimates.bill_discount_amount), 0) as sum_bill_discount_amount');
-        $estimates->selectRaw('COALESCE(SUM(estimates.bill_adjustment_amount), 0) as sum_bill_adjustment_amount');
-        $estimates->selectRaw('COALESCE(SUM(estimates.bill_final_amount), 0) as sum_bill_final_amount');
-        $estimates->selectRaw('COUNT(estimates.bill_estimateid) AS estimate_count');
+        $estimates->selectRaw('COALESCE(SUM(crm_estimaciones.bill_amount_before_tax), 0) as sum_bill_amount_before_tax');
+        $estimates->selectRaw('COALESCE(SUM(crm_estimaciones.bill_tax_total_amount), 0) as sum_bill_tax_total_amount');
+        $estimates->selectRaw('COALESCE(SUM(crm_estimaciones.bill_discount_amount), 0) as sum_bill_discount_amount');
+        $estimates->selectRaw('COALESCE(SUM(crm_estimaciones.bill_adjustment_amount), 0) as sum_bill_adjustment_amount');
+        $estimates->selectRaw('COALESCE(SUM(crm_estimaciones.bill_final_amount), 0) as sum_bill_final_amount');
+        $estimates->selectRaw('COUNT(crm_estimaciones.bill_estimateid) AS estimate_count');
 
         //skip draft estimates
         $estimates->whereNotIn('bill_status', ['draft']);
@@ -245,12 +245,12 @@ class EstimateReportRepository {
         }
 
         //group
-        $estimates->groupBy('estimates.bill_clientid');
+        $estimates->groupBy('crm_estimaciones.bill_clientid');
 
         //sorting
         if (in_array(request('sortorder'), array('desc', 'asc')) && request('orderby') != '') {
             //direct column name
-            if (Schema::hasColumn('estimates', request('orderby'))) {
+            if (Schema::hasColumn('crm_estimaciones', request('orderby'))) {
                 $estimates->orderBy(request('orderby'), request('sortorder'));
             }
             //others
@@ -261,7 +261,7 @@ class EstimateReportRepository {
             }
         } else {
             //default sorting
-            $estimates->orderBy('clients.client_company_name', 'asc');
+            $estimates->orderBy('crm_clientes.client_company_name', 'asc');
         }
 
         //page limit
@@ -327,15 +327,15 @@ class EstimateReportRepository {
                                              UNION SELECT 12) months'));
 
         //join months to estimates
-        $estimates->leftJoin('estimates', function ($join) {
+        $estimates->leftJoin('crm_estimaciones', function ($join) {
             //join
-            $join->on(DB::raw('MONTH(estimates.bill_date)'), '=', 'months.month');
+            $join->on(DB::raw('MONTH(crm_estimaciones.bill_date)'), '=', 'months.month');
 
             //APPLY ALL FILTERS HERE
 
             //filter year
             if (request()->filled('filter_year') && request('filter_year') != 'all') {
-                $join->whereYear('estimates.bill_date', '=', request('filter_year'));
+                $join->whereYear('crm_estimaciones.bill_date', '=', request('filter_year'));
             }
 
             //exclude drat
@@ -369,19 +369,19 @@ class EstimateReportRepository {
                                    ELSE "december"
                                    END as estimate_month');
         //sum the values
-        $estimates->selectRaw('COALESCE(SUM(estimates.bill_amount_before_tax), 0) as sum_bill_amount_before_tax');
-        $estimates->selectRaw('COALESCE(SUM(estimates.bill_tax_total_amount), 0) as sum_bill_tax_total_amount');
-        $estimates->selectRaw('COALESCE(SUM(estimates.bill_discount_amount), 0) as sum_bill_discount_amount');
-        $estimates->selectRaw('COALESCE(SUM(estimates.bill_adjustment_amount), 0) as sum_bill_adjustment_amount');
-        $estimates->selectRaw('COALESCE(SUM(estimates.bill_final_amount), 0) as sum_bill_final_amount');
-        $estimates->selectRaw('COUNT(estimates.bill_estimateid) AS estimate_count');
+        $estimates->selectRaw('COALESCE(SUM(crm_estimaciones.bill_amount_before_tax), 0) as sum_bill_amount_before_tax');
+        $estimates->selectRaw('COALESCE(SUM(crm_estimaciones.bill_tax_total_amount), 0) as sum_bill_tax_total_amount');
+        $estimates->selectRaw('COALESCE(SUM(crm_estimaciones.bill_discount_amount), 0) as sum_bill_discount_amount');
+        $estimates->selectRaw('COALESCE(SUM(crm_estimaciones.bill_adjustment_amount), 0) as sum_bill_adjustment_amount');
+        $estimates->selectRaw('COALESCE(SUM(crm_estimaciones.bill_final_amount), 0) as sum_bill_final_amount');
+        $estimates->selectRaw('COUNT(crm_estimaciones.bill_estimateid) AS estimate_count');
 
         $estimates->groupBy('months.month');
 
         //sorting
         if (in_array(request('sortorder'), array('desc', 'asc')) && request('orderby') != '') {
             //direct column name
-            if (Schema::hasColumn('estimates', request('orderby'))) {
+            if (Schema::hasColumn('crm_estimaciones', request('orderby'))) {
                 $estimates->orderBy(request('orderby'), request('sortorder'));
             }
             //others
@@ -467,12 +467,12 @@ class EstimateReportRepository {
         $estimates = DB::table('crm_categorias');
 
         //join estimates and add all teh conditions on estimates in this join
-        $estimates->leftJoin('estimates', function ($join) {
+        $estimates->leftJoin('crm_estimaciones', function ($join) {
 
-            $join->on('categories.category_id', '=', 'estimates.bill_categoryid');
+            $join->on('crm_categorias.category_id', '=', 'crm_estimaciones.bill_categoryid');
 
             //skip draft estimates
-            $join->whereNotIn('estimates.bill_status', ['draft']);
+            $join->whereNotIn('crm_estimaciones.bill_status', ['draft']);
 
             //[date] - range
             if (request('filter_report_date_range') == 'custom_range') {
@@ -529,24 +529,24 @@ class EstimateReportRepository {
         $estimates->selectRaw('*');
 
         //only get the estimates category
-        $estimates->where('categories.category_type', 'estimate');
+        $estimates->where('crm_categorias.category_type', 'estimate');
 
         //sum the values
-        $estimates->selectRaw('COALESCE(SUM(estimates.bill_amount_before_tax), 0) as sum_bill_amount_before_tax');
-        $estimates->selectRaw('COALESCE(SUM(estimates.bill_tax_total_amount), 0) as sum_bill_tax_total_amount');
-        $estimates->selectRaw('COALESCE(SUM(estimates.bill_discount_amount), 0) as sum_bill_discount_amount');
-        $estimates->selectRaw('COALESCE(SUM(estimates.bill_adjustment_amount), 0) as sum_bill_adjustment_amount');
-        $estimates->selectRaw('COALESCE(SUM(estimates.bill_final_amount), 0) as sum_bill_final_amount');
-        $estimates->selectRaw('COUNT(estimates.bill_estimateid) AS estimate_count');
+        $estimates->selectRaw('COALESCE(SUM(crm_estimaciones.bill_amount_before_tax), 0) as sum_bill_amount_before_tax');
+        $estimates->selectRaw('COALESCE(SUM(crm_estimaciones.bill_tax_total_amount), 0) as sum_bill_tax_total_amount');
+        $estimates->selectRaw('COALESCE(SUM(crm_estimaciones.bill_discount_amount), 0) as sum_bill_discount_amount');
+        $estimates->selectRaw('COALESCE(SUM(crm_estimaciones.bill_adjustment_amount), 0) as sum_bill_adjustment_amount');
+        $estimates->selectRaw('COALESCE(SUM(crm_estimaciones.bill_final_amount), 0) as sum_bill_final_amount');
+        $estimates->selectRaw('COUNT(crm_estimaciones.bill_estimateid) AS estimate_count');
 
         //group
-        $estimates->groupBy('categories.category_id');
-        $estimates->groupBy('categories.category_name');
+        $estimates->groupBy('crm_categorias.category_id');
+        $estimates->groupBy('crm_categorias.category_name');
 
         //sorting
         if (in_array(request('sortorder'), array('desc', 'asc')) && request('orderby') != '') {
             //direct column name
-            if (Schema::hasColumn('estimates', request('orderby'))) {
+            if (Schema::hasColumn('crm_estimaciones', request('orderby'))) {
                 $estimates->orderBy(request('orderby'), request('sortorder'));
             }
             //others
@@ -557,7 +557,7 @@ class EstimateReportRepository {
             }
         } else {
             //default sorting
-            $estimates->orderBy('categories.category_name', 'asc');
+            $estimates->orderBy('crm_categorias.category_name', 'asc');
         }
 
         //page limit

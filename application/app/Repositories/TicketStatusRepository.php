@@ -36,15 +36,15 @@ class TicketStatusRepository {
         $status = $this->status->newQuery();
 
         //joins
-        $status->leftJoin('users', 'users.id', '=', 'tickets_status.ticketstatus_creatorid');
+        $status->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_estadosdetickets.ticketstatus_creatorid');
 
         // all client fields
         $status->selectRaw('*');
 
         //count tickets
         $status->selectRaw('(SELECT COUNT(*)
-                                      FROM tickets
-                                      WHERE ticket_status = tickets_status.ticketstatus_id)
+                                      FROM crm_tickets
+                                      WHERE ticket_status = crm_estadosdetickets.ticketstatus_id)
                                       AS count_tickets');
         if (is_numeric($id)) {
             $status->where('ticketstatus_id', $id);

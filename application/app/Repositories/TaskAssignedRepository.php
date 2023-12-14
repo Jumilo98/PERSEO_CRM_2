@@ -94,7 +94,7 @@ class TaskAssignedRepository {
         }
 
         $query = $this->assigned->newQuery();
-        $query->leftJoin('users', 'users.id', '=', 'tasks_assigned.tasksassigned_userid');
+        $query->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_tareasasignadas.tasksassigned_userid');
         $query->where('tasksassigned_taskid', $id);
         $query->orderBy('first_name', 'ASC');
         return $query->get();

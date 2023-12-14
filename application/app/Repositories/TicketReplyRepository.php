@@ -41,7 +41,7 @@ class TicketReplyRepository {
         $replies->selectRaw('*');
 
         //joins
-        $replies->leftJoin('users', 'users.id', '=', 'ticket_replies.ticketreply_creatorid');
+        $replies->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_respuestasdeticket.ticketreply_creatorid');
 
         //default where
         $replies->whereRaw("1 = 1");

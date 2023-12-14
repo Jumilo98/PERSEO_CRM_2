@@ -55,16 +55,16 @@ class ClientReportRepository {
 
         //count_projects
         $clients->selectRaw("COALESCE((SELECT COUNT(project_id)
-                               FROM projects
-                               WHERE project_clientid = clients.client_id
+                               FROM crm_proyectos
+                               WHERE project_clientid = crm_clientes.client_id
                                AND project_date_start >= '$start_date'
                                AND project_date_start <= '$end_date'
                                AND project_type = 'project'), 0) AS count_projects");
 
         //count_projects_pending
         $clients->selectRaw("COALESCE((SELECT COUNT(project_id)
-                               FROM projects
-                               WHERE project_clientid = clients.client_id
+                               FROM crm_proyectos
+                               WHERE project_clientid = crm_clientes.client_id
                                AND project_date_start >= '$start_date'
                                AND project_date_start <= '$end_date'
                                AND project_type = 'project'
@@ -72,8 +72,8 @@ class ClientReportRepository {
 
         //count_projects_completed
         $clients->selectRaw("COALESCE((SELECT COUNT(project_id)
-                               FROM projects
-                               WHERE project_clientid = clients.client_id
+                               FROM crm_proyectos
+                               WHERE project_clientid = crm_clientes.client_id
                                AND project_date_start >= '$start_date'
                                AND project_date_start <= '$end_date'
                                AND project_type = 'project'
@@ -81,8 +81,8 @@ class ClientReportRepository {
 
         //sum_invoices_due
         $clients->selectRaw("(SELECT COALESCE(SUM(bill_final_amount), 0)
-                                      FROM invoices
-                                      WHERE bill_clientid = clients.client_id
+                                      FROM crm_facturas
+                                      WHERE bill_clientid = crm_clientes.client_id
                                       AND bill_date >= '$start_date'
                                       AND bill_date <= '$end_date'
                                       AND bill_status = 'due')
@@ -92,8 +92,8 @@ class ClientReportRepository {
 
         //sum_invoices_paid
         $clients->selectRaw("(SELECT COALESCE(SUM(bill_final_amount), 0)
-                                      FROM invoices
-                                      WHERE bill_clientid = clients.client_id
+                                      FROM crm_facturas
+                                      WHERE bill_clientid = crm_clientes.client_id
                                       AND bill_date >= '$start_date'
                                       AND bill_date <= '$end_date'
                                       AND bill_status = 'paid')
@@ -103,8 +103,8 @@ class ClientReportRepository {
 
         //sum_invoices_overdue
         $clients->selectRaw("(SELECT COALESCE(SUM(bill_final_amount), 0)
-                                      FROM invoices
-                                      WHERE bill_clientid = clients.client_id
+                                      FROM crm_facturas
+                                      WHERE bill_clientid = crm_clientes.client_id
                                       AND bill_date >= '$start_date'
                                       AND bill_date <= '$end_date'
                                       AND bill_status = 'overdue')
@@ -114,8 +114,8 @@ class ClientReportRepository {
 
         //sum_estimates_accepted
         $clients->selectRaw("(SELECT COALESCE(SUM(bill_final_amount), 0)
-                                      FROM estimates
-                                      WHERE bill_clientid = clients.client_id
+                                      FROM crm_estimaciones
+                                      WHERE bill_clientid = crm_clientes.client_id
                                       AND bill_date >= '$start_date'
                                       AND bill_date <= '$end_date'
                                       AND bill_status IN ('accepted'))
@@ -125,8 +125,8 @@ class ClientReportRepository {
 
         //sum_estimates_declined
         $clients->selectRaw("(SELECT COALESCE(SUM(bill_final_amount), 0)
-                                      FROM estimates
-                                      WHERE bill_clientid = clients.client_id
+                                      FROM crm_estimaciones
+                                      WHERE bill_clientid = crm_clientes.client_id
                                       AND bill_date >= '$start_date'
                                       AND bill_date <= '$end_date'
                                       AND bill_status IN ('declined'))
@@ -136,8 +136,8 @@ class ClientReportRepository {
 
         //sum_expenses
         $clients->selectRaw("(SELECT COALESCE(SUM(expense_amount), 0)
-                                      FROM expenses
-                                      WHERE expense_clientid = clients.client_id
+                                      FROM crm_gastos
+                                      WHERE expense_clientid = crm_clientes.client_id
                                       AND expense_date >= '$start_date'
                                       AND expense_date <= '$end_date')
                                       AS x_sum_expenses");
@@ -146,8 +146,8 @@ class ClientReportRepository {
 
         //sum_expenses_invoiced
         $clients->selectRaw("(SELECT COALESCE(SUM(expense_amount), 0)
-                                      FROM expenses
-                                      WHERE expense_clientid = clients.client_id
+                                      FROM crm_gastos
+                                      WHERE expense_clientid = crm_clientes.client_id
                                       AND expense_date >= '$start_date'
                                       AND expense_date <= '$end_date'
                                       AND expense_billable = 'billable'
@@ -158,8 +158,8 @@ class ClientReportRepository {
 
         //sum_expenses_not_invoiced
         $clients->selectRaw("(SELECT COALESCE(SUM(expense_amount), 0)
-                                      FROM expenses
-                                      WHERE expense_clientid = clients.client_id
+                                      FROM crm_gastos
+                                      WHERE expense_clientid = crm_clientes.client_id
                                       AND expense_date >= '$start_date'
                                       AND expense_date <= '$end_date'
                                       AND expense_billable = 'billable'
@@ -170,8 +170,8 @@ class ClientReportRepository {
 
         //sum_expenses_not_billable
         $clients->selectRaw("(SELECT COALESCE(SUM(expense_amount), 0)
-                                      FROM expenses
-                                      WHERE expense_clientid = clients.client_id
+                                      FROM crm_gastos
+                                      WHERE expense_clientid = crm_clientes.client_id
                                       AND expense_date >= '$start_date'
                                       AND expense_date <= '$end_date'
                                       AND expense_billable = 'not_billable'

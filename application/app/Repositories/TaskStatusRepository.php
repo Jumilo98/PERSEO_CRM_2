@@ -36,15 +36,15 @@ class TaskStatusRepository {
         $status = $this->status->newQuery();
 
         //joins
-        $status->leftJoin('users', 'users.id', '=', 'tasks_status.taskstatus_creatorid');
+        $status->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_estadosdetareas.taskstatus_creatorid');
 
         // all client fields
         $status->selectRaw('*');
 
         //count tasks
         $status->selectRaw('(SELECT COUNT(*)
-                                      FROM tasks
-                                      WHERE task_status = tasks_status.taskstatus_id)
+                                      FROM crm_tareas
+                                      WHERE task_status = crm_estadosdetareas.taskstatus_id)
                                       AS count_tasks');
         if (is_numeric($id)) {
             $status->where('taskstatus_id', $id);

@@ -38,9 +38,9 @@ class TimerRepository {
         $timers = $this->timer->newQuery();
 
         //joins
-        $timers->leftJoin('users', 'users.id', '=', 'timers.timer_creatorid');
-        $timers->leftJoin('tasks', 'tasks.task_id', '=', 'timers.timer_taskid');
-        $timers->leftJoin('projects', 'projects.project_id', '=', 'timers.timer_projectid');
+        $timers->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_temporizadores.timer_creatorid');
+        $timers->leftJoin('crm_tareas', 'crm_tareas.task_id', '=', 'crm_temporizadores.timer_taskid');
+        $timers->leftJoin('crm_proyectos', 'crm_proyectos.project_id', '=', 'crm_temporizadores.timer_projectid');
 
         // all client fields
         $timers->selectRaw('*');

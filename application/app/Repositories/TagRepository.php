@@ -40,7 +40,7 @@ class TagRepository {
         $tags->selectRaw('*');
 
         //joins
-        $tags->leftJoin('users', 'users.id', '=', 'tags.tag_creatorid');
+        $tags->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_etiquetas.tag_creatorid');
 
         //default where
         $tags->whereRaw("1 = 1");

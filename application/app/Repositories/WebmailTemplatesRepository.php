@@ -40,7 +40,7 @@ class WebmailTemplatesRepository {
         $templates->selectRaw('*');
 
         //joins
-        $templates->leftJoin('users', 'users.id', '=', 'webmail_templates.webmail_template_creatorid');
+        $templates->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_plantillasdewebmail.webmail_template_creatorid');
 
         //default where
         $templates->whereRaw("1 = 1");

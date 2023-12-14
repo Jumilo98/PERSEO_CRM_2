@@ -37,7 +37,7 @@ class TaxrateRepository {
         $taxrates = $this->taxrates->newQuery();
 
         //joins
-        $taxrates->leftJoin('users', 'users.id', '=', 'taxrates.taxrate_creatorid');
+        $taxrates->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_tiposdeimpuesto.taxrate_creatorid');
 
         // all client fields
         $taxrates->selectRaw('*');
