@@ -42,7 +42,7 @@ class ProductTaskRepository {
         }
 
         //joins
-        $product_tasks->leftJoin('users', 'users.id', '=', 'product_tasks.product_task_creatorid');
+        $product_tasks->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_tareasdeproducto.product_task_creatorid');
 
         // all client fields
         $product_tasks->selectRaw('*');

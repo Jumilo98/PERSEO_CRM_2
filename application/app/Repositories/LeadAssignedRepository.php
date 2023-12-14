@@ -101,7 +101,7 @@ class LeadAssignedRepository {
         }
 
         $query = $this->assigned->newQuery();
-        $query->leftJoin('users', 'users.id', '=', 'leads_assigned.leadsassigned_userid');
+        $query->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_clientespotencialesasignados.leadsassigned_userid');
         $query->where('leadsassigned_leadid', $id);
         $query->orderBy('first_name', 'ASC');
         return $query->get();

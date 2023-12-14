@@ -36,7 +36,7 @@ class MilestoneCategoryRepository {
         $categories = $this->category->newQuery();
 
         //joins
-        $categories->leftJoin('users', 'users.id', '=', 'milestone_categories.milestonecategory_creatorid');
+        $categories->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_categoriasdelameta.milestonecategory_creatorid');
 
         // all client fields
         $categories->selectRaw('*');

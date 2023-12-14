@@ -45,16 +45,16 @@ class LeadRepository {
         }
 
         //joins
-        $leads->leftJoin('categories', 'categories.category_id', '=', 'leads.lead_categoryid');
-        $leads->leftJoin('users', 'users.id', '=', 'leads.lead_creatorid');
-        $leads->leftJoin('leads_status', 'leads_status.leadstatus_id', '=', 'leads.lead_status');
+        $leads->leftJoin('crm_categorias', 'crm_categorias.category_id', '=', 'crm_clientespotenciales.lead_categoryid');
+        $leads->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_clientespotenciales.lead_creatorid');
+        $leads->leftJoin('crm_clientespotencialesestado', 'crm_clientespotencialesestado.leadstatus_id', '=', 'crm_clientespotenciales.lead_status');
 
         //join: users reminders - do not do this for cronjobs
         if (auth()->check()) {
-            $leads->leftJoin('reminders', function ($join) {
-                $join->on('reminders.reminderresource_id', '=', 'leads.lead_id')
-                    ->where('reminders.reminderresource_type', '=', 'lead')
-                    ->where('reminders.reminder_userid', '=', auth()->id());
+            $leads->leftJoin('crm_recordatorios', function ($join) {
+                $join->on('crm_recordatorios.reminderresource_id', '=', 'crm_clientespotenciales.lead_id')
+                    ->where('crm_recordatorios.reminderresource_type', '=', 'lead')
+                    ->where('crm_recordatorios.reminder_userid', '=', auth()->id());
             });
         }
 
@@ -63,38 +63,38 @@ class LeadRepository {
 
         //count unread notifications
         $leads->selectRaw('(SELECT COUNT(*)
-                                      FROM events_tracking
-                                      LEFT JOIN events ON events.event_id = events_tracking.eventtracking_eventid
+                                      FROM crm_seguimientodeeventos
+                                      LEFT JOIN crm_eventos ON crm_eventos.event_id = crm_seguimientodeeventos.eventtracking_eventid
                                       WHERE eventtracking_userid = ' . auth()->id() . '
-                                      AND events_tracking.eventtracking_status = "unread"
-                                      AND events.event_parent_type = "lead"
-                                      AND events.eventresource_id = leads.lead_id
-                                      AND events.event_item = "comment")
+                                      AND crm_seguimientodeeventos.eventtracking_status = "unread"
+                                      AND crm_eventos.event_parent_type = "lead"
+                                      AND crm_eventos.eventresource_id = crm_clientespotenciales.lead_id
+                                      AND crm_eventos.event_item = "comment")
                                       AS count_unread_comments');
 
         //count unread notifications
         $leads->selectRaw('(SELECT COUNT(*)
-                                      FROM events_tracking
-                                      LEFT JOIN events ON events.event_id = events_tracking.eventtracking_eventid
+                                      FROM crm_seguimientodeeventos
+                                      LEFT JOIN crm_eventos ON crm_eventos.event_id = crm_seguimientodeeventos.eventtracking_eventid
                                       WHERE eventtracking_userid = ' . auth()->id() . '
-                                      AND events_tracking.eventtracking_status = "unread"
-                                      AND events.event_parent_type = "lead"
-                                      AND events.event_parent_id = leads.lead_id
-                                      AND events.event_item = "attachment")
+                                      AND crm_seguimientodeeventos.eventtracking_status = "unread"
+                                      AND crm_eventos.event_parent_type = "lead"
+                                      AND crm_eventos.event_parent_id = crm_clientespotenciales.lead_id
+                                      AND crm_eventos.event_item = "attachment")
                                       AS count_unread_attachments');
         //converted by details
         $leads->selectRaw('(SELECT first_name
-                                      FROM users
-                                      WHERE users.id = leads.lead_converted_by_userid)
+                                      FROM crm_usuarios
+                                      WHERE crm_usuarios.id = crm_clientespotenciales.lead_converted_by_userid)
                                       AS converted_by_first_name');
         //converted by details
         $leads->selectRaw('(SELECT last_name
-                                      FROM users
-                                      WHERE users.id = leads.lead_converted_by_userid)
+                                      FROM crm_usuarios
+                                      WHERE crm_usuarios.id = crm_clientespotenciales.lead_converted_by_userid)
                                       AS converted_by_last_name');
 
         $leads->selectRaw('(SELECT CONCAT_WS(" ", first_name, last_name) 
-                                   FROM users WHERE users.id = leads.lead_converted_by_userid)
+                                   FROM crm_usuarios WHERE crm_usuarios.id = crm_clientespotenciales.lead_converted_by_userid)
                                    AS converted_by_full_name');
 
         //default where

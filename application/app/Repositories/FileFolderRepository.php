@@ -36,7 +36,7 @@ class FileFolderRepository {
         $filefolders = $this->filefolder->newQuery();
 
         //joins
-        $filefolders->leftJoin('users', 'users.id', '=', 'file_folders.filefolder_creatorid');
+        $filefolders->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_archivodecarpetas.filefolder_creatorid');
 
         // all fields
         $filefolders->selectRaw('*');

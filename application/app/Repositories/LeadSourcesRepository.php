@@ -36,7 +36,7 @@ class LeadSourcesRepository {
         $sources = $this->sources->newQuery();
 
         //joins
-        $sources->leftJoin('users', 'users.id', '=', 'leads_sources.leadsources_creatorid');
+        $sources->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_clientespotencialesfuentes.leadsources_creatorid');
 
         // all client fields
         $sources->selectRaw('*');

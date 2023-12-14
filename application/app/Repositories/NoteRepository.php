@@ -41,7 +41,7 @@ class NoteRepository {
         $notes->selectRaw('*');
 
         //joins
-        $notes->leftJoin('users', 'users.id', '=', 'notes.note_creatorid');
+        $notes->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_notas.note_creatorid');
 
         //default where
         $notes->whereRaw("1 = 1");

@@ -40,9 +40,9 @@ class KnowledgebaseRepository {
         $knowledgebase->selectRaw('*');
 
         //joins
-        $knowledgebase->leftJoin('users', 'users.id', '=', 'knowledgebase.knowledgebase_creatorid');
-        $knowledgebase->leftJoin('categories', 'categories.category_id', '=', 'knowledgebase.knowledgebase_categoryid');
-        $knowledgebase->leftJoin('kb_categories', 'kb_categories.kbcategory_id', '=', 'knowledgebase.knowledgebase_categoryid');
+        $knowledgebase->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_basedeconocimiento.knowledgebase_creatorid');
+        $knowledgebase->leftJoin('crm_categorias', 'crm_categorias.category_id', '=', 'crm_basedeconocimiento.knowledgebase_categoryid');
+        $knowledgebase->leftJoin('crm_kb_categorias', 'crm_kb_categorias.kbcategory_id', '=', 'crm_basedeconocimiento.knowledgebase_categoryid');
 
         //default where
         $knowledgebase->whereRaw("1 = 1");

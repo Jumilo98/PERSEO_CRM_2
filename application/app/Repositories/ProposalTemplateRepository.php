@@ -43,7 +43,7 @@ class ProposalTemplateRepository{
 
         $templates->selectRaw('*');
 
-        $templates->leftJoin('users', 'users.id', '=', 'proposal_templates.proposal_template_creatorid');
+        $templates->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_plantillasdepropuesta.proposal_template_creatorid');
 
 
         //filters: id

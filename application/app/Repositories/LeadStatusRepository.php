@@ -36,15 +36,15 @@ class LeadStatusRepository {
         $status = $this->status->newQuery();
 
         //joins
-        $status->leftJoin('users', 'users.id', '=', 'leads_status.leadstatus_creatorid');
+        $status->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_clientespotencialesestado.leadstatus_creatorid');
 
         // all client fields
         $status->selectRaw('*');
 
         //count leads
         $status->selectRaw('(SELECT COUNT(*)
-                                      FROM leads
-                                      WHERE lead_status = leads_status.leadstatus_id)
+                                      FROM crm_clientespotenciales
+                                      WHERE lead_status = crm_clientespotencialesestado.leadstatus_id)
                                       AS count_leads');
         if (is_numeric($id)) {
             $status->where('leadstatus_id', $id);

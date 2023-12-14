@@ -42,13 +42,13 @@ class RecurringTasksRepository {
         }
 
         //joins
-        $foos->leftJoin('users', 'users.id', '=', 'foos.foo_creatorid');
+        $foos->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'foos.foo_creatorid');
 
         //join: multiple condition
-        $foos->leftJoin('items', function ($join) {
-            $join->on('items.item_type', '=', DB::raw("'foo'"));
-            $join->on('items.foo_id', '=', 'foos.foo_id');
-            $join->on('items.item_userid', '=', DB::raw(auth()->id()));
+        $foos->leftJoin('crm_articulos', function ($join) {
+            $join->on('crm_articulos.item_type', '=', DB::raw("'foo'"));
+            $join->on('crm_articulos.foo_id', '=', 'foos.foo_id');
+            $join->on('crm_articulos.item_userid', '=', DB::raw(auth()->id()));
         });
 
         // all client fields
@@ -56,13 +56,13 @@ class RecurringTasksRepository {
 
         //count all items
         $foos->selectRaw("(SELECT COUNT(*)
-                                      FROM items
+                                      FROM crm_articulos
                                       WHERE item_fooid = foos.foo_id)
                                       AS count_all_items");
 
         //sum all items
         $foos->selectRaw("(SELECT COALESCE(SUM(item_amount), 0.00)
-                                      FROM items
+                                      FROM crm_articulos
                                       WHERE item_fooid = foos.foo_id
                                       AND item_status = 'overdue')
                                       AS sum_items");

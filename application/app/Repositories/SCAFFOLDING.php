@@ -45,7 +45,7 @@ class FoooRepository{
         $fooos->selectRaw('*');
 
         //joins
-        $fooos->leftJoin('categories', 'categories.category_id', '=', 'fooos.fooo_categoryid');
+        $fooos->leftJoin('crm_categorias', 'crm_categorias.category_id', '=', 'fooos.fooo_categoryid');
 
         //default where
         $fooos->whereRaw("1 = 1");

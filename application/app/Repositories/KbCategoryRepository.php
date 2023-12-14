@@ -35,15 +35,15 @@ class KbCategoryRepository {
         $categories = $this->category->newQuery();
 
         //joins
-        $categories->leftJoin('users', 'users.id', '=', 'kb_categories.kbcategory_creatorid');
+        $categories->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_kb_categorias.kbcategory_creatorid');
 
         // all client fields
         $categories->selectRaw('*');
 
         //count articles
         $categories->selectRaw('(SELECT COUNT(*)
-                                      FROM knowledgebase
-                                      WHERE knowledgebase_categoryid = kb_categories.kbcategory_id)
+                                      FROM crm_basedeconocimiento
+                                      WHERE knowledgebase_categoryid = crm_kb_categorias.kbcategory_id)
                                       AS count_articles');
 
         if (is_numeric($id)) {

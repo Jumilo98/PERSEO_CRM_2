@@ -41,7 +41,7 @@ class ItemRepository {
         $items->selectRaw('*');
 
         //joins
-        $items->leftJoin('categories', 'categories.category_id', '=', 'items.item_categoryid');
+        $items->leftJoin('crm_categorias', 'crm_categorias.category_id', '=', 'crm_articulos.item_categoryid');
 
         //default where
         $items->whereRaw("1 = 1");

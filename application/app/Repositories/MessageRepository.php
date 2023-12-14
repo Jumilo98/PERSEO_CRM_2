@@ -35,7 +35,7 @@ class MessageRepository {
         $messages = $this->message->newQuery();
 
         //joins
-        $messages->leftJoin('users', 'users.id', '=', 'messages.message_creatorid');
+        $messages->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_mensajes.message_creatorid');
 
         // all client fields
         $messages->selectRaw('*');
