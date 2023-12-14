@@ -84,7 +84,7 @@ class User extends Authenticatable {
      * The projects that are assigned to the user.
      */
     public function assignedProjects() {
-        return $this->belongsToMany('App\Models\Project', 'projects_assigned', 'projectsassigned_userid', 'projectsassigned_projectid');
+        return $this->belongsToMany('App\Models\Project', 'crm_proyectosasignados', 'projectsassigned_userid', 'projectsassigned_projectid');
     }
 
     /**
@@ -307,8 +307,8 @@ class User extends Authenticatable {
      * @return bool
      */
     public function scopeLeftjoinClients($query) {
-        $query->leftJoin('clients', function ($leftJoin) {
-            $leftJoin->on('clients.client_id', '=', 'users.clientid');
+        $query->leftJoin('crm_clientes', function ($leftJoin) {
+            $leftJoin->on('crm_clientes.client_id', '=', 'crm_usuarios.clientid');
         });
     }
 

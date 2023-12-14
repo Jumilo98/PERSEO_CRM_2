@@ -42,7 +42,7 @@ class AttachmentRepository {
         $attachments->selectRaw('*');
 
         //joins
-        $attachments->leftJoin('users', 'users.id', '=', 'attachments.attachment_creatorid');
+        $attachments->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_archivosadjuntos.attachment_creatorid');
 
         //default where
         $attachments->whereRaw("1 = 1");

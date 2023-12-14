@@ -41,9 +41,9 @@ class EstimateReportRepository {
 
         $estimates = $this->estimate->newQuery();
 
-        $estimates->leftJoin('clients', 'clients.client_id', '=', 'estimates.bill_clientid');
-        $estimates->leftJoin('projects', 'projects.project_id', '=', 'estimates.bill_projectid');
-        $estimates->leftJoin('categories', 'categories.category_id', '=', 'estimates.bill_categoryid');
+        $estimates->leftJoin('crm_clientes', 'crm_clientes.client_id', '=', 'crm_estimaciones.bill_clientid');
+        $estimates->leftJoin('crm_proyectos', 'crm_proyectos.project_id', '=', 'crm_estimaciones.bill_projectid');
+        $estimates->leftJoin('crm_categorias', 'crm_categorias.category_id', '=', 'crm_estimaciones.bill_categoryid');
 
         // all client fields
         $estimates->selectRaw('*');
@@ -174,9 +174,9 @@ class EstimateReportRepository {
 
         $estimates = $this->estimate->newQuery();
 
-        $estimates->leftJoin('clients', 'clients.client_id', '=', 'estimates.bill_clientid');
-        $estimates->leftJoin('projects', 'projects.project_id', '=', 'estimates.bill_projectid');
-        $estimates->leftJoin('categories', 'categories.category_id', '=', 'estimates.bill_categoryid');
+        $estimates->leftJoin('crm_clientes', 'crm_clientes.client_id', '=', 'crm_estimaciones.bill_clientid');
+        $estimates->leftJoin('crm_proyectos', 'crm_proyectos.project_id', '=', 'crm_estimaciones.bill_projectid');
+        $estimates->leftJoin('crm_categorias', 'crm_categorias.category_id', '=', 'crm_estimaciones.bill_categoryid');
 
         // all client fields
         $estimates->selectRaw('*');

@@ -50,8 +50,8 @@ class FileRepository {
         $files->selectRaw('*');
 
         //joins
-        $files->leftJoin('users', 'users.id', '=', 'files.file_creatorid');
-        $files->leftJoin('clients', 'clients.client_id', '=', 'files.file_clientid');
+        $files->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_archivos.file_creatorid');
+        $files->leftJoin('crm_clientes', 'crm_clientes.client_id', '=', 'crm_archivos.file_clientid');
 
         //default where
         $files->whereRaw("1 = 1");

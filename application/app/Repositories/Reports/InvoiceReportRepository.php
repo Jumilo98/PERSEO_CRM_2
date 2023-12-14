@@ -41,9 +41,9 @@ class InvoiceReportRepository {
 
         $invoices = $this->invoice->newQuery();
 
-        $invoices->leftJoin('clients', 'clients.client_id', '=', 'invoices.bill_clientid');
-        $invoices->leftJoin('projects', 'projects.project_id', '=', 'invoices.bill_projectid');
-        $invoices->leftJoin('categories', 'categories.category_id', '=', 'invoices.bill_categoryid');
+        $invoices->leftJoin('crm_clientes', 'crm_clientes.client_id', '=', 'crm_facturas.bill_clientid');
+        $invoices->leftJoin('crm_proyectos', 'crm_proyectos.project_id', '=', 'crm_facturas.bill_projectid');
+        $invoices->leftJoin('crm_categorias', 'crm_categorias.category_id', '=', 'crm_facturas.bill_categoryid');
 
         // all client fields
         $invoices->selectRaw('*');
@@ -53,7 +53,7 @@ class InvoiceReportRepository {
 
         //sum payments
         $invoices->selectRaw('(SELECT COALESCE(SUM(payment_amount), 0)
-                                      FROM payments WHERE payment_invoiceid = invoices.bill_invoiceid
+                                      FROM crm_pagos WHERE payment_invoiceid = crm_facturas.bill_invoiceid
                                       GROUP BY payment_invoiceid)
                                       AS x_sum_payments');
         $invoices->selectRaw('(SELECT COALESCE(x_sum_payments, 0.00))
@@ -188,7 +188,7 @@ class InvoiceReportRepository {
 
         $invoices = $this->invoice->newQuery();
 
-        $invoices->leftJoin('clients', 'clients.client_id', '=', 'invoices.bill_clientid');
+        $invoices->leftJoin('crm_clientes', 'crm_clientes.client_id', '=', 'invoices.bill_clientid');
         $invoices->leftJoin('projects', 'projects.project_id', '=', 'invoices.bill_projectid');
         $invoices->leftJoin('categories', 'categories.category_id', '=', 'invoices.bill_categoryid');
 

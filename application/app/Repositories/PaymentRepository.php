@@ -47,9 +47,9 @@ class PaymentRepository {
         $payments->selectRaw('*');
 
         //joins
-        $payments->leftJoin('clients', 'clients.client_id', '=', 'payments.payment_clientid');
-        $payments->leftJoin('invoices', 'invoices.bill_invoiceid', '=', 'payments.payment_invoiceid');
-        $payments->leftJoin('projects', 'projects.project_id', '=', 'payments.payment_projectid');
+        $payments->leftJoin('crm_clientes', 'crm_clientes.client_id', '=', 'crm_pagos.payment_clientid');
+        $payments->leftJoin('crm_facturas', 'crm_facturas.bill_invoiceid', '=', 'crm_pagos.payment_invoiceid');
+        $payments->leftJoin('crm_proyectos', 'crm_proyectos.project_id', '=', 'crm_pagos.payment_projectid');
 
         //default where
         $payments->whereRaw("1 = 1");

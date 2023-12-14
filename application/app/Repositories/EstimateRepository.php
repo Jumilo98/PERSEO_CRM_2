@@ -54,17 +54,17 @@ class EstimateRepository {
         $estimates->selectRaw('*');
 
         //joins
-        $estimates->leftJoin('clients', 'clients.client_id', '=', 'estimates.bill_clientid');
-        $estimates->leftJoin('users', 'users.id', '=', 'estimates.bill_creatorid');
-        $estimates->leftJoin('categories', 'categories.category_id', '=', 'estimates.bill_categoryid');
-        $estimates->leftJoin('projects', 'projects.project_id', '=', 'estimates.bill_projectid');
+        $estimates->leftJoin('crm_clientes', 'crm_clientes.client_id', '=', 'crm_estimaciones.bill_clientid');
+        $estimates->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_estimaciones.bill_creatorid');
+        $estimates->leftJoin('crm_categorias', 'crm_categorias.category_id', '=', 'crm_estimaciones.bill_categoryid');
+        $estimates->leftJoin('crm_proyectos', 'crm_proyectos.project_id', '=', 'crm_estimaciones.bill_projectid');
 
         //join: users reminders - do not do this for cronjobs
         if (auth()->check()) {
-            $estimates->leftJoin('reminders', function ($join) {
-                $join->on('reminders.reminderresource_id', '=', 'estimates.bill_estimateid')
-                    ->where('reminders.reminderresource_type', '=', 'estimate')
-                    ->where('reminders.reminder_userid', '=', auth()->id());
+            $estimates->leftJoin('crm_recordatorios', function ($join) {
+                $join->on('crm_recordatorios.reminderresource_id', '=', 'crm_estimaciones.bill_estimateid')
+                    ->where('crm_recordatorios.reminderresource_type', '=', 'estimate')
+                    ->where('crm_recordatorios.reminder_userid', '=', auth()->id());
             });
         }
 

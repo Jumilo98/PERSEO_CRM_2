@@ -47,18 +47,18 @@ class TicketRepository {
         $tickets->selectRaw('*');
 
         //joins
-        $tickets->leftJoin('clients', 'clients.client_id', '=', 'tickets.ticket_clientid');
-        $tickets->leftJoin('users', 'users.id', '=', 'tickets.ticket_creatorid');
-        $tickets->leftJoin('categories', 'categories.category_id', '=', 'tickets.ticket_categoryid');
-        $tickets->leftJoin('projects', 'projects.project_id', '=', 'tickets.ticket_projectid');
-        $tickets->leftJoin('tickets_status', 'tickets_status.ticketstatus_id', '=', 'tickets.ticket_status');
+        $tickets->leftJoin('crm_clientes', 'crm_clientes.client_id', '=', 'crm_tickets.ticket_clientid');
+        $tickets->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_tickets.ticket_creatorid');
+        $tickets->leftJoin('crm_categorias', 'crm_categorias.category_id', '=', 'crm_tickets.ticket_categoryid');
+        $tickets->leftJoin('crm_proyectos', 'crm_proyectos.project_id', '=', 'crm_tickets.ticket_projectid');
+        $tickets->leftJoin('crm_estadosdetickets', 'crm_estadosdetickets.ticketstatus_id', '=', 'crm_tickets.ticket_status');
 
         //join: users reminders - do not do this for cronjobs
         if (auth()->check()) {
-            $tickets->leftJoin('reminders', function ($join) {
-                $join->on('reminders.reminderresource_id', '=', 'tickets.ticket_id')
-                    ->where('reminders.reminderresource_type', '=', 'ticket')
-                    ->where('reminders.reminder_userid', '=', auth()->id());
+            $tickets->leftJoin('crm_recordatorios', function ($join) {
+                $join->on('crm_recordatorios.reminderresource_id', '=', 'crm_tickets.ticket_id')
+                    ->where('crm_recordatorios.reminderresource_type', '=', 'ticket')
+                    ->where('crm_recordatorios.reminder_userid', '=', auth()->id());
             });
         }
 

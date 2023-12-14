@@ -43,17 +43,17 @@ class InvoiceRepository {
         $invoices = $this->invoices->newQuery();
 
         //joins
-        $invoices->leftJoin('clients', 'clients.client_id', '=', 'invoices.bill_clientid');
-        $invoices->leftJoin('projects', 'projects.project_id', '=', 'invoices.bill_projectid');
-        $invoices->leftJoin('categories', 'categories.category_id', '=', 'invoices.bill_categoryid');
-        $invoices->leftJoin('users', 'users.id', '=', 'invoices.bill_creatorid');
+        $invoices->leftJoin('crm_clientes', 'crm_clientes.client_id', '=', 'crm_facturas.bill_clientid');
+        $invoices->leftJoin('crm_proyectos', 'crm_proyectos.project_id', '=', 'crm_facturas.bill_projectid');
+        $invoices->leftJoin('crm_categorias', 'crm_categorias.category_id', '=', 'crm_facturas.bill_categoryid');
+        $invoices->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_facturas.bill_creatorid');
 
         //join: users reminders - do not do this for cronjobs
         if (auth()->check()) {
-            $invoices->leftJoin('reminders', function ($join) {
-                $join->on('reminders.reminderresource_id', '=', 'invoices.bill_invoiceid')
-                    ->where('reminders.reminderresource_type', '=', 'invoice')
-                    ->where('reminders.reminder_userid', '=', auth()->id());
+            $invoices->leftJoin('crm_recordatorios', function ($join) {
+                $join->on('crm_recordatorios.reminderresource_id', '=', 'crm_facturas.bill_invoiceid')
+                    ->where('crm_recordatorios.reminderresource_type', '=', 'invoice')
+                    ->where('crm_recordatorios.reminder_userid', '=', auth()->id());
             });
         }
 
@@ -62,13 +62,13 @@ class InvoiceRepository {
 
         //count payments
         $invoices->selectRaw('(SELECT COUNT(*)
-                                      FROM payments
-                                      WHERE payment_invoiceid = invoices.bill_invoiceid)
+                                      FROM crm_pagos
+                                      WHERE payment_invoiceid = crm_facturas.bill_invoiceid)
                                       AS count_payments');
 
         //sum payments
         $invoices->selectRaw('(SELECT COALESCE(SUM(payment_amount), 0)
-                                      FROM payments WHERE payment_invoiceid = invoices.bill_invoiceid
+                                      FROM crm_pagos WHERE payment_invoiceid = crm_facturas.bill_invoiceid
                                       GROUP BY payment_invoiceid)
                                       AS x_sum_payments');
         $invoices->selectRaw('(SELECT COALESCE(x_sum_payments, 0.00))

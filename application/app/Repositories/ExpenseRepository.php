@@ -48,10 +48,10 @@ class ExpenseRepository {
         $this_month = \Carbon\Carbon::now()->startOfMonth();
 
         //joins
-        $expenses->leftJoin('clients', 'clients.client_id', '=', 'expenses.expense_clientid');
-        $expenses->leftJoin('projects', 'projects.project_id', '=', 'expenses.expense_projectid');
-        $expenses->leftJoin('categories', 'categories.category_id', '=', 'expenses.expense_categoryid');
-        $expenses->leftJoin('users', 'users.id', '=', 'expenses.expense_creatorid');
+        $expenses->leftJoin('crm_clientes', 'crm_clientes.client_id', '=', 'crm_gastos.expense_clientid');
+        $expenses->leftJoin('crm_proyectos', 'crm_proyectos.project_id', '=', 'crm_gastos.expense_projectid');
+        $expenses->leftJoin('crm_categorias', 'crm_categorias.category_id', '=', 'crm_gastos.expense_categoryid');
+        $expenses->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_gastos.expense_creatorid');
 
         // all client fields
         $expenses->selectRaw('*');

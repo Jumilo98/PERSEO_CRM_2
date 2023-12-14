@@ -61,69 +61,69 @@ class CategoryRepository {
         $categories = $this->categories->newQuery();
 
         //joins
-        $categories->leftJoin('users', 'users.id', '=', 'categories.category_creatorid');
+        $categories->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_categorias.category_creatorid');
 
         // all client fields
         $categories->selectRaw('*');
 
         //count users
         $categories->selectRaw('(SELECT COUNT(*)
-                                      FROM category_users
-                                      WHERE categoryuser_categoryid = categories.category_id)
+                                      FROM crm_categoriausuarios
+                                      WHERE categoryuser_categoryid = crm_categorias.category_id)
                                       AS count_users');
         //count clients
         $categories->selectRaw('(SELECT COUNT(*)
-                                      FROM clients
-                                      WHERE client_categoryid = categories.category_id)
+                                      FROM crm_clientes
+                                      WHERE client_categoryid = crm_categorias.category_id)
                                       AS count_clients');
         //count projects
         $categories->selectRaw("(SELECT COUNT(*)
-                                      FROM projects
+                                      FROM crm_proyectos
                                       WHERE project_type = 'project'
-                                      AND project_categoryid = categories.category_id)
+                                      AND project_categoryid = crm_categorias.category_id)
                                       AS count_projects");
         //count expenses
         $categories->selectRaw('(SELECT COUNT(*)
-                                      FROM expenses
-                                      WHERE expense_categoryid = categories.category_id)
+                                      FROM crm_gastos
+                                      WHERE expense_categoryid = crm_categorias.category_id)
                                       AS count_expenses');
         //count invoices
         $categories->selectRaw('(SELECT COUNT(*)
-                                      FROM invoices
-                                      WHERE bill_categoryid = categories.category_id)
+                                      FROM crm_facturas
+                                      WHERE bill_categoryid = crm_categorias.category_id)
                                       AS count_invoices');
         //count leads
         $categories->selectRaw('(SELECT COUNT(*)
-                                      FROM leads
-                                      WHERE lead_categoryid = categories.category_id)
+                                      FROM crm_clientespotenciales
+                                      WHERE lead_categoryid = crm_categorias.category_id)
                                       AS count_leads');
         //count tickets
         $categories->selectRaw('(SELECT COUNT(*)
-                                      FROM tickets
-                                      WHERE ticket_categoryid = categories.category_id)
+                                      FROM crm_tickets
+                                      WHERE ticket_categoryid = crm_categorias.category_id)
                                       AS count_tickets');
         //count items
         $categories->selectRaw('(SELECT COUNT(*)
-                                      FROM items
-                                      WHERE item_categoryid = categories.category_id)
+                                      FROM crm_articulos
+                                      WHERE item_categoryid = crm_categorias.category_id)
                                       AS count_items');
 
         //count estimates
         $categories->selectRaw('(SELECT COUNT(*)
-                                      FROM estimates
-                                      WHERE bill_categoryid = categories.category_id)
+                                      FROM crm_estimaciones
+                                      WHERE bill_categoryid = crm_categorias.category_id)
                                       AS count_estimates');
 
         //count proposals
         $categories->selectRaw('(SELECT COUNT(*)
-                                      FROM proposals
-                                      WHERE doc_categoryid = categories.category_id)
+                                      FROM crm_propuestas
+                                      WHERE doc_categoryid = crm_categorias.category_id)
                                       AS count_proposals');                                      
 
         //count contracts
         $categories->selectRaw('(SELECT COUNT(*)
-                                      FROM contracts
-                                      WHERE doc_categoryid = categories.category_id)
+                                      FROM crm_contratos
+                                      WHERE doc_categoryid = crm_categorias.category_id)
                                       AS count_contracts');                                      
 
                                       

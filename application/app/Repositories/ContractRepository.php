@@ -42,17 +42,17 @@ class ContractRepository {
         }
 
         //joins
-        $contracts->leftJoin('users', 'users.id', '=', 'contracts.doc_creatorid');
-        $contracts->leftJoin('clients', 'clients.client_id', '=', 'contracts.doc_client_id');
-        $contracts->leftJoin('leads', 'leads.lead_id', '=', 'contracts.doc_lead_id');
-        $contracts->leftJoin('estimates', 'estimates.bill_contractid', '=', 'contracts.doc_id');
+        $contracts->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_contratos.doc_creatorid');
+        $contracts->leftJoin('crm_clientes', 'crm_clientes.client_id', '=', 'crm_contratos.doc_client_id');
+        $contracts->leftJoin('crm_clientespotenciales', 'crm_clientespotenciales.lead_id', '=', 'crm_contratos.doc_lead_id');
+        $contracts->leftJoin('crm_estimaciones', 'crm_estimaciones.bill_contractid', '=', 'crm_contratos.doc_id');
 
         //join: users reminders - do not do this for cronjobs
         if (auth()->check()) {
-            $contracts->leftJoin('reminders', function ($join) {
-                $join->on('reminders.reminderresource_id', '=', 'contracts.doc_id')
-                    ->where('reminders.reminderresource_type', '=', 'contract')
-                    ->where('reminders.reminder_userid', '=', auth()->id());
+            $contracts->leftJoin('crm_recordatorios', function ($join) {
+                $join->on('crm_recordatorios.reminderresource_id', '=', 'crm_contratos.doc_id')
+                    ->where('crm_recordatorios.reminderresource_type', '=', 'contract')
+                    ->where('crm_recordatorios.reminder_userid', '=', auth()->id());
             });
         }
 

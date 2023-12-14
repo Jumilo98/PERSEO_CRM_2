@@ -44,7 +44,7 @@ class EventRepository {
         $events = $this->events->newQuery();
 
         //joins
-        $events->leftJoin('users', 'users.id', '=', 'events.event_creatorid');
+        $events->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_eventos.event_creatorid');
 
         // all client fields
         $events->selectRaw('*');

@@ -123,7 +123,7 @@ class Category extends Model {
      * The Users that are assigned to the Task.
      */
     public function users() {
-        return $this->belongsToMany('App\Models\User', 'category_users', 'categoryuser_categoryid', 'categoryuser_userid');
+        return $this->belongsToMany('App\Models\User', 'crm_categoriausuarios', 'categoryuser_categoryid', 'categoryuser_userid');
     }
 
 }

@@ -77,25 +77,25 @@ class ClientRepository {
 
         //sum payments
         $clients->selectRaw("(SELECT SUM(payment_amount)
-                                     FROM payments
-                                     WHERE payments.payment_clientid = clients.client_id
+                                     FROM crm_pagos
+                                     WHERE crm_pagos.payment_clientid = crm_clientes.client_id
                                      ) AS sum_all_payments");
 
         //join: primary contact
-        $clients->leftJoin('users', function ($join) {
-            $join->on('users.clientid', '=', 'clients.client_id');
-            $join->on('users.account_owner', '=', DB::raw("'yes'"));
+        $clients->leftJoin('crm_usuarios', function ($join) {
+            $join->on('crm_usuarios.clientid', '=', 'crm_clientes.client_id');
+            $join->on('crm_usuarios.account_owner', '=', DB::raw("'yes'"));
         });
 
         //join: client category
-        $clients->leftJoin('categories', 'categories.category_id', '=', 'clients.client_categoryid');
+        $clients->leftJoin('crm_categorias', 'crm_categorias.category_id', '=', 'crm_clientes.client_categoryid');
 
         //join: users reminders - do not do this for cronjobs
         if (auth()->check()) {
-            $clients->leftJoin('reminders', function ($join) {
-                $join->on('reminders.reminderresource_id', '=', 'clients.client_id')
-                    ->where('reminders.reminderresource_type', '=', 'client')
-                    ->where('reminders.reminder_userid', '=', auth()->id());
+            $clients->leftJoin('crm_recordatorios', function ($join) {
+                $join->on('crm_recordatorios.reminderresource_id', '=', 'crm_clientes.client_id')
+                    ->where('crm_recordatorios.reminderresource_type', '=', 'client')
+                    ->where('crm_recordatorios.reminder_userid', '=', auth()->id());
             });
         }
 

@@ -100,7 +100,7 @@ class ProjectAssignedRepository {
         }
 
         $query = $this->assigned->newQuery();
-        $query->leftJoin('users', 'users.id', '=', 'projects_assigned.projectsassigned_userid');
+        $query->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_proyectosasignados.projectsassigned_userid');
         $query->where('projectsassigned_projectid', $id);
         $query->orderBy('first_name', 'ASC');
         return $query->get();

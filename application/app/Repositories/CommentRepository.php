@@ -41,8 +41,8 @@ class CommentRepository {
         $comments->selectRaw('*');
 
         //joins
-        $comments->leftJoin('users', 'users.id', '=', 'comments.comment_creatorid');
-        $comments->leftJoin('clients', 'clients.client_id', '=', 'comments.comment_clientid');
+        $comments->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_comentarios.comment_creatorid');
+        $comments->leftJoin('crm_clientes', 'crm_clientes.client_id', '=', 'crm_comentarios.comment_clientid');
 
         //default where
         $comments->whereRaw("1 = 1");

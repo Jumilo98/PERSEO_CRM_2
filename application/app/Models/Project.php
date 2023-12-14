@@ -164,14 +164,14 @@ class Project extends Model {
      * The Users that are assigned to the Project.
      */
     public function assigned() {
-        return $this->belongsToMany('App\Models\User', 'projects_assigned', 'projectsassigned_projectid', 'projectsassigned_userid');
+        return $this->belongsToMany('App\Models\User', 'crm_proyectosasignados', 'projectsassigned_projectid', 'projectsassigned_userid');
     }
 
     /**
      * The Users that are managers for the Project.
      */
     public function managers() {
-        return $this->belongsToMany('App\Models\User', 'projects_manager', 'projectsmanager_projectid', 'projectsmanager_userid');
+        return $this->belongsToMany('App\Models\User', 'crm_gestordeproyectos', 'projectsmanager_projectid', 'projectsmanager_userid');
     }
 
     /**

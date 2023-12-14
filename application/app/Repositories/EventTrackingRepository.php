@@ -37,8 +37,8 @@ class EventTrackingRepository {
         $eventtracking = $this->eventtracking->newQuery();
 
         //joins
-        $eventtracking->leftJoin('events', 'events.event_id', '=', 'events_tracking.eventtracking_eventid');
-        $eventtracking->leftJoin('users', 'users.id', '=', 'events.event_creatorid');
+        $eventtracking->leftJoin('crm_eventos', 'crm_eventos.event_id', '=', 'crm_seguimientodeeventos.eventtracking_eventid');
+        $eventtracking->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_eventos.event_creatorid');
 
         // all client fields
         $eventtracking->selectRaw('*');

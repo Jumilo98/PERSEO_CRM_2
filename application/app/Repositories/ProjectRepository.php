@@ -44,16 +44,16 @@ class ProjectRepository {
         }
 
         // select all
-        $projects->leftJoin('clients', 'clients.client_id', '=', 'projects.project_clientid');
-        $projects->leftJoin('categories', 'categories.category_id', '=', 'projects.project_categoryid');
-        $projects->leftJoin('users', 'users.id', '=', 'projects.project_creatorid');
+        $projects->leftJoin('crm_clientes', 'crm_clientes.client_id', '=', 'crm_proyectos.project_clientid');
+        $projects->leftJoin('crm_categorias', 'crm_categorias.category_id', '=', 'crm_proyectos.project_categoryid');
+        $projects->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_proyectos.project_creatorid');
 
         //join: users reminders - do not do this for cronjobs
         if (auth()->check()) {
-            $projects->leftJoin('reminders', function ($join) {
-                $join->on('reminders.reminderresource_id', '=', 'projects.project_id')
-                    ->where('reminders.reminderresource_type', '=', 'project')
-                    ->where('reminders.reminder_userid', '=', auth()->id());
+            $projects->leftJoin('crm_recordatorios', function ($join) {
+                $join->on('crm_recordatorios.reminderresource_id', '=', 'crm_proyectos.project_id')
+                    ->where('crm_recordatorios.reminderresource_type', '=', 'project')
+                    ->where('crm_recordatorios.reminder_userid', '=', auth()->id());
             });
         }
 

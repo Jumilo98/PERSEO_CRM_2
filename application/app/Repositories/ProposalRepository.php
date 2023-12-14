@@ -42,17 +42,17 @@ class ProposalRepository {
         }
 
         //joins
-        $proposals->leftJoin('users', 'users.id', '=', 'proposals.doc_creatorid');
-        $proposals->leftJoin('clients', 'clients.client_id', '=', 'proposals.doc_client_id');
-        $proposals->leftJoin('leads', 'leads.lead_id', '=', 'proposals.doc_lead_id');
-        $proposals->leftJoin('estimates', 'estimates.bill_proposalid', '=', 'proposals.doc_id');
+        $proposals->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_propuestas.doc_creatorid');
+        $proposals->leftJoin('crm_clientes', 'crm_clientes.client_id', '=', 'crm_propuestas.doc_client_id');
+        $proposals->leftJoin('crm_clientespotenciales', 'crm_clientespotenciales.lead_id', '=', 'crm_propuestas.doc_lead_id');
+        $proposals->leftJoin('crm_estimaciones', 'crm_estimaciones.bill_proposalid', '=', 'crm_propuestas.doc_id');
 
         //join: users reminders - do not do this for cronjobs
         if (auth()->check()) {
-            $proposals->leftJoin('reminders', function ($join) {
-                $join->on('reminders.reminderresource_id', '=', 'proposals.doc_id')
-                    ->where('reminders.reminderresource_type', '=', 'proposal')
-                    ->where('reminders.reminder_userid', '=', auth()->id());
+            $proposals->leftJoin('crm_recordatorios', function ($join) {
+                $join->on('crm_recordatorios.reminderresource_id', '=', 'crm_propuestas.doc_id')
+                    ->where('crm_recordatorios.reminderresource_type', '=', 'proposal')
+                    ->where('crm_recordatorios.reminder_userid', '=', auth()->id());
             });
         }
 
@@ -61,55 +61,55 @@ class ProposalRepository {
 
         //count proposals (all)
         $proposals->selectRaw("(SELECT COUNT(*)
-                                      FROM proposals)
+                                      FROM crm_propuestas)
                                       AS count_proposals_all");
 
         //count proposals (draft)
         $proposals->selectRaw("(SELECT COUNT(*)
-                                      FROM proposals
+                                      FROM crm_propuestas
                                       WHERE doc_status = 'draft')
                                       AS count_proposals_draft");
 
         //count proposals (new)
         $proposals->selectRaw("(SELECT COUNT(*)
-                                      FROM proposals
+                                      FROM crm_propuestas
                                       WHERE doc_status = 'new')
                                       AS count_proposals_new");
 
         //count proposals (accepted)
         $proposals->selectRaw("(SELECT COUNT(*)
-                                      FROM proposals
+                                      FROM crm_propuestas
                                       WHERE doc_status = 'accepted')
                                       AS count_proposals_accepted");
 
         //count proposals (declined)
         $proposals->selectRaw("(SELECT COUNT(*)
-                                      FROM proposals
+                                      FROM crm_propuestas
                                       WHERE doc_status = 'declined')
                                       AS count_proposals_declined");
 
         //count proposals (revised)
         $proposals->selectRaw("(SELECT COUNT(*)
-                                      FROM proposals
+                                      FROM crm_propuestas
                                       WHERE doc_status = 'revised')
                                       AS count_proposals_revised");
 
         //client details - first name
         $proposals->selectRaw("(SELECT first_name
-                                      FROM users
-                                      WHERE clientid = proposals.doc_client_id AND account_owner = 'yes' LIMIT 1)
+                                      FROM crm_usuarios
+                                      WHERE clientid = crm_propuestas.doc_client_id AND account_owner = 'yes' LIMIT 1)
                                       AS client_first_name");
 
         //client details - last name
         $proposals->selectRaw("(SELECT last_name
-                                      FROM users
-                                      WHERE clientid = proposals.doc_client_id AND account_owner = 'yes' LIMIT 1)
+                                      FROM crm_usuarios
+                                      WHERE clientid = crm_propuestas.doc_client_id AND account_owner = 'yes' LIMIT 1)
                                       AS client_last_name");
 
         //sum value: all
         $proposals->selectRaw("(SELECT COALESCE(SUM(bill_final_amount), 0.00)
-                                      FROM estimates
-                                      WHERE bill_proposalid = proposals.doc_id)
+                                      FROM crm_estimaciones
+                                      WHERE bill_proposalid = crm_propuestas.doc_id)
                                       AS proposal_value");
 
         //default where

@@ -63,17 +63,17 @@ class SubscriptionRepository {
         }
 
         //joins
-        $subscriptions->leftJoin('clients', 'clients.client_id', '=', 'subscriptions.subscription_clientid');
-        $subscriptions->leftJoin('users', 'users.id', '=', 'subscriptions.subscription_creatorid');
-        $subscriptions->leftJoin('categories', 'categories.category_id', '=', 'subscriptions.subscription_categoryid');
-        $subscriptions->leftJoin('projects', 'projects.project_id', '=', 'subscriptions.subscription_projectid');
+        $subscriptions->leftJoin('crm_clientes', 'crm_clientes.client_id', '=', 'crm_suscripciones.subscription_clientid');
+        $subscriptions->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_suscripciones.subscription_creatorid');
+        $subscriptions->leftJoin('crm_categorias', 'crm_categorias.category_id', '=', 'crm_suscripciones.subscription_categoryid');
+        $subscriptions->leftJoin('crm_proyectos', 'crm_proyectos.project_id', '=', 'crm_suscripciones.subscription_projectid');
 
         //join: users reminders - do not do this for cronjobs
         if (auth()->check()) {
-            $subscriptions->leftJoin('reminders', function ($join) {
-                $join->on('reminders.reminderresource_id', '=', 'subscriptions.subscription_id')
-                    ->where('reminders.reminderresource_type', '=', 'subscription')
-                    ->where('reminders.reminder_userid', '=', auth()->id());
+            $subscriptions->leftJoin('crm_recordatorios', function ($join) {
+                $join->on('crm_recordatorios.reminderresource_id', '=', 'crm_suscripciones.subscription_id')
+                    ->where('crm_recordatorios.reminderresource_type', '=', 'subscription')
+                    ->where('crm_recordatorios.reminder_userid', '=', auth()->id());
             });
         }
 
@@ -82,7 +82,7 @@ class SubscriptionRepository {
 
         //sum payments
         $subscriptions->selectRaw('(SELECT COALESCE(SUM(payment_amount), 0)
-                                      FROM payments WHERE payment_subscriptionid = subscriptions.subscription_id
+                                      FROM crm_pagos WHERE payment_subscriptionid = crm_suscripciones.subscription_id
                                       GROUP BY payment_subscriptionid)
                                       AS x_sum_payments');
         $subscriptions->selectRaw('(SELECT COALESCE(x_sum_payments, 0.00))

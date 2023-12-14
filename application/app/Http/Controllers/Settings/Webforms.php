@@ -218,7 +218,7 @@ class Webforms extends Controller {
 
         //get currently asssigned users
         $assigned = \App\Models\WebformAssigned::Where('webformassigned_formid', $id)
-            ->leftJoin('users', 'users.id', '=', 'webforms_assigned.webformassigned_userid')
+            ->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_asignaciondewebforms.webformassigned_userid')
             ->orderBy('first_name', 'asc')->get();
 
         //reponse payload

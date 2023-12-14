@@ -43,8 +43,8 @@ class ProjectReportRepository {
 
         $projects = $this->project->newQuery();
 
-        $projects->leftJoin('clients', 'clients.client_id', '=', 'projects.project_clientid');
-        $projects->leftJoin('categories', 'categories.category_id', '=', 'projects.project_categoryid');
+        $projects->leftJoin('crm_clientes', 'crm_clientes.client_id', '=', 'crm_proyectos.project_clientid');
+        $projects->leftJoin('crm_categorias', 'crm_categorias.category_id', '=', 'crm_proyectos.project_categoryid');
 
         // all client fields
         $projects->selectRaw('*');
@@ -54,8 +54,8 @@ class ProjectReportRepository {
 
         //sum_payments
         $projects->selectRaw('(SELECT COALESCE(SUM(payment_amount), 0)
-                                      FROM payments
-                                      WHERE payment_projectid = projects.project_id
+                                      FROM crm_pagos
+                                      WHERE payment_projectid = crm_proyectos.project_id
                                       GROUP BY payment_projectid)
                                       AS x_sum_payments');
         $projects->selectRaw('(SELECT COALESCE(x_sum_payments, 0.00))
@@ -63,8 +63,8 @@ class ProjectReportRepository {
 
         //sum_invoices
         $projects->selectRaw("(SELECT COALESCE(SUM(bill_final_amount), 0)
-                                      FROM invoices
-                                      WHERE bill_projectid = projects.project_id
+                                      FROM crm_facturas
+                                      WHERE bill_projectid = crm_proyectos.project_id
                                       AND bill_status NOT IN ('draft')
                                       GROUP BY bill_projectid)
                                       AS x_sum_invoices");
@@ -73,8 +73,8 @@ class ProjectReportRepository {
 
         //sum_expenses
         $projects->selectRaw("(SELECT COALESCE(SUM(expense_amount), 0)
-                                      FROM expenses
-                                       WHERE expense_projectid = projects.project_id
+                                      FROM crm_gastos
+                                       WHERE expense_projectid = crm_proyectos.project_id
                                       GROUP BY expense_projectid)
                                       AS x_sum_expenses");
         $projects->selectRaw('(SELECT COALESCE(x_sum_expenses, 0.00))
@@ -82,21 +82,21 @@ class ProjectReportRepository {
 
         //sum_hours
         $projects->selectRaw("COALESCE((SELECT SUM(timer_time)
-                                      FROM timers WHERE timer_projectid = projects.project_id
+                                      FROM crm_temporizadores WHERE timer_projectid = crm_proyectos.project_id
                                       AND timer_status = 'stopped'
                                       GROUP BY timer_projectid), 0)
                                       AS sum_hours");
 
         //count_tasks_due
         $projects->selectRaw("COALESCE((SELECT COUNT(task_id)
-                               FROM tasks
-                               WHERE task_projectid = projects.project_id
+                               FROM crm_tareas
+                               WHERE task_projectid = crm_proyectos.project_id
                                AND task_status NOT IN (2)
                                GROUP BY task_projectid), 0) AS count_tasks_due");
         //count_tasks_completed
         $projects->selectRaw("COALESCE((SELECT COUNT(task_id)
-                               FROM tasks
-                               WHERE task_projectid = projects.project_id
+                               FROM crm_tareas
+                               WHERE task_projectid = crm_proyectos.project_id
                                AND task_status = 2
                                GROUP BY task_projectid), 0) AS count_tasks_completed");
 

@@ -807,7 +807,7 @@ class UserRepository {
         $query = $this->users->newQuery();
 
         //joins
-        $query->leftJoin('clients', 'clients.client_id', '=', 'users.clientid');
+        $query->leftJoin('crm_clientes', 'crm_clientes.client_id', '=', 'crm_usuarios.clientid');
 
         $query->where('type', 'client');
         $query->where('account_owner', 'yes');

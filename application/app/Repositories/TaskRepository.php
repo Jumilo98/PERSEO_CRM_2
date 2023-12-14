@@ -45,18 +45,18 @@ class TaskRepository {
         }
 
         //joins
-        $tasks->leftJoin('projects', 'projects.project_id', '=', 'tasks.task_projectid');
-        $tasks->leftJoin('milestones', 'milestones.milestone_id', '=', 'tasks.task_milestoneid');
-        $tasks->leftJoin('users', 'users.id', '=', 'tasks.task_creatorid');
-        $tasks->leftJoin('clients', 'clients.client_id', '=', 'projects.project_clientid');
-        $tasks->leftJoin('tasks_status', 'tasks_status.taskstatus_id', '=', 'tasks.task_status');
+        $tasks->leftJoin('crm_proyectos', 'crm_proyectos.project_id', '=', 'crm_tareas.task_projectid');
+        $tasks->leftJoin('crm_metas', 'crm_metas.milestone_id', '=', 'crm_tareas.task_milestoneid');
+        $tasks->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_tareas.task_creatorid');
+        $tasks->leftJoin('crm_clientes', 'crm_clientes.client_id', '=', 'crm_proyectos.project_clientid');
+        $tasks->leftJoin('crm_estadosdetareas', 'crm_estadosdetareas.taskstatus_id', '=', 'crm_tareas.task_status');
 
         //join: users reminders - do not do this for cronjobs
         if (auth()->check()) {
-            $tasks->leftJoin('reminders', function ($join) {
-                $join->on('reminders.reminderresource_id', '=', 'tasks.task_id')
-                    ->where('reminders.reminderresource_type', '=', 'task')
-                    ->where('reminders.reminder_userid', '=', auth()->id());
+            $tasks->leftJoin('crm_recordatorios', function ($join) {
+                $join->on('crm_recordatorios.reminderresource_id', '=', 'crm_tareas.task_id')
+                    ->where('crm_recordatorios.reminderresource_type', '=', 'task')
+                    ->where('crm_recordatorios.reminder_userid', '=', auth()->id());
             });
         }
 
@@ -68,77 +68,77 @@ class TaskRepository {
 
         //count unread notifications
         $tasks->selectRaw('(SELECT COUNT(*)
-                                      FROM events_tracking
-                                      LEFT JOIN events ON events.event_id = events_tracking.eventtracking_eventid
+                                      FROM crm_seguimientodeeventos
+                                      LEFT JOIN crm_eventos ON crm_eventos.event_id = crm_seguimientodeeventos.eventtracking_eventid
                                       WHERE eventtracking_userid = ' . auth()->id() . '
-                                      AND events_tracking.eventtracking_status = "unread"
-                                      AND events.event_parent_type = "task"
-                                      AND events.event_parent_id = tasks.task_id
-                                      AND events.event_item = "comment")
+                                      AND crm_seguimientodeeventos.eventtracking_status = "unread"
+                                      AND crm_eventos.event_parent_type = "task"
+                                      AND crm_eventos.event_parent_id = crm_tareas.task_id
+                                      AND crm_eventos.event_item = "comment")
                                       AS count_unread_comments');
 
         //count unread notifications
         $tasks->selectRaw('(SELECT COUNT(*)
-                                      FROM events_tracking
-                                      LEFT JOIN events ON events.event_id = events_tracking.eventtracking_eventid
+                                      FROM crm_seguimientodeeventos
+                                      LEFT JOIN crm_eventos ON crm_eventos.event_id = crm_seguimientodeeventos.eventtracking_eventid
                                       WHERE eventtracking_userid = ' . auth()->id() . '
-                                      AND events_tracking.eventtracking_status = "unread"
-                                      AND events.event_parent_type = "task"
-                                      AND events.event_parent_id = tasks.task_id
-                                      AND events.event_item = "attachment")
+                                      AND crm_seguimientodeeventos.eventtracking_status = "unread"
+                                      AND crm_eventos.event_parent_type = "task"
+                                      AND crm_eventos.event_parent_id = crm_tareas.task_id
+                                      AND crm_eventos.event_item = "attachment")
                                       AS count_unread_attachments');
 
         //sum all timers for this task
         $tasks->selectRaw('(SELECT COALESCE(SUM(timer_time), 0)
-                                           FROM timers WHERE timer_taskid = tasks.task_id)
+                                           FROM crm_temporizadores WHERE timer_taskid = crm_tareas.task_id)
                                            AS sum_all_time');
 
         //sum my timers for this task
         $tasks->selectRaw("(SELECT COALESCE(SUM(timer_time), 0)
-                                           FROM timers WHERE timer_taskid = tasks.task_id
+                                           FROM crm_temporizadores WHERE timer_taskid = crm_tareas.task_id
                                            AND timer_creatorid = $myid)
                                            AS sum_my_time");
 
         //sum invoiced time
         $tasks->selectRaw("(SELECT COALESCE(SUM(timer_time), 0)
-                                           FROM timers WHERE timer_taskid = tasks.task_id
+                                           FROM crm_temporizadores WHERE timer_taskid = crm_tareas.task_id
                                            AND timer_billing_status = 'invoiced')
                                            AS sum_invoiced_time");
 
         //sum not invoiced time
         $tasks->selectRaw("(SELECT COALESCE(SUM(timer_time), 0)
-                                           FROM timers WHERE timer_taskid = tasks.task_id
+                                           FROM crm_temporizadores WHERE timer_taskid = crm_tareas.task_id
                                            AND timer_billing_status = 'not_invoiced')
                                            AS sum_not_invoiced_time");
 
         //dependency - count blockings
         $tasks->selectRaw('(SELECT COUNT(*)
-                                      FROM tasks_dependencies
-                                      WHERE tasksdependency_taskid = tasks.task_id
-                                      AND tasks_dependencies.tasksdependency_type = "cannot_start"
-                                      AND tasks_dependencies.tasksdependency_status = "active")
+                                      FROM crm_tareasdependientes
+                                      WHERE tasksdependency_taskid = crm_tareas.task_id
+                                      AND crm_tareasdependientes.tasksdependency_type = "cannot_start"
+                                      AND crm_tareasdependientes.tasksdependency_status = "active")
                                       AS count_dependency_cannot_start');
 
         //dependency - count blockings
         $tasks->selectRaw('(SELECT COUNT(*)
-                                      FROM tasks_dependencies
-                                      WHERE tasksdependency_taskid = tasks.task_id
-                                      AND tasks_dependencies.tasksdependency_type = "cannot_start"
-                                      AND tasks_dependencies.tasksdependency_status = "fulfilled")
+                                      FROM crm_tareasdependientes
+                                      WHERE tasksdependency_taskid = crm_tareas.task_id
+                                      AND crm_tareasdependientes.tasksdependency_type = "cannot_start"
+                                      AND crm_tareasdependientes.tasksdependency_status = "fulfilled")
                                       AS count_dependency_cannot_start_fullfilled');
 
         $tasks->selectRaw('(SELECT COUNT(*)
-                                      FROM tasks_dependencies
-                                      WHERE tasksdependency_taskid = tasks.task_id
-                                      AND tasks_dependencies.tasksdependency_type = "cannot_complete"
-                                      AND tasks_dependencies.tasksdependency_status = "active")
+                                      FROM crm_tareasdependientes
+                                      WHERE tasksdependency_taskid = crm_tareas.task_id
+                                      AND crm_tareasdependientes.tasksdependency_type = "cannot_complete"
+                                      AND crm_tareasdependientes.tasksdependency_status = "active")
                                       AS count_dependency_cannot_complete');
 
         $tasks->selectRaw('(SELECT COUNT(*)
-                                      FROM tasks_dependencies
-                                      WHERE tasksdependency_taskid = tasks.task_id
-                                      AND tasks_dependencies.tasksdependency_type = "cannot_complete"
-                                      AND tasks_dependencies.tasksdependency_status = "fulfilled")
+                                      FROM crm_tareasdependientes
+                                      WHERE tasksdependency_taskid = crm_tareas.task_id
+                                      AND crm_tareasdependientes.tasksdependency_type = "cannot_complete"
+                                      AND crm_tareasdependientes.tasksdependency_status = "fulfilled")
                                       AS count_dependency_cannot_complete_fulfilled');
         //default where
         $tasks->whereRaw("1 = 1");
