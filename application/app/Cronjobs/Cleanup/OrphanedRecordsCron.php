@@ -89,7 +89,7 @@ class OrphanedRecordsCron {
          *     Set the project to default project cagetory id [1]
         ------------------------------------------------------------------------------------------ */
         \App\Models\Project::whereNotIn('project_categoryid', function ($query) {
-            $query->select('category_id')->from('categories')->where('category_type', 'project');
+            $query->select('category_id')->from('crm_categorias')->where('category_type', 'project');
         })
             ->update(['project_categoryid' => 1]);
 

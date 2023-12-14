@@ -188,9 +188,9 @@ class InvoiceReportRepository {
 
         $invoices = $this->invoice->newQuery();
 
-        $invoices->leftJoin('crm_clientes', 'crm_clientes.client_id', '=', 'invoices.bill_clientid');
-        $invoices->leftJoin('projects', 'projects.project_id', '=', 'invoices.bill_projectid');
-        $invoices->leftJoin('categories', 'categories.category_id', '=', 'invoices.bill_categoryid');
+        $invoices->leftJoin('crm_clientes', 'crm_clientes.client_id', '=', 'crm_facturas.bill_clientid');
+        $invoices->leftJoin('crm_proyectos', 'crm_proyectos.project_id', '=', 'crm_facturas.bill_projectid');
+        $invoices->leftJoin('crm_categorias', 'crm_categorias.category_id', '=', 'crm_facturas.bill_categoryid');
 
         // all client fields
         $invoices->selectRaw('*');
@@ -199,12 +199,12 @@ class InvoiceReportRepository {
         $invoices->whereRaw("1 = 1");
 
         //sum the values
-        $invoices->selectRaw('COALESCE(SUM(invoices.bill_amount_before_tax), 0) as sum_bill_amount_before_tax');
-        $invoices->selectRaw('COALESCE(SUM(invoices.bill_tax_total_amount), 0) as sum_bill_tax_total_amount');
-        $invoices->selectRaw('COALESCE(SUM(invoices.bill_discount_amount), 0) as sum_bill_discount_amount');
-        $invoices->selectRaw('COALESCE(SUM(invoices.bill_adjustment_amount), 0) as sum_bill_adjustment_amount');
-        $invoices->selectRaw('COALESCE(SUM(invoices.bill_final_amount), 0) as sum_bill_final_amount');
-        $invoices->selectRaw('COUNT(invoices.bill_invoiceid) AS invoice_count');
+        $invoices->selectRaw('COALESCE(SUM(crm_facturas.bill_amount_before_tax), 0) as sum_bill_amount_before_tax');
+        $invoices->selectRaw('COALESCE(SUM(crm_facturas.bill_tax_total_amount), 0) as sum_bill_tax_total_amount');
+        $invoices->selectRaw('COALESCE(SUM(crm_facturas.bill_discount_amount), 0) as sum_bill_discount_amount');
+        $invoices->selectRaw('COALESCE(SUM(crm_facturas.bill_adjustment_amount), 0) as sum_bill_adjustment_amount');
+        $invoices->selectRaw('COALESCE(SUM(crm_facturas.bill_final_amount), 0) as sum_bill_final_amount');
+        $invoices->selectRaw('COUNT(crm_facturas.bill_invoiceid) AS invoice_count');
 
         //skip draft invoices
         $invoices->whereNotIn('bill_status', ['draft']);
