@@ -54,36 +54,36 @@ class TimesheetReportRepository {
 
         //sum_hours
         $timesheets->selectRaw("COALESCE((SELECT SUM(timer_time)
-                                      FROM timers
+                                      FROM crm_temporizadores
                                       WHERE timer_status = 'stopped'
-                                      AND timer_creatorid = users.id
+                                      AND timer_creatorid = crm_usuarios.id
                                       AND timer_stopped >= $start_date
                                       AND timer_stopped <= $end_date), 0)
                                       AS sum_hours");
 
         //sum_not_invoiced
         $timesheets->selectRaw("COALESCE((SELECT SUM(timer_time)
-                                      FROM timers
+                                      FROM crm_temporizadores
                                       WHERE timer_status = 'stopped'
                                       AND timer_billing_status = 'not_invoiced'
-                                      AND timer_creatorid = users.id
+                                      AND timer_creatorid = crm_usuarios.id
                                       AND timer_stopped >= $start_date
                                       AND timer_stopped <= $end_date), 0)
                                       AS sum_not_invoiced");
 
         //sum_invoiced
         $timesheets->selectRaw("COALESCE((SELECT SUM(timer_time)
-                                      FROM timers
+                                      FROM crm_temporizadores
                                       WHERE timer_status = 'stopped'
                                       AND timer_billing_status = 'invoiced'
-                                      AND timer_creatorid = users.id
+                                      AND timer_creatorid = crm_usuarios.id
                                       AND timer_stopped >= $start_date
                                       AND timer_stopped <= $end_date), 0)
                                       AS sum_invoiced");
 
         //sum_hours
-        $timesheets->selectRaw("(SELECT role_name FROM roles
-                                        WHERE role_id = users.role_id)
+        $timesheets->selectRaw("(SELECT role_name FROM crm_roles
+                                        WHERE role_id = crm_usuarios.role_id)
                                         AS role_name");
 
         //page limit
@@ -141,29 +141,29 @@ class TimesheetReportRepository {
 
         //sum_hours
         $timesheets->selectRaw("COALESCE((SELECT SUM(timer_time)
-                                      FROM timers
+                                      FROM crm_temporizadores
                                       WHERE timer_status = 'stopped'
-                                      AND timer_clientid = clients.client_id
+                                      AND timer_clientid = crm_clientes.client_id
                                       AND timer_stopped >= $start_date
                                       AND timer_stopped <= $end_date), 0)
                                       AS sum_hours");
 
         //sum_not_invoiced
         $timesheets->selectRaw("COALESCE((SELECT SUM(timer_time)
-                                      FROM timers
+                                      FROM crm_temporizadores
                                       WHERE timer_status = 'stopped'
                                       AND timer_billing_status = 'not_invoiced'
-                                      AND timer_clientid = clients.client_id
+                                      AND timer_clientid = crm_clientes.client_id
                                       AND timer_stopped >= $start_date
                                       AND timer_stopped <= $end_date), 0)
                                       AS sum_not_invoiced");
 
         //sum_invoiced
         $timesheets->selectRaw("COALESCE((SELECT SUM(timer_time)
-                                      FROM timers
+                                      FROM crm_temporizadores
                                       WHERE timer_status = 'stopped'
                                       AND timer_billing_status = 'invoiced'
-                                      AND timer_clientid = clients.client_id
+                                      AND timer_clientid = crm_clientes.client_id
                                       AND timer_stopped >= $start_date
                                       AND timer_stopped <= $end_date), 0)
                                       AS sum_invoiced");
@@ -224,29 +224,29 @@ class TimesheetReportRepository {
 
         //sum_hours
         $timesheets->selectRaw("COALESCE((SELECT SUM(timer_time)
-                                      FROM timers
+                                      FROM crm_temporizadores
                                       WHERE timer_status = 'stopped'
-                                      AND timer_projectid = projects.project_id
+                                      AND timer_projectid = crm_proyectos.project_id
                                       AND timer_stopped >= $start_date
                                       AND timer_stopped <= $end_date), 0)
                                       AS sum_hours");
 
         //sum_not_invoiced
         $timesheets->selectRaw("COALESCE((SELECT SUM(timer_time)
-                                      FROM timers
+                                      FROM crm_temporizadores
                                       WHERE timer_status = 'stopped'
                                       AND timer_billing_status = 'not_invoiced'
-                                      AND timer_projectid = projects.project_id
+                                      AND timer_projectid = crm_proyectos.project_id
                                       AND timer_stopped >= $start_date
                                       AND timer_stopped <= $end_date), 0)
                                       AS sum_not_invoiced");
 
         //sum_invoiced
         $timesheets->selectRaw("COALESCE((SELECT SUM(timer_time)
-                                      FROM timers
+                                      FROM crm_temporizadores
                                       WHERE timer_status = 'stopped'
                                       AND timer_billing_status = 'invoiced'
-                                      AND timer_projectid = projects.project_id
+                                      AND timer_projectid = crm_proyectos.project_id
                                       AND timer_stopped >= $start_date
                                       AND timer_stopped <= $end_date), 0)
                                       AS sum_invoiced");

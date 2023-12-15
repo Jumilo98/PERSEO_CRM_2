@@ -167,7 +167,7 @@ class ProjectReportRepository {
         //sorting
         if (in_array(request('sortorder'), array('desc', 'asc')) && request('orderby') != '') {
             //direct column name
-            if (Schema::hasColumn('projects', request('orderby'))) {
+            if (Schema::hasColumn('crm_proyectos', request('orderby'))) {
                 $projects->orderBy(request('orderby'), request('sortorder'));
             }
             //others
@@ -252,7 +252,7 @@ class ProjectReportRepository {
         $end_date = $this->filterDates('end');
 
         $clients = $this->client->newQuery();
-        $clients->leftJoin('projects', 'projects.project_clientid', '=', 'clients.client_id');
+        $clients->leftJoin('crm_proyectos', 'crm_proyectos.project_clientid', '=', 'crm_clientes.client_id');
 
         $clients->selectRaw('*');
 
@@ -263,16 +263,16 @@ class ProjectReportRepository {
 
         //count_projects
         $clients->selectRaw("COALESCE((SELECT COUNT(project_id)
-                               FROM projects
-                               WHERE project_clientid = clients.client_id
+                               FROM crm_proyectos
+                               WHERE project_clientid = crm_clientes.client_id
                                AND project_date_start >= '$start_date'
                                AND project_date_start <= '$end_date'
                                AND project_type = 'project'), 0) AS count_projects");
 
         //count_projects_pending
         $clients->selectRaw("COALESCE((SELECT COUNT(project_id)
-                               FROM projects
-                               WHERE project_clientid = clients.client_id
+                               FROM crm_proyectos
+                               WHERE project_clientid = crm_clientes.client_id
                                AND project_date_start >= '$start_date'
                                AND project_date_start <= '$end_date'
                                AND project_type = 'project'
@@ -280,8 +280,8 @@ class ProjectReportRepository {
 
         //count_projects_on_hold
         $clients->selectRaw("COALESCE((SELECT COUNT(project_id)
-                               FROM projects
-                               WHERE project_clientid = clients.client_id
+                               FROM crm_proyectos
+                               WHERE project_clientid = crm_clientes.client_id
                                AND project_date_start >= '$start_date'
                                AND project_date_start <= '$end_date'
                                AND project_type = 'project'
@@ -289,8 +289,8 @@ class ProjectReportRepository {
 
         //count_projects_not_started
         $clients->selectRaw("COALESCE((SELECT COUNT(project_id)
-                               FROM projects
-                               WHERE project_clientid = clients.client_id
+                               FROM crm_proyectos
+                               WHERE project_clientid = crm_clientes.client_id
                                AND project_date_start >= '$start_date'
                                AND project_date_start <= '$end_date'
                                AND project_type = 'project'
@@ -298,8 +298,8 @@ class ProjectReportRepository {
 
         //count_projects_cancelled
         $clients->selectRaw("COALESCE((SELECT COUNT(project_id)
-                               FROM projects
-                               WHERE project_clientid = clients.client_id
+                               FROM crm_proyectos
+                               WHERE project_clientid = crm_clientes.client_id
                                AND project_date_start >= '$start_date'
                                AND project_date_start <= '$end_date'
                                AND project_type = 'project'
@@ -307,8 +307,8 @@ class ProjectReportRepository {
 
         //count_projects_completed
         $clients->selectRaw("COALESCE((SELECT COUNT(project_id)
-                               FROM projects
-                               WHERE project_clientid = clients.client_id
+                               FROM crm_proyectos
+                               WHERE project_clientid = crm_clientes.client_id
                                AND project_date_start >= '$start_date'
                                AND project_date_start <= '$end_date'
                                AND project_type = 'project'
@@ -316,33 +316,33 @@ class ProjectReportRepository {
 
         //count_tasks_due
         $clients->selectRaw("COALESCE((SELECT COUNT(task_id)
-                               FROM tasks
+                               FROM crm_tareas
                                WHERE task_projectid IN
                                (SELECT project_id
-                                       FROM projects
-                                       WHERE project_clientid = clients.client_id
+                                       FROM crm_proyectos
+                                       WHERE project_clientid = crm_clientes.client_id
                                        AND project_date_start >= '$start_date'
                                        AND project_date_start <= '$end_date')
                                AND task_status NOT IN (2)), 0) AS count_tasks_due");
 
         //count_tasks_completed
         $clients->selectRaw("COALESCE((SELECT COUNT(task_id)
-                               FROM tasks
+                               FROM crm_tareas
                                WHERE task_projectid IN
                                (SELECT project_id
-                                       FROM projects
-                                       WHERE project_clientid = clients.client_id
+                                       FROM crm_proyectos
+                                       WHERE project_clientid = crm_clientes.client_id
                                        AND project_date_start >= '$start_date'
                                        AND project_date_start <= '$end_date')
                                AND task_status = 2), 0) AS count_tasks_completed");
 
         //sum_payments
         $clients->selectRaw("(SELECT COALESCE(SUM(payment_amount), 0)
-                                      FROM payments
+                                      FROM crm_pagos
                                       WHERE payment_projectid IN
                                       (SELECT project_id
-                                              FROM projects
-                                              WHERE project_clientid = clients.client_id
+                                              FROM crm_proyectos
+                                              WHERE project_clientid = crm_clientes.client_id
                                               AND project_date_start >= '$start_date'
                                               AND project_date_start <= '$end_date')
                                       AND payment_projectid IS NOT NULL)
@@ -352,11 +352,11 @@ class ProjectReportRepository {
 
         //sum_invoices
         $clients->selectRaw("(SELECT COALESCE(SUM(bill_final_amount), 0)
-                                      FROM invoices
+                                      FROM crm_facturas
                                       WHERE bill_projectid IN
                                       (SELECT project_id
-                                              FROM projects
-                                              WHERE project_clientid = clients.client_id
+                                              FROM crm_proyectos
+                                              WHERE project_clientid = crm_clientes.client_id
                                               AND project_date_start >= '$start_date'
                                               AND project_date_start <= '$end_date')
                                       AND bill_status NOT IN ('draft')
@@ -367,11 +367,11 @@ class ProjectReportRepository {
 
         //sum_expenses
         $clients->selectRaw("(SELECT COALESCE(SUM(expense_amount), 0)
-                                      FROM expenses
+                                      FROM crm_gastos
                                       WHERE expense_projectid IN
                                       (SELECT project_id
-                                              FROM projects
-                                              WHERE project_clientid = clients.client_id
+                                              FROM crm_proyectos
+                                              WHERE project_clientid = crm_clientes.client_id
                                               AND project_date_start >= '$start_date'
                                               AND project_date_start <= '$end_date')
                                       AND expense_projectid IS NOT NULL)
@@ -381,17 +381,17 @@ class ProjectReportRepository {
 
         //sum_hours
         $clients->selectRaw("COALESCE((SELECT SUM(timer_time)
-                                      FROM timers
+                                      FROM crm_temporizadores
                                       WHERE timer_projectid IN
                                       (SELECT project_id
-                                              FROM projects
-                                              WHERE project_clientid = clients.client_id
+                                              FROM crm_proyectos
+                                              WHERE project_clientid = crm_clientes.client_id
                                               AND project_date_start >= '$start_date'
                                               AND project_date_start <= '$end_date')
                                       AND timer_status = 'stopped'), 0)
                                       AS sum_hours");
 
-        $clients->groupBy('clients.client_id');
+        $clients->groupBy('crm_clientes.client_id');
 
         //page limit
         if (request()->filled('page_limit') && is_numeric(request('page_limit'))) {

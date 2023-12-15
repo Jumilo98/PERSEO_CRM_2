@@ -57,20 +57,20 @@ class ClientRepository {
         $clients->selectRaw('*');
 
         //count: clients projects by status
-        foreach (config('settings.project_statuses') as $key => $value) {
+        foreach (config('crm_config.project_statuses') as $key => $value) {
             $clients->countProjects($key);
         }
         $clients->countProjects('all');
         $clients->countProjects('pending');
 
         //count: clients invoices by status
-        foreach (config('settings.invoice_statuses') as $key => $value) {
+        foreach (config('crm_config.invoice_statuses') as $key => $value) {
             $clients->countInvoices($key);
         }
         $clients->countInvoices('all');
 
         //sum: clients invoices by status
-        foreach (config('settings.invoice_statuses') as $key => $value) {
+        foreach (config('crm_config.invoice_statuses') as $key => $value) {
             $clients->sumInvoices($key);
         }
         $clients->sumInvoices('all');
@@ -130,21 +130,21 @@ class ClientRepository {
 
         //filter: contacts
         if (is_array(request('filter_client_contacts')) && !empty(array_filter(request('filter_client_contacts'))) && !empty(array_filter(request('filter_client_contacts')))) {
-            $clients->whereHas('users', function ($query) {
+            $clients->whereHas('crm_usuarios', function ($query) {
                 $query->whereIn('id', request('filter_client_contacts'));
             });
         }
 
         //filter: catagories
         if (is_array(request('filter_client_categoryid')) && !empty(array_filter(request('filter_client_categoryid'))) && !empty(array_filter(request('filter_client_categoryid')))) {
-            $clients->whereHas('category', function ($query) {
+            $clients->whereHas('crm_categorias', function ($query) {
                 $query->whereIn('category_id', request('filter_client_categoryid'));
             });
         }
 
         //filter: tags
         if (is_array(request('filter_tags')) && !empty(array_filter(request('filter_tags'))) && !empty(array_filter(request('filter_tags')))) {
-            $clients->whereHas('tags', function ($query) {
+            $clients->whereHas('crm_etiquetas', function ($query) {
                 $query->whereIn('tag_title', request('filter_tags'));
             });
         }
@@ -174,10 +174,10 @@ class ClientRepository {
                 $query->orwhere('client_company_name', 'LIKE', '%' . request('search_query') . '%');
                 $query->orWhere('client_created', 'LIKE', '%' . request('search_query') . '%');
                 $query->orWhere('client_status', '=', request('search_query'));
-                $query->orWhereHas('tags', function ($query) {
+                $query->orWhereHas('crm_etiquetas', function ($query) {
                     $query->where('tag_title', 'LIKE', '%' . request('search_query') . '%');
                 });
-                $query->orWhereHas('category', function ($query) {
+                $query->orWhereHas('crm_categorias', function ($query) {
                     $query->where('category_name', 'LIKE', '%' . request('search_query') . '%');
                 });
             });
@@ -187,7 +187,7 @@ class ClientRepository {
         //sorting
         if (in_array(request('sortorder'), array('desc', 'asc')) && request('orderby') != '') {
             //direct column name
-            if (Schema::hasColumn('clients', request('orderby'))) {
+            if (Schema::hasColumn('crm_clientes', request('orderby'))) {
                 $clients->orderBy(request('orderby'), request('sortorder'));
             }
             //others

@@ -122,7 +122,7 @@ class InvoiceReportRepository {
         //sorting
         if (in_array(request('sortorder'), array('desc', 'asc')) && request('orderby') != '') {
             //direct column name
-            if (Schema::hasColumn('invoices', request('orderby'))) {
+            if (Schema::hasColumn('crm_facturas', request('orderby'))) {
                 $invoices->orderBy(request('orderby'), request('sortorder'));
             }
             //others
@@ -259,12 +259,12 @@ class InvoiceReportRepository {
         }
 
         //group
-        $invoices->groupBy('invoices.bill_clientid');
+        $invoices->groupBy('crm_facturas.bill_clientid');
 
         //sorting
         if (in_array(request('sortorder'), array('desc', 'asc')) && request('orderby') != '') {
             //direct column name
-            if (Schema::hasColumn('invoices', request('orderby'))) {
+            if (Schema::hasColumn('crm_facturas', request('orderby'))) {
                 $invoices->orderBy(request('orderby'), request('sortorder'));
             }
             //others
@@ -275,7 +275,7 @@ class InvoiceReportRepository {
             }
         } else {
             //default sorting
-            $invoices->orderBy('clients.client_company_name', 'asc');
+            $invoices->orderBy('crm_clientes.client_company_name', 'asc');
         }
 
         //page limit
@@ -341,14 +341,14 @@ class InvoiceReportRepository {
                                              UNION SELECT 12) months'));
 
         //join months to invoices
-        $invoices->leftJoin('invoices', function ($join) {
-            $join->on(DB::raw('MONTH(invoices.bill_date)'), '=', 'months.month');
+        $invoices->leftJoin('crm_facturas', function ($join) {
+            $join->on(DB::raw('MONTH(crm_facturas.bill_date)'), '=', 'months.month');
 
             //APPLY ALL FILTERS HERE
 
             //filter year
             if (request()->filled('filter_year') && request('filter_year') != 'all') {
-                $join->whereYear('invoices.bill_date', '=', request('filter_year'));
+                $join->whereYear('crm_facturas.bill_date', '=', request('filter_year'));
             }
 
             //exclude draft
@@ -382,19 +382,19 @@ class InvoiceReportRepository {
                                    ELSE "december"
                                    END as invoice_month');
         //sum the values
-        $invoices->selectRaw('COALESCE(SUM(invoices.bill_amount_before_tax), 0) as sum_bill_amount_before_tax');
-        $invoices->selectRaw('COALESCE(SUM(invoices.bill_tax_total_amount), 0) as sum_bill_tax_total_amount');
-        $invoices->selectRaw('COALESCE(SUM(invoices.bill_discount_amount), 0) as sum_bill_discount_amount');
-        $invoices->selectRaw('COALESCE(SUM(invoices.bill_adjustment_amount), 0) as sum_bill_adjustment_amount');
-        $invoices->selectRaw('COALESCE(SUM(invoices.bill_final_amount), 0) as sum_bill_final_amount');
-        $invoices->selectRaw('COUNT(invoices.bill_invoiceid) AS invoice_count');
+        $invoices->selectRaw('COALESCE(SUM(crm_facturas.bill_amount_before_tax), 0) as sum_bill_amount_before_tax');
+        $invoices->selectRaw('COALESCE(SUM(crm_facturas.bill_tax_total_amount), 0) as sum_bill_tax_total_amount');
+        $invoices->selectRaw('COALESCE(SUM(crm_facturas.bill_discount_amount), 0) as sum_bill_discount_amount');
+        $invoices->selectRaw('COALESCE(SUM(crm_facturas.bill_adjustment_amount), 0) as sum_bill_adjustment_amount');
+        $invoices->selectRaw('COALESCE(SUM(crm_facturas.bill_final_amount), 0) as sum_bill_final_amount');
+        $invoices->selectRaw('COUNT(crm_facturas.bill_invoiceid) AS invoice_count');
 
         $invoices->groupBy('months.month');
 
         //sorting
         if (in_array(request('sortorder'), array('desc', 'asc')) && request('orderby') != '') {
             //direct column name
-            if (Schema::hasColumn('invoices', request('orderby'))) {
+            if (Schema::hasColumn('crm_facturas', request('orderby'))) {
                 $invoices->orderBy(request('orderby'), request('sortorder'));
             }
             //others
@@ -480,12 +480,12 @@ class InvoiceReportRepository {
         $invoices = DB::table('crm_categorias');
 
         //join invoices and add all teh conditions on invoices in this join
-        $invoices->leftJoin('invoices', function ($join) {
+        $invoices->leftJoin('crm_facturas', function ($join) {
 
-            $join->on('categories.category_id', '=', 'invoices.bill_categoryid');
+            $join->on('crm_categorias.category_id', '=', 'crm_facturas.bill_categoryid');
 
             //skip draft invoices
-            $join->whereNotIn('invoices.bill_status', ['draft']);
+            $join->whereNotIn('crm_facturas.bill_status', ['draft']);
 
             //[date] - range
             if (request('filter_report_date_range') == 'custom_range') {
@@ -542,24 +542,24 @@ class InvoiceReportRepository {
         $invoices->selectRaw('*');
 
         //only get the invoices category
-        $invoices->where('categories.category_type', 'invoice');
+        $invoices->where('crm_categorias.category_type', 'invoice');
 
         //sum the values
-        $invoices->selectRaw('COALESCE(SUM(invoices.bill_amount_before_tax), 0) as sum_bill_amount_before_tax');
-        $invoices->selectRaw('COALESCE(SUM(invoices.bill_tax_total_amount), 0) as sum_bill_tax_total_amount');
-        $invoices->selectRaw('COALESCE(SUM(invoices.bill_discount_amount), 0) as sum_bill_discount_amount');
-        $invoices->selectRaw('COALESCE(SUM(invoices.bill_adjustment_amount), 0) as sum_bill_adjustment_amount');
-        $invoices->selectRaw('COALESCE(SUM(invoices.bill_final_amount), 0) as sum_bill_final_amount');
-        $invoices->selectRaw('COUNT(invoices.bill_invoiceid) AS invoice_count');
+        $invoices->selectRaw('COALESCE(SUM(crm_facturas.bill_amount_before_tax), 0) as sum_bill_amount_before_tax');
+        $invoices->selectRaw('COALESCE(SUM(crm_facturas.bill_tax_total_amount), 0) as sum_bill_tax_total_amount');
+        $invoices->selectRaw('COALESCE(SUM(crm_facturas.bill_discount_amount), 0) as sum_bill_discount_amount');
+        $invoices->selectRaw('COALESCE(SUM(crm_facturas.bill_adjustment_amount), 0) as sum_bill_adjustment_amount');
+        $invoices->selectRaw('COALESCE(SUM(crm_facturas.bill_final_amount), 0) as sum_bill_final_amount');
+        $invoices->selectRaw('COUNT(crm_facturas.bill_invoiceid) AS invoice_count');
 
         //group
-        $invoices->groupBy('categories.category_id');
-        $invoices->groupBy('categories.category_name');
+        $invoices->groupBy('crm_categorias.category_id');
+        $invoices->groupBy('crm_categorias.category_name');
 
         //sorting
         if (in_array(request('sortorder'), array('desc', 'asc')) && request('orderby') != '') {
             //direct column name
-            if (Schema::hasColumn('invoices', request('orderby'))) {
+            if (Schema::hasColumn('crm_facturas', request('orderby'))) {
                 $invoices->orderBy(request('orderby'), request('sortorder'));
             }
             //others
@@ -570,7 +570,7 @@ class InvoiceReportRepository {
             }
         } else {
             //default sorting
-            $invoices->orderBy('categories.category_name', 'asc');
+            $invoices->orderBy('crm_categorias.category_name', 'asc');
         }
 
         //page limit
