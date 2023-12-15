@@ -183,7 +183,7 @@ class ExpenseRepository {
         //sorting
         if (in_array(request('sortorder'), array('desc', 'asc')) && request('orderby') != '') {
             //direct column name
-            if (Schema::hasColumn('expenses', request('orderby'))) {
+            if (Schema::hasColumn('crm_gastos', request('orderby'))) {
                 $expenses->orderBy(request('orderby'), request('sortorder'));
             }
             //others

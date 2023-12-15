@@ -86,20 +86,20 @@ class MilestoneRepository {
 
         //count tasks - all
         $milestones->selectRaw('(SELECT COUNT(*)
-                                             FROM tasks
-                                             WHERE task_milestoneid = milestones.milestone_id)
+                                             FROM crm_tareas
+                                             WHERE task_milestoneid = crm_metas.milestone_id)
                                              AS milestone_count_tasks_all');
         //count tasks - pending
         $milestones->selectRaw("(SELECT COUNT(*)
-                                             FROM tasks
-                                             WHERE task_milestoneid = milestones.milestone_id
+                                             FROM crm_tareas
+                                             WHERE task_milestoneid = crm_metas.milestone_id
                                              AND task_status NOT IN(2))
                                              AS milestone_count_tasks_pending");
 
         //count tasks - all
         $milestones->selectRaw("(SELECT COUNT(*)
-                                             FROM tasks
-                                             WHERE task_milestoneid = milestones.milestone_id
+                                             FROM crm_tareas
+                                             WHERE task_milestoneid = crm_metas.milestone_id
                                              AND task_status = 2)
                                              AS milestone_count_tasks_completed");
 
@@ -122,7 +122,7 @@ class MilestoneRepository {
         //sorting
         if (in_array(request('sortorder'), array('desc', 'asc')) && request('orderby') != '') {
             //direct column name
-            if (Schema::hasColumn('milestones', request('orderby'))) {
+            if (Schema::hasColumn('crm_metas', request('orderby'))) {
                 $milestones->orderBy(request('orderby'), request('sortorder'));
             }
             //others

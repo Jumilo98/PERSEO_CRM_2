@@ -254,7 +254,7 @@ class InvoiceRepository {
         //sorting
         if (in_array(request('sortorder'), array('desc', 'asc')) && request('orderby') != '') {
             //direct column name
-            if (Schema::hasColumn('invoices', request('orderby'))) {
+            if (Schema::hasColumn('crm_facturas', request('orderby'))) {
                 $invoices->orderBy(request('orderby'), request('sortorder'));
             }
             //others

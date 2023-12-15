@@ -84,7 +84,7 @@ class ItemRepository {
         //sorting
         if (in_array(request('sortorder'), array('desc', 'asc')) && request('orderby') != '') {
             //direct column name
-            if (Schema::hasColumn('items', request('orderby'))) {
+            if (Schema::hasColumn('crm_articulos', request('orderby'))) {
                 $items->orderBy(request('orderby'), request('sortorder'));
             }
             //others

@@ -35,7 +35,7 @@ class LineitemRepository {
 
         $lines = $this->lineitems->newQuery();
 
-        $lines->leftJoin('items', 'items.item_id', '=', 'lineitems.lineitem_linked_product_id');
+        $lines->leftJoin('crm_articulos', 'crm_articulos.item_id', '=', 'crm_lineadearticulos.lineitem_linked_product_id');
 
         // all client fields
         $lines->selectRaw('*');

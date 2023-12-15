@@ -61,55 +61,55 @@ class ContractRepository {
 
         //count contracts (all)
         $contracts->selectRaw("(SELECT COUNT(*)
-                                      FROM contracts)
+                                      FROM crm_contratos)
                                       AS count_contracts_all");
 
         //count contracts (draft)
         $contracts->selectRaw("(SELECT COUNT(*)
-                                      FROM contracts
+                                      FROM crm_contratos
                                       WHERE doc_status = 'draft')
                                       AS count_contracts_draft");
 
         //count contracts (new)
         $contracts->selectRaw("(SELECT COUNT(*)
-                                      FROM contracts
+                                      FROM crm_contratos
                                       WHERE doc_status = 'new')
                                       AS count_contracts_new");
 
         //count contracts (accepted)
         $contracts->selectRaw("(SELECT COUNT(*)
-                                      FROM contracts
+                                      FROM crm_contratos
                                       WHERE doc_status = 'accepted')
                                       AS count_contracts_accepted");
 
         //count contracts (declined)
         $contracts->selectRaw("(SELECT COUNT(*)
-                                      FROM contracts
+                                      FROM crm_contratos
                                       WHERE doc_status = 'declined')
                                       AS count_contracts_declined");
 
         //count contracts (revised)
         $contracts->selectRaw("(SELECT COUNT(*)
-                                      FROM contracts
+                                      FROM crm_contratos
                                       WHERE doc_status = 'revised')
                                       AS count_contracts_revised");
 
         //client details - first name
         $contracts->selectRaw("(SELECT first_name
-                                      FROM users
-                                      WHERE clientid = contracts.doc_client_id AND account_owner = 'yes' LIMIT 1)
+                                      FROM crm_usuarios
+                                      WHERE clientid = crm_contratos.doc_client_id AND account_owner = 'yes' LIMIT 1)
                                       AS client_first_name");
 
         //client details - last name
         $contracts->selectRaw("(SELECT last_name
-                                      FROM users
-                                      WHERE clientid = contracts.doc_client_id AND account_owner = 'yes' LIMIT 1)
+                                      FROM crm_usuarios
+                                      WHERE clientid = crm_contratos.doc_client_id AND account_owner = 'yes' LIMIT 1)
                                       AS client_last_name");
 
         //sum value: all
         $contracts->selectRaw("(SELECT COALESCE(SUM(bill_final_amount), 0.00)
-                                      FROM estimates
-                                      WHERE bill_contractid = contracts.doc_id)
+                                      FROM crm_estimaciones
+                                      WHERE bill_contractid = crm_contratos.doc_id)
                                       AS contract_value");
 
         //default where
@@ -248,7 +248,7 @@ class ContractRepository {
         //sorting
         if (in_array(request('sortorder'), array('desc', 'asc')) && request('orderby') != '') {
             //direct column name
-            if (Schema::hasColumn('contracts', request('orderby'))) {
+            if (Schema::hasColumn('crm_contratos', request('orderby'))) {
                 $contracts->orderBy(request('orderby'), request('sortorder'));
             }
             //others

@@ -227,7 +227,7 @@ class EstimateRepository {
         //sorting
         if (in_array(request('sortorder'), array('desc', 'asc')) && request('orderby') != '') {
             //direct column name
-            if (Schema::hasColumn('estimates', request('orderby'))) {
+            if (Schema::hasColumn('crm_estimaciones', request('orderby'))) {
                 $estimates->orderBy(request('orderby'), request('sortorder'));
             }
             //others client

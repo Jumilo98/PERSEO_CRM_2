@@ -61,27 +61,27 @@ class ProjectRepository {
 
         //count al tasks
         $projects->selectRaw("(SELECT filefolder_id
-                                      FROM file_folders
-                                      WHERE filefolder_projectid = projects.project_id
+                                      FROM crm_archivosadjuntos
+                                      WHERE filefolder_projectid = crm_proyectos.project_id
                                       LIMIT 1)
                                       AS default_folder_id");
         //count al tasks
         $projects->selectRaw("(SELECT COUNT(*)
-                                      FROM tasks
-                                      WHERE task_projectid = projects.project_id)
+                                      FROM crm_tareas
+                                      WHERE task_projectid = crm_proyectos.project_id)
                                       AS count_all_tasks");
 
         //count completed tasks
         $projects->selectRaw("(SELECT COUNT(*)
-                                      FROM tasks
-                                      WHERE task_projectid = projects.project_id
+                                      FROM crm_tareas
+                                      WHERE task_projectid = crm_proyectos.project_id
                                       AND task_status IN('completed', 2))
                                       AS count_completed_tasks");
 
         //count pending tasks
         $projects->selectRaw("(SELECT COUNT(*)
-                                      FROM tasks
-                                      WHERE task_projectid = projects.project_id
+                                      FROM crm_tareas
+                                      WHERE task_projectid = crm_proyectos.project_id
                                       AND task_status NOT IN('completed', 2))
                                       AS count_pending_tasks");
 
@@ -91,41 +91,41 @@ class ProjectRepository {
 
         //sum invoices: all
         $projects->selectRaw("(SELECT COALESCE(SUM(bill_final_amount), 0.00)
-                                      FROM invoices
-                                      WHERE bill_projectid = projects.project_id)
+                                      FROM crm_facturas
+                                      WHERE bill_projectid = crm_proyectos.project_id)
                                       AS sum_invoices_all");
 
         //sum payments: all
         $projects->selectRaw("(SELECT COALESCE(SUM(payment_amount), 0.00)
-                                      FROM payments
-                                      WHERE payment_projectid = projects.project_id)
+                                      FROM crm_pagos
+                                      WHERE payment_projectid = crm_proyectos.project_id)
                                       AS sum_all_payments");
 
         //sum invoices: due
         $projects->selectRaw("(SELECT COALESCE(SUM(bill_final_amount), 0.00)
-                                      FROM invoices
-                                      WHERE bill_projectid = projects.project_id
+                                      FROM crm_facturas
+                                      WHERE bill_projectid = crm_proyectos.project_id
                                       AND bill_status = 'due')
                                       AS sum_invoices_due");
 
         //sum invoices: overdue
         $projects->selectRaw("(SELECT COALESCE(SUM(bill_final_amount), 0.00)
-                                      FROM invoices
-                                      WHERE bill_projectid = projects.project_id
+                                      FROM crm_facturas
+                                      WHERE bill_projectid = crm_proyectos.project_id
                                       AND bill_status = 'overdue')
                                       AS sum_invoices_overdue");
 
         //sum invoices: paid
         $projects->selectRaw("(SELECT COALESCE(SUM(bill_final_amount), 0.00)
-                                      FROM invoices
-                                      WHERE bill_projectid = projects.project_id
+                                      FROM crm_facturas
+                                      WHERE bill_projectid = crm_proyectos.project_id
                                       AND bill_status = 'paid')
                                       AS sum_invoices_paid");
 
         //sum expenses
         $projects->selectRaw("(SELECT COALESCE(SUM(expense_amount), 0.00)
-                                      FROM expenses
-                                      WHERE expense_projectid = projects.project_id)
+                                      FROM crm_gastos
+                                      WHERE expense_projectid = crm_proyectos.project_id)
                                       AS sum_expenses");
 
         //default where
@@ -308,7 +308,7 @@ class ProjectRepository {
                 $query->orWhereHas('category', function ($q) {
                     $q->where('category_name', 'LIKE', '%' . request('search_query') . '%');
                 });
-                $query->orWhereHas('client', function ($q) {
+                $query->orWhereHas('clients', function ($q) {
                     $q->where('client_company_name', 'LIKE', '%' . request('search_query') . '%');
                 });
                 $query->orWhereHas('assigned', function ($q) {

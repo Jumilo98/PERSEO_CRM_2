@@ -77,7 +77,7 @@ class NoteRepository {
         //sorting
         if (in_array(request('sortorder'), array('desc', 'asc')) && request('orderby') != '') {
             //direct column name
-            if (Schema::hasColumn('notes', request('orderby'))) {
+            if (Schema::hasColumn('crm_notas', request('orderby'))) {
                 $notes->orderBy(request('orderby'), request('sortorder'));
             }
             //others

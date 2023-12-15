@@ -243,7 +243,7 @@ class LeadRepository {
         //sorting
         if (in_array(request('sortorder'), array('desc', 'asc')) && request('orderby') != '') {
             //direct column name
-            if (Schema::hasColumn('leads', request('orderby'))) {
+            if (Schema::hasColumn('crm_clientespotenciales', request('orderby'))) {
                 $leads->orderBy(request('orderby'), request('sortorder'));
             }
             //others

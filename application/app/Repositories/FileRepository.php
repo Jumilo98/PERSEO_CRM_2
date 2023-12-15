@@ -135,7 +135,7 @@ class FileRepository {
         //sorting
         if (in_array(request('sortorder'), array('desc', 'asc')) && request('orderby') != '') {
             //direct column name
-            if (Schema::hasColumn('files', request('orderby'))) {
+            if (Schema::hasColumn('crm_archivos', request('orderby'))) {
                 $files->orderBy(request('orderby'), request('sortorder'));
             }
             //others
