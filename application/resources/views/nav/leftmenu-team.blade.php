@@ -25,7 +25,7 @@
                 @endif
 
 
-                <!--users[done]-->
+                <!--users[done]-->                
                 @if(runtimeGroupMenuVibility([config('visibility.modules.clients'),
                 config('visibility.modules.users')]))
                 <li data-modular-id="main_menu_team_clients"
@@ -54,6 +54,7 @@
                 <!--customers-->
 
                 <!--projects[done]-->
+                <!-- --REVIEW
                 @if(config('visibility.modules.projects'))
                 <li data-modular-id="main_menu_team_projects"
                     class="sidenav-menu-item {{ $page['mainmenu_projects'] ?? '' }}">
@@ -84,10 +85,12 @@
                     </ul>
                 </li>
                 @endif
+                -->
                 <!--projects-->
 
 
                 <!--tasks[done]-->
+                <!-- --REVIEW
                 @if(config('visibility.modules.tasks'))
                 <li data-modular-id="main_menu_team_tasks"
                     class="sidenav-menu-item {{ $page['mainmenu_tasks'] ?? '' }} menu-tooltip menu-with-tooltip"
@@ -99,9 +102,11 @@
                     </a>
                 </li>
                 @endif
+                -->
                 <!--tasks-->
 
                 <!--leads[done]-->
+                <!-- --REVIEW
                 @if(config('visibility.modules.leads'))
                 <li data-modular-id="main_menu_team_leads"
                     class="sidenav-menu-item {{ $page['mainmenu_leads'] ?? '' }} menu-tooltip menu-with-tooltip"
@@ -113,9 +118,11 @@
                     </a>
                 </li>
                 @endif
+                -->
                 <!--leads-->
 
                 <!--sales-->
+                <!-- --REVIEW
                 @if(runtimeGroupMenuVibility([config('visibility.modules.invoices'),
                 config('visibility.modules.payments'), config('visibility.modules.estimates'),
                 config('visibility.modules.products'), config('visibility.modules.expenses'),
@@ -168,15 +175,21 @@
                     </ul>
                 </li>
                 @endif
+                -->
                 <!--billing-->
 
 
                 <!--proposals [multiple]-->
+                <!-- --REVIEW
                 @if(config('visibility.modules.proposals') && auth()->user()->role->role_templates_proposals > 0)
+                -->
                 <!--multipl menu-->
+                <!-- 
                 <li data-modular-id="main_menu_team_proposals"
                     class="sidenav-menu-item {{ $page['mainmenu_proposals'] ?? '' }}">
+                    -->
                     <!--multiple menu-->
+                    <!--
                     <a class="has-arrow waves-effect waves-dark" href="javascript:void(0);" aria-expanded="false">
                         <i class="ti-bookmark-alt"></i>
                         <span class="hide-menu">{{ cleanLang(__('lang.proposals')) }}
@@ -195,9 +208,11 @@
                     </ul>
                 </li>
                 @endif
+                -->
                 <!--proposals-->
 
                 <!--proposals [single]-->
+                <!--
                 @if(config('visibility.modules.proposals') && auth()->user()->role->role_templates_proposals == 0)
                 <li data-modular-id="main_menu_team_proposals"
                     class="sidenav-menu-item {{ $page['mainmenu_proposals'] ?? '' }} menu-tooltip menu-with-tooltip"
@@ -209,14 +224,19 @@
                     </a>
                 </li>
                 @endif
-
+                -->
 
                 <!--contracts [multiple]-->
+                <!-- --REVIEW
                 @if(config('visibility.modules.contracts') && auth()->user()->role->role_templates_contracts > 0)
+                -->
                 <!--multipl menu-->
+                <!-- 
                 <li data-modular-id="main_menu_team_contracts"
                     class="sidenav-menu-item {{ $page['mainmenu_contracts'] ?? '' }}">
+                    -->
                     <!--multiple menu-->
+                    <!--
                     <a class="has-arrow waves-effect waves-dark" href="javascript:void(0);" aria-expanded="false">
                         <i class="ti-write"></i>
                         <span class="hide-menu">{{ cleanLang(__('lang.contracts')) }}
@@ -235,9 +255,11 @@
                     </ul>
                 </li>
                 @endif
+                -->
                 <!--contracts-->
 
                 <!--contracts [single]-->
+                <!-- 
                 @if(config('visibility.modules.contracts') && auth()->user()->role->role_templates_contracts == 0)
                 <li data-modular-id="main_menu_team_contracts"
                     class="sidenav-menu-item {{ $page['mainmenu_contracts'] ?? '' }} menu-tooltip menu-with-tooltip"
@@ -249,9 +271,10 @@
                     </a>
                 </li>
                 @endif
-
+                -->
 
                 <!--affiliates-->
+                <!-- --REVIEW
                 @if(auth()->user()->is_admin && config('settings.custom_modules.cs_affiliate'))
                 <li class="sidenav-menu-item {{ $page['mainmenu_cs_affiliates'] ?? '' }}">
                     <a class="has-arrow waves-effect waves-dark" href="javascript:void(0);" aria-expanded="false">
@@ -278,10 +301,12 @@
                     </ul>
                 </li>
                 @endif
+                -->
                 <!--affiliates-->
 
 
                 <!--messaging-->
+                <!-- --REVIEW
                 @if(config('visibility.modules.messages'))
                 <li data-modular-id="main_menu_team_messages"
                     class="sidenav-menu-item {{ $page['mainmenu_messages'] ?? '' }} menu-tooltip menu-with-tooltip"
@@ -293,11 +318,13 @@
                     </a>
                 </li>
                 @endif
+                -->
 
                 <!--[MODULES] - dynamic menu-->
                 {!! config('module_menus.main_menu_team') !!}
 
                 <!--spaces-->
+                <!-- --REVIEW
                 @if(config('visibility.modules.spaces'))
                 <li data-modular-id="main_menu_team_spaces hidden"
                     class="sidenav-menu-item {{ $page['mainmenu_spaces'] ?? '' }}">
@@ -326,10 +353,12 @@
                     </ul>
                 </li>
                 @endif
+                -->
                 <!--spaces-->
 
 
                 <!--tickets-->
+                <!-- --REVIEW
                 @if(config('visibility.modules.tickets'))
                 <li class="sidenav-menu-item {{ $page['mainmenu_tickets'] ?? '' }} menu-tooltip menu-with-tooltip"
                     title="{{ cleanLang(__('lang.tickets')) }}">
@@ -340,10 +369,12 @@
                     </a>
                 </li>
                 @endif
+                -->
                 <!--tickets-->
 
 
                 <!--knowledgebase-->
+                <!-- --REVIEW
                 @if(config('visibility.modules.knowledgebase'))
                 <li data-modular-id="main_menu_team_knowledgebase"
                     class="sidenav-menu-item {{ $page['mainmenu_kb'] ?? '' }} menu-tooltip menu-with-tooltip"
@@ -356,10 +387,12 @@
                     </a>
                 </li>
                 @endif
+                -->
                 <!--knowledgebase-->
 
 
                 <!--knowledgebase-->
+                <!--
                 @if(config('visibility.modules.reports'))
                 <li data-modular-id="main_menu_reports"
                     class="sidenav-menu-item {{ $page['mainmenu_reports'] ?? '' }} menu-tooltip menu-with-tooltip"
@@ -372,9 +405,11 @@
                     </a>
                 </li>
                 @endif
+                -->
                 <!--knowledgebase-->
 
                 <!--other-->
+                <!-- --REVIEW
                 @if(auth()->user()->is_team)
                 <li data-modular-id="main_menu_team_team"
                     class="sidenav-menu-item {{ $page['mainmenu_settings'] ?? '' }}">
@@ -407,6 +442,7 @@
                     </ul>
                 </li>
                 @endif
+                -->
 
             </ul>
         </nav>

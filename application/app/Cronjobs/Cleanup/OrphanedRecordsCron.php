@@ -137,17 +137,17 @@ class OrphanedRecordsCron {
 
         //all timers with invalid client
         \App\Models\Timer::WhereNotIn('timer_clientid', function ($query) {
-            $query->select('client_id')->from('clients');
+            $query->select('client_id')->from('crm_clientes');
         })->delete();
 
         //all timers with invalid project
         \App\Models\Timer::WhereNotIn('timer_projectid', function ($query) {
-            $query->select('project_id')->from('projects');
+            $query->select('project_id')->from('crm_proyectos');
         })->delete();
 
         //all timers with invalid task
         \App\Models\Timer::WhereNotIn('timer_taskid', function ($query) {
-            $query->select('task_id')->from('tasks');
+            $query->select('task_id')->from('crm_tareas');
         })->delete();
     }
 

@@ -192,8 +192,10 @@
                     </a>
                 </li>
                 @endif
-
+                
+                
                 <!-- settings -->
+               
                 @if(auth()->user()->is_admin)
                 <li class="nav-item">
                     <a class="nav-link waves-effect waves-dark font-22 p-t-10 p-r-10" href="/settings" id="32"
@@ -201,7 +203,8 @@
                         <i class="sl-icon-settings"></i>
                     </a>
                 </li>
-                @endif
+                @endif 
+                
 
                 <!-- add content -->
                 @if(auth()->user()->is_team && auth()->user()->can_add_content)
