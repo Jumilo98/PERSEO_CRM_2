@@ -195,7 +195,7 @@
                 
                 
                 <!-- settings -->
-               
+               <!-- --REVIEW
                 @if(auth()->user()->is_admin)
                 <li class="nav-item">
                     <a class="nav-link waves-effect waves-dark font-22 p-t-10 p-r-10" href="/settings" id="32"
@@ -204,6 +204,7 @@
                     </a>
                 </li>
                 @endif 
+                -->
                 
 
                 <!-- add content -->
