@@ -39,7 +39,7 @@ class TaskDependencyRepository {
         $taskdependencys->selectRaw('*');
 
         //joins
-        $taskdependencys->leftJoin('tasks', 'tasks.task_id', '=', 'tasks_dependencies.tasksdependency_blockerid');
+        $taskdependencys->leftJoin('crm_tareas', 'crm_tareas.task_id', '=', 'crm_tareasdependientes.tasksdependency_blockerid');
 
         //default where
         $taskdependencys->whereRaw("1 = 1");

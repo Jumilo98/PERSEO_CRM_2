@@ -250,7 +250,7 @@ class ProposalRepository {
         //sorting
         if (in_array(request('sortorder'), array('desc', 'asc')) && request('orderby') != '') {
             //direct column name
-            if (Schema::hasColumn('proposals', request('orderby'))) {
+            if (Schema::hasColumn('crm_propuestas', request('orderby'))) {
                 $proposals->orderBy(request('orderby'), request('sortorder'));
             }
             //others

@@ -70,14 +70,14 @@ class User extends Authenticatable {
      * The tasks that are assigned to the user.
      */
     public function assignedTasks() {
-        return $this->belongsToMany('App\Models\Task', 'tasks_assigned', 'tasksassigned_userid', 'tasksassigned_taskid');
+        return $this->belongsToMany('App\Models\Task', 'crm_tareasasignadas', 'tasksassigned_userid', 'tasksassigned_taskid');
     }
 
     /**
      * The tasks that are assigned to the user.
      */
     public function assignedLeads() {
-        return $this->belongsToMany('App\Models\Lead', 'leads_assigned', 'leadsassigned_userid', 'leadsassigned_leadid');
+        return $this->belongsToMany('App\Models\Lead', 'crm_clientespotencialesasignados', 'leadsassigned_userid', 'leadsassigned_leadid');
     }
 
     /**

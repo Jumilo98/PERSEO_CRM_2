@@ -51,7 +51,7 @@ class Invoices extends Controller {
         $settings = \App\Models\Settings::find(1);
         $settings2 = \App\Models\Settings2::find(1);
 
-        $query = DB::select("SHOW TABLE STATUS LIKE 'invoices'");
+        $query = DB::select("SHOW TABLE STATUS LIKE 'crm_facturas'");
         $next_id = $query[0]->Auto_increment;
 
         //reponse payload

@@ -43,7 +43,7 @@ class ContractTemplateRepository{
 
         $templates->selectRaw('*');
 
-        $templates->leftJoin('crm_clientes', 'crm_clientes.id', '=', 'crm_plantillasdecontrato.contract_template_creatorid');
+        $templates->leftJoin('crm_usuarios', 'crm_usuarios.id', '=', 'crm_plantillasdecontrato.contract_template_creatorid');
 
 
         //filters: id

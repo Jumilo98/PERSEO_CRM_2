@@ -48,8 +48,8 @@ class RoleRepository {
 
         //count users on this role
         $roles->selectRaw("(SELECT COUNT(*)
-                                      FROM users
-                                      WHERE role_id = roles.role_id
+                                      FROM crm_usuarios
+                                      WHERE role_id = crm_roles.role_id
                                       AND status NOT IN('deleted'))
                                       AS count_users");
 

@@ -219,7 +219,7 @@ class SubscriptionRepository {
         //sorting
         if (in_array(request('sortorder'), array('desc', 'asc')) && request('orderby') != '') {
             //direct column name
-            if (Schema::hasColumn('subscriptions', request('orderby'))) {
+            if (Schema::hasColumn('crm_suscripciones', request('orderby'))) {
                 $subscriptions->orderBy(request('orderby'), request('sortorder'));
             }
             //others client

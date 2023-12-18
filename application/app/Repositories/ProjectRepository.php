@@ -322,7 +322,7 @@ class ProjectRepository {
         //sorting
         if (in_array(request('sortorder'), array('desc', 'asc')) && request('orderby') != '') {
             //direct column name
-            if (Schema::hasColumn('projects', request('orderby'))) {
+            if (Schema::hasColumn('crm_proyectos', request('orderby'))) {
                 $projects->orderBy(request('orderby'), request('sortorder'));
             }
             //others

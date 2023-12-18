@@ -105,7 +105,7 @@ class OrphanedRecordsCron {
          * (1) Find and delete any payments that have an invalid invoice_id
          *    (i.e. invoice nolonger exists)
         ------------------------------------------------------------------------------------------ */
-        if (Schema::hasColumn('payments', 'payment_type')) {
+        if (Schema::hasColumn('crm_pagos', 'payment_type')) {
             \App\Models\Payment::whereNotIn('payment_invoiceid', function ($query) {
                 $query->select('bill_invoiceid')->from('invoices');
             })->Where('payment_type', 'invoice')->delete();
@@ -115,7 +115,7 @@ class OrphanedRecordsCron {
          * (2) Find and delete any payments that have an invalid subscription_id
          *    (i.e. subscription nolonger exists)
         ------------------------------------------------------------------------------------------ */
-        if (Schema::hasColumn('payments', 'payment_type')) {
+        if (Schema::hasColumn('crm_pagos', 'payment_type')) {
             \App\Models\Payment::whereNotIn('payment_subscriptionid', function ($query) {
                 $query->select('subscription_id')->from('subscriptions');
             })->Where('payment_type', 'subscription')->delete();
@@ -158,7 +158,7 @@ class OrphanedRecordsCron {
     public function cleanupInvoices() {
 
         //(1) Find invoices that are missing a unique id and give them one
-        if (Schema::hasColumn('invoices', 'bill_uniqueid')) {
+        if (Schema::hasColumn('crm_facturas', 'bill_uniqueid')) {
             \App\Models\Invoice::where('bill_uniqueid', '')->OrWhere('bill_uniqueid', null)
                 ->update([
                     'bill_uniqueid' => str_unique(),
@@ -174,7 +174,7 @@ class OrphanedRecordsCron {
     public function cleanupEstimates() {
 
         //(1) Find invoices that are missing a unique id and give them one
-        if (Schema::hasColumn('estimates', 'bill_uniqueid')) {
+        if (Schema::hasColumn('crm_estimaciones', 'bill_uniqueid')) {
             \App\Models\Estimate::where('bill_uniqueid', '')->OrWhere('bill_uniqueid', null)
                 ->update([
                     'bill_uniqueid' => str_unique(),

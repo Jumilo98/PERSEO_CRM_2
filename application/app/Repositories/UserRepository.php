@@ -165,7 +165,7 @@ class UserRepository {
 
         //sorting
         if (in_array(request('sortorder'), array('desc', 'asc')) && request('orderby') != '') {
-            if (Schema::hasColumn('users', request('orderby'))) {
+            if (Schema::hasColumn('crm_usuarios', request('orderby'))) {
                 $users->orderBy(request('orderby'), request('sortorder'));
             }
             //others

@@ -173,8 +173,8 @@ class Client extends Model {
 
         //return query
         return $query->selectRaw("(SELECT COUNT(*)
-                                          FROM projects
-                                          WHERE projects.project_clientid = clients.client_id
+                                          FROM crm_proyectos
+                                          WHERE crm_proyectos.project_clientid = crm_clientes.client_id
                                           $conditional ) AS $name");
     }
 
@@ -197,8 +197,8 @@ class Client extends Model {
 
         //return query
         $query->selectRaw("(SELECT COUNT(*)
-                                   FROM invoices
-                                   WHERE invoices.bill_clientid = clients.client_id
+                                   FROM crm_facturas
+                                   WHERE crm_facturas.bill_clientid = crm_clientes.client_id
                                    $conditional ) AS $name");
     }
 
@@ -221,8 +221,8 @@ class Client extends Model {
 
         //query
         return $query->selectRaw("(SELECT SUM(bill_final_amount)
-                                          FROM invoices
-                                          WHERE invoices.bill_clientid = clients.client_id
+                                          FROM crm_facturas
+                                          WHERE crm_facturas.bill_clientid = crm_clientes.client_id
                                           $conditional ) AS $name");
     }
 
@@ -236,8 +236,8 @@ class Client extends Model {
 
         //query
         return $query->selectRaw("(SELECT SUM(payment_amount)
-                                          FROM payments
-                                          WHERE payments.payment_clientid = clients.client_id
+                                          FROM crm_pagos
+                                          WHERE crm_pagos.payment_clientid = crm_clientes.client_id
                                            ) AS sum_all_payments");
     }
 

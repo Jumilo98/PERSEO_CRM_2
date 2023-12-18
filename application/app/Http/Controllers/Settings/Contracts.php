@@ -50,7 +50,7 @@ class Contracts extends Controller {
 
         $settings = \App\Models\Settings::find(1);
 
-        $query = DB::select("SHOW TABLE STATUS LIKE 'contracts'");
+        $query = DB::select("SHOW TABLE STATUS LIKE 'crm_contratos'");
         $next_id = $query[0]->Auto_increment;
 
         //reponse payload

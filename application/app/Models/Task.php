@@ -90,7 +90,7 @@ class Task extends Model {
      * The Users that are assigned to the Task.
      */
     public function assigned() {
-        return $this->belongsToMany('App\Models\User', 'tasks_assigned', 'tasksassigned_taskid', 'tasksassigned_userid');
+        return $this->belongsToMany('App\Models\User', 'crm_tareasasignadas', 'tasksassigned_taskid', 'tasksassigned_userid');
     }
 
     /**

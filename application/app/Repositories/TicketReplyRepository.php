@@ -61,7 +61,7 @@ class TicketReplyRepository {
         //sorting
         if (in_array(request('sortorder'), array('desc', 'asc')) && request('orderby') != '') {
             //direct column name
-            if (Schema::hasColumn('ticket_replies', request('orderby'))) {
+            if (Schema::hasColumn('crm_respuestasdeticket', request('orderby'))) {
                 $replies->orderBy(request('orderby'), request('sortorder'));
             }
             //others
@@ -74,7 +74,7 @@ class TicketReplyRepository {
 
         //eager load
         $replies->with([
-            'attachments.creator',
+            'crm_archivodecarpetas.creator',
             'ticket',
         ]);
 

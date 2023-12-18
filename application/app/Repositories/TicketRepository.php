@@ -183,7 +183,7 @@ class TicketRepository {
         //sorting
         if (in_array(request('sortorder'), array('desc', 'asc')) && request('orderby') != '') {
             //direct column name
-            if (Schema::hasColumn('tickets', request('orderby'))) {
+            if (Schema::hasColumn('crm_tickets', request('orderby'))) {
                 $tickets->orderBy(request('orderby'), request('sortorder'));
             }
             //others
@@ -202,7 +202,7 @@ class TicketRepository {
 
         //eager load
         $tickets->with([
-            'attachments.creator',
+            'crm_archivosadjuntos.creator',
         ]);
 
         //eager load counts

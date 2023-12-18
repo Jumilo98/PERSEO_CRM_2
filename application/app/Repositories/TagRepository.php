@@ -85,7 +85,7 @@ class TagRepository {
         //sorting
         if (in_array(request('sortorder'), array('desc', 'asc')) && request('orderby') != '') {
             //direct column name
-            if (Schema::hasColumn('tags', request('orderby'))) {
+            if (Schema::hasColumn('crm_etiquetas', request('orderby'))) {
                 $tags->orderBy(request('orderby'), request('sortorder'));
             }
             switch (request('orderby')) {

@@ -119,16 +119,16 @@ class TimerRepository {
 
         //grouping - tasks
         if (request('filter_grouping') == 'task') {
-            $timers->groupBy('timers.timer_taskid');
-            $timers->groupBy('timers.timer_creatorid');
+            $timers->groupBy('crm_temporizadores.timer_taskid');
+            $timers->groupBy('crm_temporizadores.timer_creatorid');
         }
         //grouping - tasks
         if (request('filter_grouping') == 'tasks_unbilled') {
-            $timers->groupBy('timers.timer_taskid');
+            $timers->groupBy('crm_temporizadores.timer_taskid');
         }
         //grouping - user
         if (request('filter_grouping') == 'user') {
-            $timers->groupBy('timers.timer_creatorid');
+            $timers->groupBy('crm_temporizadores.timer_creatorid');
         }
 
         //search: various client columns and relationships (where first, then wherehas)
@@ -145,7 +145,7 @@ class TimerRepository {
         //sorting
         if (in_array(request('sortorder'), array('desc', 'asc')) && request('orderby') != '') {
             //direct column name
-            if (Schema::hasColumn('timers', request('orderby'))) {
+            if (Schema::hasColumn('crm_temporizadores', request('orderby'))) {
                 $timers->orderBy(request('orderby'), request('sortorder'));
             }
             //others
@@ -193,7 +193,7 @@ class TimerRepository {
         $timers = $this->timer->newQuery();
 
         //joins
-        $timers->leftJoin('tasks', 'tasks.task_id', '=', 'timers.timer_taskid');
+        $timers->leftJoin('crm_tareas', 'crm_tareas.task_id', '=', 'crm_temporizadores.timer_taskid');
 
         // all client fields
         $timers->selectRaw('*');
@@ -214,7 +214,7 @@ class TimerRepository {
         $timers->where('timer_billing_status', 'not_invoiced');
 
         //group all
-        $timers->groupBy('timers.timer_taskid');
+        $timers->groupBy('crm_temporizadores.timer_taskid');
 
         //sorting
         if (in_array(request('sortorder'), array('desc', 'asc')) && request('orderby') != '') {
@@ -276,7 +276,7 @@ class TimerRepository {
         }
 
         //group all
-        $timers->groupBy('timers.timer_projectid');
+        $timers->groupBy('crm_temporizadores.timer_projectid');
 
         // Get the results and return them.
         $timer = $timers->first();

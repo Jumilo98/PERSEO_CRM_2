@@ -329,7 +329,7 @@ class TaskRepository {
         //sorting
         if (in_array(request('sortorder'), array('desc', 'asc')) && request('orderby') != '') {
             //direct column name
-            if (Schema::hasColumn('tasks', request('orderby'))) {
+            if (Schema::hasColumn('crm_tareas', request('orderby'))) {
                 $tasks->orderBy(request('orderby'), request('sortorder'));
             }
             //others

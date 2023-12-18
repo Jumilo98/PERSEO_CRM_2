@@ -49,7 +49,7 @@ class Proposals extends Controller {
 
         $settings = \App\Models\Settings::find(1);
 
-        $query = DB::select("SHOW TABLE STATUS LIKE 'proposals'");
+        $query = DB::select("SHOW TABLE STATUS LIKE 'crm_propuestas'");
         $next_id = $query[0]->Auto_increment;
 
         //reponse payload

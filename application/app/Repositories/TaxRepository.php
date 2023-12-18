@@ -37,7 +37,7 @@ class TaxRepository {
         $tax = $this->tax->newQuery();
 
         //joins
-        $tax->leftJoin('taxrates', 'taxrates.taxrate_id', '=', 'tax.tax_taxrateid');
+        $tax->leftJoin('crm_tiposdeimpuesto', 'crm_tiposdeimpuesto.taxrate_id', '=', 'crm_impuesto.tax_taxrateid');
 
         // all client fields
         $tax->selectRaw('*');

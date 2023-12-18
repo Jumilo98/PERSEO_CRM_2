@@ -116,7 +116,7 @@ class Home extends Controller {
             ->get();
 
         //get projects
-        $projects = \App\Models\Custom\CSAffiliateProject::leftJoin('projects', 'projects.project_id', '=', 'cs_affiliate_projects.cs_affiliate_project_projectid')
+        $projects = \App\Models\Custom\CSAffiliateProject::leftJoin('crm_proyectos', 'crm_proyectos.project_id', '=', 'crm_cs_proyectosdelafiliado.cs_affiliate_project_projectid')
             ->selectRaw('*')
             ->Where('cs_affiliate_project_affiliateid', auth()->id())
             ->where('cs_affiliate_project_status', 'active')
