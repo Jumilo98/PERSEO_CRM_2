@@ -3080,7 +3080,7 @@ CREATE TABLE `crm_webforms` (
 TRUNCATE `crm_webforms`;
 
 DROP TABLE IF EXISTS `crm_asignaciondewebforms`;
-CREATE TABLE `crm_asignacionDeWebforms` (
+CREATE TABLE `crm_asignaciondewebforms` (
   `webformassigned_id` int(11) NOT NULL AUTO_INCREMENT,
   `webformassigned_created` datetime NOT NULL,
   `webformassigned_updated` datetime NOT NULL,
