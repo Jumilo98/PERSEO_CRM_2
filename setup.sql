@@ -1680,7 +1680,7 @@ CREATE TABLE `crm_categoriasdelameta` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 TRUNCATE `crm_categoriasdelameta`;
-INSERT INTO `crm_categoriasdelaMeta` (`milestonecategory_id`, `milestonecategory_created`, `milestonecategory_updated`, `milestonecategory_creatorid`, `milestonecategory_title`, `milestonecategory_position`) VALUES
+INSERT INTO `crm_categoriasdelameta` (`milestonecategory_id`, `milestonecategory_created`, `milestonecategory_updated`, `milestonecategory_creatorid`, `milestonecategory_title`, `milestonecategory_position`) VALUES
 (1,	'2023-11-07 14:28:30',	'2023-11-07 14:28:30',	0,	'Planning',	1),
 (2,	'2023-11-07 14:28:30',	'2023-11-07 14:28:30',	0,	'Design',	2),
 (3,	'2023-11-07 14:28:30',	'2023-11-07 14:28:30',	0,	'Development',	3),
