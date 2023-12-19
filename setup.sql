@@ -5,8 +5,8 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
-DROP TABLE IF EXISTS `crm_archivosAdjuntos`;
-CREATE TABLE `crm_archivosAdjuntos` (
+DROP TABLE IF EXISTS `crm_archivosadjuntos`;
+CREATE TABLE `crm_archivosadjuntos` (
   `attachment_id` int(11) NOT NULL AUTO_INCREMENT,
   `attachment_uniqiueid` varchar(100) NOT NULL,
   `attachment_created` datetime DEFAULT NULL,
@@ -24,10 +24,10 @@ CREATE TABLE `crm_archivosAdjuntos` (
   PRIMARY KEY (`attachment_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='[truncate]';
 
-TRUNCATE `crm_archivosAdjuntos`;
+TRUNCATE `crm_archivosadjuntos`;
 
-DROP TABLE IF EXISTS `crm_asignacionAutomatica`;
-CREATE TABLE `crm_asignacionAutomatica` (
+DROP TABLE IF EXISTS `crm_asignacionautomatica`;
+CREATE TABLE `crm_asignacionautomatica` (
   `automationassigned_id` int(11) NOT NULL AUTO_INCREMENT,
   `automationassigned_created` datetime DEFAULT NULL,
   `automationassigned_updated` int(11) DEFAULT NULL,
@@ -37,7 +37,7 @@ CREATE TABLE `crm_asignacionAutomatica` (
   PRIMARY KEY (`automationassigned_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-TRUNCATE `crm_asignacionAutomatica`;
+TRUNCATE `crm_asignacionautomatica`;
 
 DROP TABLE IF EXISTS `crm_categorias`;
 CREATE TABLE `crm_categorias` (
@@ -73,8 +73,8 @@ INSERT INTO `crm_categorias` (`category_id`, `category_created`, `category_updat
 (60,	NULL,	NULL,	0,	'Default',	NULL,	'yes',	'everyone',	'sl-icon-docs',	'subscription',	'subscription'),
 (21,	'2020-09-02 15:41:04',	'2020-01-01 00:00:00',	0,	'Uncategorised',	NULL,	'yes',	'everyone',	'sl-icon-folder',	'milestones',	'1-uncategorised');
 
-DROP TABLE IF EXISTS `crm_categoriaUsuarios`;
-CREATE TABLE `crm_categoriaUsuarios` (
+DROP TABLE IF EXISTS `crm_categoriausuarios`;
+CREATE TABLE `crm_categoriausuarios` (
   `categoryuser_id` int(11) NOT NULL AUTO_INCREMENT,
   `categoryuser_categoryid` int(11) NOT NULL,
   `categoryuser_userid` int(11) NOT NULL,
@@ -83,10 +83,10 @@ CREATE TABLE `crm_categoriaUsuarios` (
   PRIMARY KEY (`categoryuser_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-TRUNCATE `crm_categoriaUsuarios`;
+TRUNCATE `crm_categoriausuarios`;
 
-DROP TABLE IF EXISTS `crm_listasDeControl`;
-CREATE TABLE `crm_listasDeControl` (
+DROP TABLE IF EXISTS `crm_listasdecontrol`;
+CREATE TABLE `crm_listasdecontrol` (
   `checklist_id` int(11) NOT NULL AUTO_INCREMENT,
   `checklist_position` int(11) NOT NULL,
   `checklist_created` datetime NOT NULL,
@@ -105,7 +105,7 @@ CREATE TABLE `crm_listasDeControl` (
   KEY `checklist_status` (`checklist_status`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='[truncate]';
 
-TRUNCATE `crm_listasDeControl`;
+TRUNCATE `crm_listasdecontrol`;
 
 DROP TABLE IF EXISTS `crm_clientes`;
 CREATE TABLE `crm_clientes` (
@@ -305,8 +305,8 @@ CREATE TABLE `crm_contratos` (
 
 TRUNCATE `crm_contratos`;
 
-DROP TABLE IF EXISTS `crm_plantillasDeContrato`;
-CREATE TABLE `crm_plantillasDeContrato` (
+DROP TABLE IF EXISTS `crm_plantillasdecontrato`;
+CREATE TABLE `crm_plantillasdecontrato` (
   `contract_template_id` int(11) NOT NULL AUTO_INCREMENT,
   `contract_template_created` datetime NOT NULL,
   `contract_template_updated` datetime NOT NULL,
@@ -320,12 +320,12 @@ CREATE TABLE `crm_plantillasDeContrato` (
   KEY `contract_template_creatorid` (`contract_template_creatorid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-TRUNCATE `crm_plantillasDeContrato`;
-INSERT INTO `crm_plantillasDeContrato` (`contract_template_id`, `contract_template_created`, `contract_template_updated`, `contract_template_creatorid`, `contract_template_title`, `contract_template_heading_color`, `contract_template_title_color`, `contract_template_body`, `contract_template_system`) VALUES
+TRUNCATE `crm_plantillascecontrato`;
+INSERT INTO `crm_plantillasdecontrato` (`contract_template_id`, `contract_template_created`, `contract_template_updated`, `contract_template_creatorid`, `contract_template_title`, `contract_template_heading_color`, `contract_template_title_color`, `contract_template_body`, `contract_template_system`) VALUES
 (1,	'2023-01-07 17:07:29',	'2022-05-22 09:15:49',	0,	'Default Template',	'#FFFFFF',	'#FFFFFF',	'This agreement (the &ldquo;Agreement&rdquo;) is between <strong>{client_company_name}</strong> (the &ldquo;Client&rdquo;) and <strong>{company_name}</strong> (the &ldquo;Service Provider&rdquo;). This Agreement is dated <strong>{contract_date}</strong>.<br /><br />\r\n<h6><span style=\"text-decoration: underline;\"><br />DELIVERABLES</span></h6>\r\n<br />The Client is hiring the Service Provider to do the following: <br /><br />\r\n<ul>\r\n<li>Design a website template.</li>\r\n<li>Convert the template into a WordPress theme.</li>\r\n<li>Install the WordPress theme on the Client\'s website.</li>\r\n</ul>\r\n<h6><span style=\"text-decoration: underline;\"><br /><br />DURATION</span></h6>\r\n<br />The Service Provider will begin work on&nbsp;<strong>{contract_date}</strong> and must complete the work by <strong>{contract_end_date}</strong>.<br />\r\n<h6><span style=\"text-decoration: underline;\"><br /><br /><br />PAYMENT</span></h6>\r\n<br />The Client will pay the Service Provider a sum of <strong>{pricing_table_total}</strong>. Of this, the Client will pay the Service Provider a 3<strong>0% deposit</strong>, before work begins.<br /><br /><strong>{pricing_table}</strong><br /><br />The Service Provider will invoice the Client on or after <strong>{contract_end_date}</strong>. <br /><br />The Client agrees to pay the Service Provider in full within <strong>7 days</strong> of receiving the invoice. Payment after that date will incur a late fee of <strong>$500 per month</strong>.<br /><br />\r\n<h6><span style=\"text-decoration: underline;\"><br /><br />EXPENSES</span></h6>\r\n<br />The Client will reimburse the Service Provider&rsquo;s expenses. Expenses do not need to be pre-approved by the Client.<br />\r\n<h6><span style=\"text-decoration: underline;\"><br /><br /><br />REVISIONS</span></h6>\r\n<br />The Client will incur additional fees for revisions requested which are outside the scope of the Deliverables at the Service Provider&rsquo;s standard hourly rate of <strong>$50/Hour</strong>.<br />\r\n<h6><span style=\"text-decoration: underline;\"><br /><br /><br />OWNERSHIP AND AUTHORSHIP</span></h6>\r\n<strong><br />Ownership:</strong> The Client owns all Deliverables (including intellectual property rights) once the Client has paid the Service Provider in full.<br /><br /><strong>Authorship:</strong> The Client agrees the Service Provider may showcase the Deliverables in the Service Provider&rsquo;s portfolio and in websites, printed literature and other media for the purpose of recognition.<br />\r\n<h6><span style=\"text-decoration: underline;\"><br /><br /><br />CONFIDENTIALITY AND NON-DISCLOSURE<br /></span></h6>\r\nEach party promises to the other party that it will not share information that is marked confidential and nonpublic with a third party, unless the disclosing party gives written permission first. Each party must continue to follow these obligations, even after the Agreement ends.<br />\r\n<h6><span style=\"text-decoration: underline;\"><br /><br /><br />NON-SOLICITATION</span></h6>\r\n<br />Until this Agreement ends, the Service Provider won&rsquo;t encourage Client employees or service providers to stop working for the Client for any reason.<br />\r\n<h6><span style=\"text-decoration: underline;\"><br /><br /><br />REPRESENTATIONS</span></h6>\r\n<br />Each party promises to the other party that it has the authority to enter into and perform all of its obligations under this Agreement.<br />\r\n<h6><span style=\"text-decoration: underline;\"><br /><br /><br />TERM AND TERMINATION</span></h6>\r\n<br />Either party may end this Agreement at any time and for any reason, by providing <strong>7 days\'</strong> written notice. <br /><br />The Client will pay the Service Provider for all work that has been completed when the Agreement ends and will reimburse the Service Provider for any prior expenses.<br />\r\n<h6><span style=\"text-decoration: underline;\"><br /><br /><br />LIMITATION OF LIABILITY</span></h6>\r\n<br />The Service Provider&rsquo;s Deliverables are sold &ldquo;as is&rdquo; and the Service Provider&rsquo;s maximum liability is the total sum paid by the Client to the Service Provider under this Agreement.<br /><span style=\"text-decoration-line: underline; color: #455a64;\"><br /><br />INDEMNITY</span><br /><br />The Client agrees to indemnify, save and hold harmless the Service Provider from any and all damages, liabilities, costs, losses or expenses arising out of any claim, demand, or action by a third party as a result of the work the Service Provider has done under this Agreement.<br />\r\n<h6><span style=\"text-decoration: underline;\"><br /><br /><br />GENERAL</span></h6>\r\n<br />Governing Law and Dispute Resolution. The laws of <strong>France</strong> govern the rights and obligations of the Client and the Service Provider under this Agreement, without regard to conflict of law provisions of that state.<br />\r\n<h6><span style=\"text-decoration: underline;\"><br /><br /><br />NOTICES</span></h6>\r\n<br />All notices to either party shall be in writing and delivered by email or registered mail. Notices must be delivered to the party&rsquo;s address(es) listed at the end of this Agreement.<br />Severability.&nbsp; If any portion of this Agreement is changed or disregarded because it is unenforceable, the rest of the Agreement is still enforceable.<br />\r\n<h6><span style=\"text-decoration: underline;\"><br /><br /><br />ENTIRE AGREEMENT</span></h6>\r\n<br />This Agreement supersedes all other prior Agreements (both written and oral) between the parties.<br /><br /><strong>The undersigned agree to and accept the terms of this Agreement.</strong>',	'no');
 
-DROP TABLE IF EXISTS `crm_cs_gananciasDelAfiliado`;
-CREATE TABLE `crm_cs_gananciasDelAfiliado` (
+DROP TABLE IF EXISTS `crm_cs_gananciasdelafiliado`;
+CREATE TABLE `crm_cs_gananciasdelafiliado` (
   `cs_affiliate_earning_id` int(11) NOT NULL AUTO_INCREMENT,
   `cs_affiliate_earning_created` datetime NOT NULL,
   `cs_affiliate_earning_updated` datetime NOT NULL,
@@ -340,12 +340,12 @@ CREATE TABLE `crm_cs_gananciasDelAfiliado` (
   PRIMARY KEY (`cs_affiliate_earning_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-TRUNCATE `crm_cs_gananciasDelAfiliado`;
-INSERT INTO `crm_cs_gananciasDelAfiliado` (`cs_affiliate_earning_id`, `cs_affiliate_earning_created`, `cs_affiliate_earning_updated`, `cs_affiliate_earning_projectid`, `cs_affiliate_earning_invoiceid`, `cs_affiliate_earning_invoice_payment_date`, `cs_affiliate_earning_commission_approval_date`, `cs_affiliate_earning_affiliateid`, `cs_affiliate_earning_amount`, `cs_affiliate_earning_commission_rate`, `cs_affiliate_earning_status`) VALUES
+TRUNCATE `crm_cs_gananciasdelafiliado`;
+INSERT INTO `crm_cs_gananciasdelafiliado` (`cs_affiliate_earning_id`, `cs_affiliate_earning_created`, `cs_affiliate_earning_updated`, `cs_affiliate_earning_projectid`, `cs_affiliate_earning_invoiceid`, `cs_affiliate_earning_invoice_payment_date`, `cs_affiliate_earning_commission_approval_date`, `cs_affiliate_earning_affiliateid`, `cs_affiliate_earning_amount`, `cs_affiliate_earning_commission_rate`, `cs_affiliate_earning_status`) VALUES
 (3,	'2022-08-16 18:25:17',	'2022-08-16 18:25:50',	5,	137,	'2022-08-16 18:25:17',	'2022-08-16 18:25:50',	167,	100.00,	10.00,	'paid');
 
-DROP TABLE IF EXISTS `crm_cs_proyectosDelAfiliado`;
-CREATE TABLE `crm_cs_proyectosDelAfiliado` (
+DROP TABLE IF EXISTS `crm_cs_proyectosdelafiliado`;
+CREATE TABLE `crm_cs_proyectosdelafiliado` (
   `cs_affiliate_project_id` int(11) NOT NULL AUTO_INCREMENT,
   `cs_affiliate_project_created` int(11) NOT NULL,
   `cs_affiliate_project_updated` int(11) NOT NULL,
@@ -357,8 +357,8 @@ CREATE TABLE `crm_cs_proyectosDelAfiliado` (
   PRIMARY KEY (`cs_affiliate_project_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-TRUNCATE `crm_cs_proyectosDelAfiliado`;
-INSERT INTO `crm_cs_proyectosDelAfiliado` (`cs_affiliate_project_id`, `cs_affiliate_project_created`, `cs_affiliate_project_updated`, `cs_affiliate_project_creatorid`, `cs_affiliate_project_affiliateid`, `cs_affiliate_project_projectid`, `cs_affiliate_project_commission_rate`, `cs_affiliate_project_status`) VALUES
+TRUNCATE `crm_cs_proyectosdelafiliado`;
+INSERT INTO `crm_cs_proyectosdelafiliado` (`cs_affiliate_project_id`, `cs_affiliate_project_created`, `cs_affiliate_project_updated`, `cs_affiliate_project_creatorid`, `cs_affiliate_project_affiliateid`, `cs_affiliate_project_projectid`, `cs_affiliate_project_commission_rate`, `cs_affiliate_project_status`) VALUES
 (7,	2022,	2022,	1,	167,	5,	10.00,	'active');
 
 DROP TABLE IF EXISTS `crm_cs_eventos`;
@@ -377,8 +377,8 @@ TRUNCATE `crm_cs_eventos`;
 INSERT INTO `crm_cs_eventos` (`cs_event_id`, `cs_event_created`, `cs_event_updated`, `cs_event_affliateid`, `cs_event_invoiceid`, `cs_event_project_title`, `cs_event_amount`) VALUES
 (3,	'2022-08-16',	'2022-08-16',	167,	137,	'Redesign the layout of our helpdesk',	100.00);
 
-DROP TABLE IF EXISTS `crm_camposPersonalizados`;
-CREATE TABLE `crm_camposPersonalizados` (
+DROP TABLE IF EXISTS `crm_campospersonalizados`;
+CREATE TABLE `crm_campospersonalizados` (
   `customfields_id` int(11) NOT NULL AUTO_INCREMENT,
   `customfields_created` datetime NOT NULL,
   `customfields_updated` datetime NOT NULL,
@@ -402,8 +402,8 @@ CREATE TABLE `crm_camposPersonalizados` (
   PRIMARY KEY (`customfields_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='checkbox fields are stored as ''on'' or null';
 
-TRUNCATE `crm_camposPersonalizados`;
-INSERT INTO `crm_camposPersonalizados` (`customfields_id`, `customfields_created`, `customfields_updated`, `customfields_position`, `customfields_datatype`, `customfields_datapayload`, `customfields_type`, `customfields_name`, `customfields_title`, `customfields_required`, `customfields_show_client_page`, `customfields_show_project_page`, `customfields_show_task_summary`, `customfields_show_lead_summary`, `customfields_show_invoice`, `customfields_show_ticket_page`, `customfields_show_filter_panel`, `customfields_standard_form_status`, `customfields_status`, `customfields_sorting_a_z`) VALUES
+TRUNCATE `crm_campospersonalizados`;
+INSERT INTO `crm_campospersonalizados` (`customfields_id`, `customfields_created`, `customfields_updated`, `customfields_position`, `customfields_datatype`, `customfields_datapayload`, `customfields_type`, `customfields_name`, `customfields_title`, `customfields_required`, `customfields_show_client_page`, `customfields_show_project_page`, `customfields_show_task_summary`, `customfields_show_lead_summary`, `customfields_show_invoice`, `customfields_show_ticket_page`, `customfields_show_filter_panel`, `customfields_standard_form_status`, `customfields_status`, `customfields_sorting_a_z`) VALUES
 (1,	'2021-01-09 17:02:59',	'2022-10-02 15:07:33',	1,	'text',	'',	'projects',	'project_custom_field_1',	'',	'no',	'no',	'no',	'no',	'no',	'no',	'no',	'no',	'disabled',	'disabled',	'z'),
 (2,	'2021-01-09 17:03:12',	'2021-07-13 15:56:23',	1,	'text',	'',	'projects',	'project_custom_field_2',	'',	'no',	'no',	'no',	'no',	'no',	'no',	'no',	'no',	'disabled',	'disabled',	'z'),
 (3,	'2021-01-09 17:03:17',	'2021-07-09 17:25:11',	1,	'text',	'',	'projects',	'project_custom_field_3',	'',	'no',	'no',	'no',	'no',	'no',	'no',	'no',	'no',	'disabled',	'disabled',	'z'),
@@ -835,8 +835,8 @@ INSERT INTO `crm_camposPersonalizados` (`customfields_id`, `customfields_created
 (479,	'2021-07-04 19:18:20',	'2021-07-09 17:20:01',	1,	'decimal',	'',	'tickets',	'ticket_custom_field_69',	'',	'no',	'no',	'no',	'no',	'no',	'no',	'no',	'no',	'disabled',	'disabled',	'z'),
 (480,	'2021-07-04 19:18:20',	'2021-07-09 17:20:01',	1,	'decimal',	'',	'tickets',	'ticket_custom_field_70',	'',	'no',	'no',	'no',	'no',	'no',	'no',	'no',	'no',	'disabled',	'disabled',	'z');
 
-DROP TABLE IF EXISTS `crm_CorreoElectronico`;
-CREATE TABLE `crm_CorreoElectronico` (
+DROP TABLE IF EXISTS `crm_correoelectronico`;
+CREATE TABLE `crm_correoelectronico` (
   `emaillog_id` int(11) NOT NULL AUTO_INCREMENT,
   `emaillog_created` datetime DEFAULT NULL,
   `emaillog_updated` datetime DEFAULT NULL,
@@ -847,10 +847,10 @@ CREATE TABLE `crm_CorreoElectronico` (
   PRIMARY KEY (`emaillog_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='[truncate]';
 
-TRUNCATE `crm_CorreoElectronico`;
+TRUNCATE `crm_correoelectronico`;
 
-DROP TABLE IF EXISTS `crm_correoEnCola`;
-CREATE TABLE `crm_correoEnCola` (
+DROP TABLE IF EXISTS `crm_correoencola`;
+CREATE TABLE `crm_correoencola` (
   `emailqueue_id` int(11) NOT NULL AUTO_INCREMENT,
   `emailqueue_created` datetime NOT NULL,
   `emailqueue_updated` datetime NOT NULL,
@@ -876,10 +876,10 @@ CREATE TABLE `crm_correoEnCola` (
   KEY `emailqueue_status` (`emailqueue_status`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='[truncate]';
 
-TRUNCATE `crm_correoEnCola`;
+TRUNCATE `crm_correoencola`;
 
-DROP TABLE IF EXISTS `crm_plantillasDeCorreo`;
-CREATE TABLE `crm_plantillasDeCorreo` (
+DROP TABLE IF EXISTS `crm_plantillasdecorreo`;
+CREATE TABLE `crm_plantillasdecorreo` (
   `emailtemplate_module_unique_id` varchar(250) DEFAULT NULL,
   `emailtemplate_module_name` varchar(250) DEFAULT NULL,
   `emailtemplate_name` varchar(100) DEFAULT NULL,
@@ -901,8 +901,8 @@ CREATE TABLE `crm_plantillasDeCorreo` (
   KEY `emailtemplate_category` (`emailtemplate_category`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='[do not truncate]';
 
-TRUNCATE `crm_plantillasDeCorreo`;
-INSERT INTO `crm_plantillasDeCorreo` (`emailtemplate_module_unique_id`, `emailtemplate_module_name`, `emailtemplate_name`, `emailtemplate_lang`, `emailtemplate_type`, `emailtemplate_category`, `emailtemplate_subject`, `emailtemplate_body`, `emailtemplate_variables`, `emailtemplate_created`, `emailtemplate_updated`, `emailtemplate_status`, `emailtemplate_language`, `emailtemplate_real_template`, `emailtemplate_show_enabled`, `emailtemplate_id`) VALUES
+TRUNCATE `crm_plantillasdecorreo`;
+INSERT INTO `crm_plantillasdecorreo` (`emailtemplate_module_unique_id`, `emailtemplate_module_name`, `emailtemplate_name`, `emailtemplate_lang`, `emailtemplate_type`, `emailtemplate_category`, `emailtemplate_subject`, `emailtemplate_body`, `emailtemplate_variables`, `emailtemplate_created`, `emailtemplate_updated`, `emailtemplate_status`, `emailtemplate_language`, `emailtemplate_real_template`, `emailtemplate_show_enabled`, `emailtemplate_id`) VALUES
 (NULL,	NULL,	'New User Welcome',	'template_lang_new_user_welcome',	'everyone',	'users',	'Welcome - Your Account Details',	'<!DOCTYPE html>\n<html>\n\n<head>\n\n    <meta charset=\"utf-8\">\n    <meta http-equiv=\"x-ua-compatible\" content=\"ie=edge\">\n    <title>Email Confirmation</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n    <style type=\"text/css\">\n        @media screen {\n            @font-face {\n                font-family: \'Source Sans Pro\';\n                font-style: normal;\n                font-weight: 400;\n                src: local(\'Source Sans Pro Regular\'), local(\'SourceSansPro-Regular\'), url(https://fonts.gstatic.com/s/sourcesanspro/v10/ODelI1aHBYDBqgeIAH2zlBM0YzuT7MdOe03otPbuUS0.woff) format(\'woff\');\n            }\n\n            @font-face {\n                font-family: \'Source Sans Pro\';\n                font-style: normal;\n                font-weight: 700;\n                src: local(\'Source Sans Pro Bold\'), local(\'SourceSansPro-Bold\'), url(https://fonts.gstatic.com/s/sourcesanspro/v10/toadOcfmlt9b38dHJxOBGFkQc6VGVFSmCnC_l7QZG60.woff) format(\'woff\');\n            }\n        }\n\n        body,\n        table,\n        td,\n        a {\n            -ms-text-size-adjust: 100%;\n            /* 1 */\n            -webkit-text-size-adjust: 100%;\n            /* 2 */\n        }\n\n        img {\n            -ms-interpolation-mode: bicubic;\n        }\n\n        a[x-apple-data-detectors] {\n            font-family: inherit !important;\n            font-size: inherit !important;\n            font-weight: inherit !important;\n            line-height: inherit !important;\n            color: inherit !important;\n            text-decoration: none !important;\n        }\n\n        div[style*=\"margin: 16px 0;\"] {\n            margin: 0 !important;\n        }\n\n        body {\n            width: 100% !important;\n            height: 100% !important;\n            padding: 0 !important;\n            margin: 0 !important;\n            padding: 24px;\n            font-family: \'Source Sans Pro\', Helvetica, Arial, sans-serif;\n            font-size: 16px;\n            background-color: #f9fafc;\n            color: #60676d;\n        }\n\n        table {\n            border-collapse: collapse !important;\n        }\n\n        a {\n            color: #1a82e2;\n        }\n\n        img {\n            height: auto;\n            line-height: 100%;\n            text-decoration: none;\n            border: 0;\n            outline: none;\n        }\n\n        .table-1 {\n            max-width: 600px;\n        }\n\n        .table-1 td {\n            padding: 36px 24px 40px;\n            text-align: center;\n        }\n\n        .table-1 h1 {\n            margin: 0;\n            font-size: 32px;\n            font-weight: 600;\n            letter-spacing: -1px;\n            line-height: 48px;\n        }\n\n        .table-2 {\n            max-width: 600px;\n        }\n\n        .table-2 td {\n            padding: 36px 24px 0;\n            border-top: 3px solid #d4dadf;\n            background-color: #ffffff;\n        }\n\n        .table-2 h1 {\n            margin: 0;\n            font-size: 20px;\n            font-weight: 600;\n            letter-spacing: -1px;\n            line-height: 48px;\n        }\n\n        .table-3 {\n            max-width: 600px;\n        }\n\n        .table-2 td {\n\n            background-color: #ffffff;\n        }\n\n        .td-1 {\n            padding: 24px;\n            font-size: 16px;\n            line-height: 24px;\n            background-color: #ffffff;\n            text-align: left;\n            padding-bottom: 10px;\n            padding-top: 0px;\n        }\n\n        .table-gray {\n            width: 100%;\n        }\n\n        .table-gray tr {\n            height: 24px;\n        }\n\n        .table-gray .td-1 {\n            background-color: #f1f3f7;\n            width: 30%;\n            border: solid 1px #e7e9ec;\n            padding-top: 5px;\n            padding-bottom: 5px;\n        }\n\n        .table-gray .td-2 {\n            background-color: #f1f3f7;\n            width: 70%;\n            border: solid 1px #e7e9ec;\n        }\n\n        .button, .button:active, .button:visited {\n            display: inline-block;\n            padding: 16px 36px;\n            font-family: \'Source Sans Pro\', Helvetica, Arial, sans-serif;\n            font-size: 16px;\n            color: #ffffff;\n            text-decoration: none;\n            border-radius: 6px;\n            background-color: #1a82e2;\n            border-radius: 6px;\n        }\n\n        .signature {\n            padding: 24px;\n            font-family: \'Source Sans Pro\', Helvetica, Arial, sans-serif;\n            font-size: 16px;\n            line-height: 24px;\n            border-bottom: 3px solid #d4dadf;\n            background-color: #ffffff;\n        }\n\n        .footer {\n            max-width: 600px;\n        }\n\n        .footer td {\n            padding: 12px 24px;\n            font-family: \'Source Sans Pro\', Helvetica, Arial, sans-serif;\n            font-size: 14px;\n            line-height: 20px;\n            color: #666;\n        }\n\n        .td-button {\n            padding: 12px;\n            background-color: #ffffff;\n            text-align: center;\n        }\n\n        .p-24 {\n            padding: 24px;\n        }\n    </style>\n\n</head>\n\n<body>\n<!-- start body -->\n<table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\"><!-- start hero -->\n<tbody>\n<tr>\n<td align=\"center\">\n<table class=\"table-1\" border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\">\n<tbody>\n<tr>\n<td align=\"left\">\n<h1>Welcome</h1>\n</td>\n</tr>\n</tbody>\n</table>\n</td>\n</tr>\n<!-- end hero --> <!-- start hero -->\n<tr>\n<td align=\"center\">\n<table class=\"table-2\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\">\n<tbody>\n<tr>\n<td align=\"left\">\n<h1>Hi {first_name},</h1>\n</td>\n</tr>\n</tbody>\n</table>\n</td>\n</tr>\n<!-- end hero --> <!-- start copy block -->\n<tr>\n<td align=\"center\">\n<table class=\"table-3\" border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\"><!-- start copy -->\n<tbody>\n<tr>\n<td class=\"td-1\">\n<p>Your account has been created. Below are your login details.</p>\n</td>\n</tr>\n<tr>\n<td class=\"td-1\">\n<table class=\"table-gray\" cellpadding=\"5\">\n<tbody>\n<tr>\n<td class=\"td-1\"><strong>Username</strong></td>\n<td class=\"td-2\">{username}</td>\n</tr>\n<tr>\n<td class=\"td-1\"><strong>Password</strong></td>\n<td class=\"td-2\">{password}</td>\n</tr>\n</tbody>\n</table>\n<p>You will be asked to change your password the first time you log in.</p>\n</td>\n</tr>\n<tr>\n<td align=\"left\" bgcolor=\"#ffffff\">\n<table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\">\n<tbody>\n<tr>\n<td class=\"td-button\">\n<table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\">\n<tbody>\n<tr>\n<td align=\"center\"><a class=\"button\" href=\"{dashboard_url}\" target=\"_blank\" rel=\"noopener\">Login To You Account</a></td>\n</tr>\n</tbody>\n</table>\n</td>\n</tr>\n</tbody>\n</table>\n</td>\n</tr>\n<tr>\n<td class=\"signature\">\n<p>{email_signature}</p>\n</td>\n</tr>\n</tbody>\n</table>\n</td>\n</tr>\n<!-- end copy block --> <!-- start footer -->\n<tr>\n<td class=\"p-24\" align=\"center\">\n<table class=\"footer\" border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\"><!-- start permission -->\n<tbody>\n<tr>\n<td align=\"center\">\n<p>{email_footer}</p>\n</td>\n</tr>\n</tbody>\n</table>\n</td>\n</tr>\n<!-- end footer --></tbody>\n</table>\n<!-- end body -->\n</body>\n\n</html>',	'{first_name}, {last_name}, {username}, {password}',	'2019-12-08 17:13:10',	'2020-11-12 10:10:48',	'enabled',	'english',	'yes',	'yes',	1),
 (NULL,	NULL,	'Reset Password Request',	'template_lang_reset_password_request',	'everyone',	'users',	'Reset Password Request',	'<!DOCTYPE html>\n<html>\n\n<head>\n\n    <meta charset=\"utf-8\">\n    <meta http-equiv=\"x-ua-compatible\" content=\"ie=edge\">\n    <title>Email Confirmation</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n    <style type=\"text/css\">\n        @media screen {\n            @font-face {\n                font-family: \'Source Sans Pro\';\n                font-style: normal;\n                font-weight: 400;\n                src: local(\'Source Sans Pro Regular\'), local(\'SourceSansPro-Regular\'), url(https://fonts.gstatic.com/s/sourcesanspro/v10/ODelI1aHBYDBqgeIAH2zlBM0YzuT7MdOe03otPbuUS0.woff) format(\'woff\');\n            }\n\n            @font-face {\n                font-family: \'Source Sans Pro\';\n                font-style: normal;\n                font-weight: 700;\n                src: local(\'Source Sans Pro Bold\'), local(\'SourceSansPro-Bold\'), url(https://fonts.gstatic.com/s/sourcesanspro/v10/toadOcfmlt9b38dHJxOBGFkQc6VGVFSmCnC_l7QZG60.woff) format(\'woff\');\n            }\n        }\n\n        body,\n        table,\n        td,\n        a {\n            -ms-text-size-adjust: 100%;\n            /* 1 */\n            -webkit-text-size-adjust: 100%;\n            /* 2 */\n        }\n\n        img {\n            -ms-interpolation-mode: bicubic;\n        }\n\n        a[x-apple-data-detectors] {\n            font-family: inherit !important;\n            font-size: inherit !important;\n            font-weight: inherit !important;\n            line-height: inherit !important;\n            color: inherit !important;\n            text-decoration: none !important;\n        }\n\n        div[style*=\"margin: 16px 0;\"] {\n            margin: 0 !important;\n        }\n\n        body {\n            width: 100% !important;\n            height: 100% !important;\n            padding: 0 !important;\n            margin: 0 !important;\n            padding: 24px;\n            font-family: \'Source Sans Pro\', Helvetica, Arial, sans-serif;\n            font-size: 16px;\n            background-color: #f9fafc;\n            color: #60676d;\n        }\n\n        table {\n            border-collapse: collapse !important;\n        }\n\n        a {\n            color: #1a82e2;\n        }\n\n        img {\n            height: auto;\n            line-height: 100%;\n            text-decoration: none;\n            border: 0;\n            outline: none;\n        }\n\n        .table-1 {\n            max-width: 600px;\n        }\n\n        .table-1 td {\n            padding: 36px 24px 40px;\n            text-align: center;\n        }\n\n        .table-1 h1 {\n            margin: 0;\n            font-size: 32px;\n            font-weight: 600;\n            letter-spacing: -1px;\n            line-height: 48px;\n        }\n\n        .table-2 {\n            max-width: 600px;\n        }\n\n        .table-2 td {\n            padding: 36px 24px 0;\n            border-top: 3px solid #d4dadf;\n            background-color: #ffffff;\n        }\n\n        .table-2 h1 {\n            margin: 0;\n            font-size: 20px;\n            font-weight: 600;\n            letter-spacing: -1px;\n            line-height: 48px;\n        }\n\n        .table-3 {\n            max-width: 600px;\n        }\n\n        .table-2 td {\n\n            background-color: #ffffff;\n        }\n\n        .td-1 {\n            padding: 24px;\n            font-size: 16px;\n            line-height: 24px;\n            background-color: #ffffff;\n            text-align: left;\n            padding-bottom: 10px;\n            padding-top: 0px;\n        }\n\n        .table-gray {\n            width: 100%;\n        }\n\n        .table-gray tr {\n            height: 24px;\n        }\n\n        .table-gray .td-1 {\n            background-color: #f1f3f7;\n            width: 30%;\n            border: solid 1px #e7e9ec;\n            padding-top: 5px;\n            padding-bottom: 5px;\n        }\n\n        .table-gray .td-2 {\n            background-color: #f1f3f7;\n            width: 70%;\n            border: solid 1px #e7e9ec;\n        }\n\n        .button, .button:active, .button:visited {\n            display: inline-block;\n            padding: 16px 36px;\n            font-family: \'Source Sans Pro\', Helvetica, Arial, sans-serif;\n            font-size: 16px;\n            color: #ffffff;\n            text-decoration: none;\n            border-radius: 6px;\n            background-color: #1a82e2;\n            border-radius: 6px;\n        }\n\n        .signature {\n            padding: 24px;\n            font-family: \'Source Sans Pro\', Helvetica, Arial, sans-serif;\n            font-size: 16px;\n            line-height: 24px;\n            border-bottom: 3px solid #d4dadf;\n            background-color: #ffffff;\n        }\n\n        .footer {\n            max-width: 600px;\n        }\n\n        .footer td {\n            padding: 12px 24px;\n            font-family: \'Source Sans Pro\', Helvetica, Arial, sans-serif;\n            font-size: 14px;\n            line-height: 20px;\n            color: #666;\n        }\n\n        .td-button {\n            padding: 12px;\n            background-color: #ffffff;\n            text-align: center;\n        }\n\n        .p-24 {\n            padding: 24px;\n        }\n    </style>\n\n</head>\n\n<body>\n<!-- start body -->\n<table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\"><!-- start hero -->\n<tbody>\n<tr>\n<td align=\"center\">\n<table class=\"table-1\" border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\">\n<tbody>\n<tr>\n<td align=\"left\">\n<h1>Reset Your Password</h1>\n</td>\n</tr>\n</tbody>\n</table>\n</td>\n</tr>\n<!-- end hero --> <!-- start hero -->\n<tr>\n<td align=\"center\">\n<table class=\"table-2\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\">\n<tbody>\n<tr>\n<td align=\"left\">\n<h1>Hi {first_name},</h1>\n</td>\n</tr>\n</tbody>\n</table>\n</td>\n</tr>\n<!-- end hero --> <!-- start copy block -->\n<tr>\n<td align=\"center\">\n<table class=\"table-3\" border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\"><!-- start copy -->\n<tbody>\n<tr>\n<td class=\"td-1\">\n<p>To complete your password request, please follow the link below.</p>\n</td>\n</tr>\n<tr>\n<td class=\"td-1\">\n<p>If you are not the one that has initiated this password request, please contact us.</p>\n</td>\n</tr>\n<tr>\n<td align=\"left\" bgcolor=\"#ffffff\">\n<table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\">\n<tbody>\n<tr>\n<td class=\"td-button\">\n<table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\">\n<tbody>\n<tr>\n<td align=\"center\"><a class=\"button\" href=\"{password_reset_link}\" target=\"_blank\" rel=\"noopener\">Reset Password</a></td>\n</tr>\n</tbody>\n</table>\n</td>\n</tr>\n</tbody>\n</table>\n</td>\n</tr>\n<tr>\n<td class=\"signature\">\n<p>{email_signature}</p>\n</td>\n</tr>\n</tbody>\n</table>\n</td>\n</tr>\n<!-- end copy block --> <!-- start footer -->\n<tr>\n<td class=\"p-24\" align=\"center\">\n<table class=\"footer\" border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\"><!-- start permission -->\n<tbody>\n<tr>\n<td align=\"center\">\n<p>{email_footer}</p>\n</td>\n</tr>\n</tbody>\n</table>\n</td>\n</tr>\n<!-- end footer --></tbody>\n</table>\n<!-- end body -->\n</body>\n\n</html>',	'{first_name}, {last_name}, {password_reset_link}',	'2019-12-08 17:13:10',	'2020-11-12 12:21:58',	'enabled',	'english',	'yes',	'yes',	2),
 (NULL,	NULL,	'Email Signature',	'template_lang_email_signature',	'everyone',	'other',	'---',	'<div align=\"left\">\r\n<p>Thanks,</p>\r\n<p><strong>Support Team</strong></p>\r\n</div>',	'',	'2019-12-08 17:13:10',	'2020-08-23 06:58:05',	'disabled',	'english',	'no',	'no',	100),
@@ -1048,8 +1048,8 @@ CREATE TABLE `crm_eventos` (
 
 TRUNCATE `crm_eventos`;
 
-DROP TABLE IF EXISTS `crm_seguimientoDeEventos`;
-CREATE TABLE `crm_seguimientoDeEventos` (
+DROP TABLE IF EXISTS `crm_seguimientodeeventos`;
+CREATE TABLE `crm_seguimientodeeventos` (
   `eventtracking_id` int(11) NOT NULL AUTO_INCREMENT,
   `eventtracking_created` datetime NOT NULL,
   `eventtracking_updated` datetime NOT NULL,
@@ -1073,7 +1073,7 @@ CREATE TABLE `crm_seguimientoDeEventos` (
   KEY `resource_id` (`resource_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='[truncate]';
 
-TRUNCATE `crm_seguimientoDeEventos`;
+TRUNCATE `crm_seguimientodeeventos`;
 
 DROP TABLE IF EXISTS `crm_gastos`;
 CREATE TABLE `crm_gastos` (
@@ -1105,8 +1105,8 @@ TRUNCATE `crm_gastos`;
 
 SET NAMES utf8mb4;
 
-DROP TABLE IF EXISTS `crm_trabajosFallidos`;
-CREATE TABLE `crm_trabajosFallidos` (
+DROP TABLE IF EXISTS `crm_trabajosfallidos`;
+CREATE TABLE `crm_trabajosfallidos` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1116,7 +1116,7 @@ CREATE TABLE `crm_trabajosFallidos` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='[truncate]';
 
-TRUNCATE `crm_trabajosFallidos`;
+TRUNCATE `crm_trabajosfallidos`;
 
 DROP TABLE IF EXISTS `crm_archivos`;
 CREATE TABLE `crm_archivos` (
@@ -1146,8 +1146,8 @@ CREATE TABLE `crm_archivos` (
 
 TRUNCATE `crm_archivos`;
 
-DROP TABLE IF EXISTS `crm_archivoDeCarpetas`;
-CREATE TABLE `crm_archivoDeCarpetas` (
+DROP TABLE IF EXISTS `crm_archivodecarpetas`;
+CREATE TABLE `crm_archivodecarpetas` (
   `filefolder_id` int(11) NOT NULL AUTO_INCREMENT,
   `filefolder_created` datetime NOT NULL,
   `filefolder_updated` datetime NOT NULL,
@@ -1159,8 +1159,8 @@ CREATE TABLE `crm_archivoDeCarpetas` (
   PRIMARY KEY (`filefolder_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-TRUNCATE `crm_archivoDeCarpetas`;
-INSERT INTO `crm_archivoDeCarpetas` (`filefolder_id`, `filefolder_created`, `filefolder_updated`, `filefolder_creatorid`, `filefolder_projectid`, `filefolder_name`, `filefolder_default`, `filefolder_system`) VALUES
+TRUNCATE `crm_archivodecarpetas`;
+INSERT INTO `crm_archivodecarpetas` (`filefolder_id`, `filefolder_created`, `filefolder_updated`, `filefolder_creatorid`, `filefolder_projectid`, `filefolder_name`, `filefolder_default`, `filefolder_system`) VALUES
 (1,	'2023-11-07 14:28:30',	'2023-11-07 14:28:30',	0,	NULL,	'Default',	'yes',	'yes');
 
 DROP TABLE IF EXISTS `crm_facturas`;
@@ -1285,8 +1285,8 @@ TRUNCATE `crm_kb_categorias`;
 INSERT INTO `crm_kb_categorias` (`kbcategory_id`, `kbcategory_created`, `kbcategory_updated`, `kbcategory_creatorid`, `kbcategory_title`, `kbcategory_description`, `kbcategory_position`, `kbcategory_visibility`, `kbcategory_slug`, `kbcategory_icon`, `kbcategory_type`, `kbcategory_system_default`) VALUES
 (1,	'2023-11-07 14:28:30',	'2023-11-07 14:28:30',	0,	'Frequently Asked Questions',	'Answers to some of the most frequently asked questions',	1,	'everyone',	'1-frequently-asked-questions',	'sl-icon-call-out',	'text',	'yes');
 
-DROP TABLE IF EXISTS `crm_baseDeConocimiento`;
-CREATE TABLE `crm_baseDeConocimiento` (
+DROP TABLE IF EXISTS `crm_basedeconocimiento`;
+CREATE TABLE `crm_basedeconocimiento` (
   `knowledgebase_id` int(11) NOT NULL AUTO_INCREMENT,
   `knowledgebase_created` datetime NOT NULL,
   `knowledgebase_updated` datetime NOT NULL,
@@ -1302,10 +1302,10 @@ CREATE TABLE `crm_baseDeConocimiento` (
   KEY `knowledgebase_categoryid` (`knowledgebase_categoryid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='[truncate]';
 
-TRUNCATE `crm_baseDeConocimiento`;
+TRUNCATE `crm_basedeconocimiento`;
 
-DROP TABLE IF EXISTS `crm_clientesPotenciales`;
-CREATE TABLE `crm_clientesPotenciales` (
+DROP TABLE IF EXISTS `crm_clientespotenciales`;
+CREATE TABLE `crm_clientespotenciales` (
   `lead_id` int(11) NOT NULL AUTO_INCREMENT,
   `lead_importid` varchar(100) DEFAULT NULL,
   `lead_position` double NOT NULL,
@@ -1499,10 +1499,10 @@ CREATE TABLE `crm_clientesPotenciales` (
   KEY `lead_visibility` (`lead_visibility`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='[truncate]';
 
-TRUNCATE `crm_clientesPotenciales`;
+TRUNCATE `crm_clientespotenciales`;
 
-DROP TABLE IF EXISTS `crm_clientesPotencialesAsignados`;
-CREATE TABLE `crm_clientesPotencialesAsignados` (
+DROP TABLE IF EXISTS `crm_clientespotencialesasignados`;
+CREATE TABLE `crm_clientespotencialesasignados` (
   `leadsassigned_id` int(11) NOT NULL AUTO_INCREMENT,
   `leadsassigned_leadid` int(11) DEFAULT NULL,
   `leadsassigned_userid` int(11) DEFAULT NULL,
@@ -1513,10 +1513,10 @@ CREATE TABLE `crm_clientesPotencialesAsignados` (
   KEY `leadsassigned_leadid` (`leadsassigned_leadid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='[truncate]';
 
-TRUNCATE `crm_clientesPotencialesAsignados`;
+TRUNCATE `crm_clientespotencialesasignados`;
 
-DROP TABLE IF EXISTS `crm_clientesPotencialesFuentes`;
-CREATE TABLE `crm_clientesPotencialesFuentes` (
+DROP TABLE IF EXISTS `crm_clientespotencialesfuentes`;
+CREATE TABLE `crm_clientespotencialesfuentes` (
   `leadsources_id` int(11) NOT NULL AUTO_INCREMENT,
   `leadsources_created` datetime NOT NULL,
   `leadsources_updated` datetime NOT NULL,
@@ -1525,10 +1525,10 @@ CREATE TABLE `crm_clientesPotencialesFuentes` (
   PRIMARY KEY (`leadsources_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='[truncate]';
 
-TRUNCATE `crm_clientesPotencialesFuentes`;
+TRUNCATE `crm_clientespotencialesfuentes`;
 
-DROP TABLE IF EXISTS `crm_clientesPotencialesEstado`;
-CREATE TABLE `crm_clientesPotencialesEstado` (
+DROP TABLE IF EXISTS `crm_clientespotencialesestado`;
+CREATE TABLE `crm_clientespotencialesestado` (
   `leadstatus_id` int(11) NOT NULL AUTO_INCREMENT,
   `leadstatus_created` datetime DEFAULT NULL,
   `leadstatus_creatorid` int(11) DEFAULT NULL,
@@ -1540,8 +1540,8 @@ CREATE TABLE `crm_clientesPotencialesEstado` (
   PRIMARY KEY (`leadstatus_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='[do not truncate]  expected to have 2 system default statuses (ID: 1 & 2) ''new'' & ''converted'' statuses ';
 
-TRUNCATE `crm_clientesPotencialesEstado`;
-INSERT INTO `crm_clientesPotencialesEstado` (`leadstatus_id`, `leadstatus_created`, `leadstatus_creatorid`, `leadstatus_updated`, `leadstatus_title`, `leadstatus_position`, `leadstatus_color`, `leadstatus_system_default`) VALUES
+TRUNCATE `crm_clientespotencialesestado`;
+INSERT INTO `crm_clientespotencialesestado` (`leadstatus_id`, `leadstatus_created`, `leadstatus_creatorid`, `leadstatus_updated`, `leadstatus_title`, `leadstatus_position`, `leadstatus_color`, `leadstatus_system_default`) VALUES
 (1,	'2023-11-07 14:28:30',	0,	'2023-11-07 14:28:30',	'New',	1,	'default',	'yes'),
 (2,	'2023-11-07 14:28:30',	0,	'2023-11-07 14:28:30',	'Converted',	6,	'success',	'yes'),
 (3,	'2023-11-07 14:28:30',	0,	'2023-11-07 14:28:30',	'Qualified',	3,	'info',	'no'),
@@ -1549,8 +1549,8 @@ INSERT INTO `crm_clientesPotencialesEstado` (`leadstatus_id`, `leadstatus_create
 (5,	'2023-11-07 14:28:30',	0,	'2023-11-07 14:28:30',	'Contacted',	2,	'warning',	'no'),
 (7,	'2023-11-07 14:28:30',	0,	'2023-11-07 14:28:30',	'Disqualified',	4,	'danger',	'no');
 
-DROP TABLE IF EXISTS `crm_lineaDeArticulos`;
-CREATE TABLE `crm_lineaDeArticulos` (
+DROP TABLE IF EXISTS `crm_lineadearticulos`;
+CREATE TABLE `crm_lineadearticulos` (
   `lineitem_id` int(11) NOT NULL AUTO_INCREMENT,
   `lineitem_position` int(11) DEFAULT NULL,
   `lineitem_created` datetime DEFAULT NULL,
@@ -1580,7 +1580,7 @@ CREATE TABLE `crm_lineaDeArticulos` (
   KEY `lineitem_type` (`lineitem_type`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='[truncate]';
 
-TRUNCATE `crm_lineaDeArticulos`;
+TRUNCATE `crm_lineadearticulos`;
 
 DROP TABLE IF EXISTS `crm_registros`;
 CREATE TABLE `crm_registros` (
@@ -1633,8 +1633,8 @@ CREATE TABLE `crm_mensajes` (
 
 TRUNCATE `crm_mensajes`;
 
-DROP TABLE IF EXISTS `crm_seguimientoDeMensajes`;
-CREATE TABLE `crm_seguimientoDeMensajes` (
+DROP TABLE IF EXISTS `crm_seguimientodemensajes`;
+CREATE TABLE `crm_seguimientodemensajes` (
   `messagestracking_id` int(11) NOT NULL AUTO_INCREMENT,
   `messagestracking_created` datetime NOT NULL,
   `messagestracking_update` datetime NOT NULL,
@@ -1648,7 +1648,7 @@ CREATE TABLE `crm_seguimientoDeMensajes` (
   KEY `messagestracking_user_unique_id` (`messagestracking_user_unique_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-TRUNCATE `crm_seguimientoDeMensajes`;
+TRUNCATE `crm_seguimientodemensajes`;
 
 DROP TABLE IF EXISTS `crm_metas`;
 CREATE TABLE `crm_metas` (
@@ -1668,8 +1668,8 @@ CREATE TABLE `crm_metas` (
 
 TRUNCATE `crm_metas`;
 
-DROP TABLE IF EXISTS `crm_categoriasDeLaMeta`;
-CREATE TABLE `crm_categoriasDeLaMeta` (
+DROP TABLE IF EXISTS `crm_categoriasdelameta`;
+CREATE TABLE `crm_categoriasdelameta` (
   `milestonecategory_id` int(11) NOT NULL AUTO_INCREMENT,
   `milestonecategory_created` datetime NOT NULL,
   `milestonecategory_updated` datetime NOT NULL,
@@ -1679,7 +1679,7 @@ CREATE TABLE `crm_categoriasDeLaMeta` (
   PRIMARY KEY (`milestonecategory_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-TRUNCATE `crm_categoriasDeLaMeta`;
+TRUNCATE `crm_categoriasdelameta`;
 INSERT INTO `crm_categoriasDeLaMeta` (`milestonecategory_id`, `milestonecategory_created`, `milestonecategory_updated`, `milestonecategory_creatorid`, `milestonecategory_title`, `milestonecategory_position`) VALUES
 (1,	'2023-11-07 14:28:30',	'2023-11-07 14:28:30',	0,	'Planning',	1),
 (2,	'2023-11-07 14:28:30',	'2023-11-07 14:28:30',	0,	'Design',	2),
@@ -1732,8 +1732,8 @@ CREATE TABLE `crm_pagos` (
 
 TRUNCATE `crm_pagos`;
 
-DROP TABLE IF EXISTS `crm_sesionesDePago`;
-CREATE TABLE `crm_sesionesDePago` (
+DROP TABLE IF EXISTS `crm_sesionesdepago`;
+CREATE TABLE `crm_sesionesdepago` (
   `session_id` int(11) NOT NULL AUTO_INCREMENT,
   `session_created` datetime DEFAULT NULL,
   `session_updated` datetime DEFAULT NULL,
@@ -1751,10 +1751,10 @@ CREATE TABLE `crm_sesionesDePago` (
   KEY `session_gateway_ref` (`session_gateway_ref`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Track payment sessions so that IPN/Webhook calls can be linked to the correct invoice. Cronjob can be used to cleanup this table for any records older than 72hrs';
 
-TRUNCATE `crm_sesionesDePago`;
+TRUNCATE `crm_sesionesdepago`;
 
-DROP TABLE IF EXISTS `crm_tareasDeProducto`;
-CREATE TABLE `crm_tareasDeProducto` (
+DROP TABLE IF EXISTS `crm_tareasdeproducto`;
+CREATE TABLE `crm_tareasdeproducto` (
   `product_task_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_task_created` date NOT NULL,
   `product_task_updated` date NOT NULL,
@@ -1765,10 +1765,10 @@ CREATE TABLE `crm_tareasDeProducto` (
   PRIMARY KEY (`product_task_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-TRUNCATE `crm_tareasDeProducto`;
+TRUNCATE `crm_tareasdeproducto`;
 
-DROP TABLE IF EXISTS `crm_dependenciasDeTareasDeProducto`;
-CREATE TABLE `crm_dependenciasDeTareasDeProducto` (
+DROP TABLE IF EXISTS `crm_dependenciasdetareasdeproducto`;
+CREATE TABLE `crm_dependenciasdetareasdeproducto` (
   `product_task_dependency_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_task_dependency_created` date NOT NULL,
   `product_task_dependency_updated` date NOT NULL,
@@ -1781,7 +1781,7 @@ CREATE TABLE `crm_dependenciasDeTareasDeProducto` (
   KEY `product_task_dependency_type` (`product_task_dependency_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-TRUNCATE `crm_dependenciasDeTareasDeProducto`;
+TRUNCATE `crm_dependenciasdetareasdeproducto`;
 
 DROP TABLE IF EXISTS `crm_proyectos`;
 CREATE TABLE `crm_proyectos` (
@@ -1919,8 +1919,8 @@ CREATE TABLE `crm_proyectos` (
 
 TRUNCATE `crm_proyectos`;
 
-DROP TABLE IF EXISTS `crm_proyectosAsignados`;
-CREATE TABLE `crm_proyectosAsignados` (
+DROP TABLE IF EXISTS `crm_proyectosasignados`;
+CREATE TABLE `crm_proyectosasignados` (
   `projectsassigned_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '[truncate]',
   `projectsassigned_projectid` int(11) DEFAULT NULL,
   `projectsassigned_userid` int(11) DEFAULT NULL,
@@ -1931,10 +1931,10 @@ CREATE TABLE `crm_proyectosAsignados` (
   KEY `projectsassigned_userid` (`projectsassigned_userid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='[truncate]';
 
-TRUNCATE `crm_proyectosAsignados`;
+TRUNCATE `crm_proyectosasignados`;
 
-DROP TABLE IF EXISTS `crm_gestorDeProyectos`;
-CREATE TABLE `crm_gestorDeProyectos` (
+DROP TABLE IF EXISTS `crm_gestordeproyectos`;
+CREATE TABLE `crm_gestordeproyectos` (
   `projectsmanager_id` int(11) NOT NULL AUTO_INCREMENT,
   `projectsmanager_created` datetime NOT NULL,
   `projectsmanager_updated` datetime NOT NULL,
@@ -1945,7 +1945,7 @@ CREATE TABLE `crm_gestorDeProyectos` (
   KEY `projectsmanager_projectid` (`projectsmanager_projectid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='[truncate]';
 
-TRUNCATE `crm_gestorDeProyectos`;
+TRUNCATE `crm_gestordeproyectos`;
 
 DROP TABLE IF EXISTS `crm_propuestas`;
 CREATE TABLE `crm_propuestas` (
@@ -1993,8 +1993,8 @@ CREATE TABLE `crm_propuestas` (
 
 TRUNCATE `crm_propuestas`;
 
-DROP TABLE IF EXISTS `crm_plantillasDePropuesta`;
-CREATE TABLE `crm_plantillasDePropuesta` (
+DROP TABLE IF EXISTS `crm_plantillasdepropuesta`;
+CREATE TABLE `crm_plantillasdepropuesta` (
   `proposal_template_id` int(11) NOT NULL AUTO_INCREMENT,
   `proposal_template_created` datetime NOT NULL,
   `proposal_template_updated` datetime NOT NULL,
@@ -2009,8 +2009,8 @@ CREATE TABLE `crm_plantillasDePropuesta` (
   KEY `proposal_template_creatorid` (`proposal_template_creatorid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-TRUNCATE `crm_plantillasDePropuesta`;
-INSERT INTO `crm_plantillasDePropuesta` (`proposal_template_id`, `proposal_template_created`, `proposal_template_updated`, `proposal_template_creatorid`, `proposal_template_title`, `proposal_template_heading_color`, `proposal_template_title_color`, `proposal_template_body`, `proposal_template_estimate_id`, `proposal_template_system`) VALUES
+TRUNCATE `crm_plantillasdepropuesta`;
+INSERT INTO `crm_plantillasdepropuesta` (`proposal_template_id`, `proposal_template_created`, `proposal_template_updated`, `proposal_template_creatorid`, `proposal_template_title`, `proposal_template_heading_color`, `proposal_template_title_color`, `proposal_template_body`, `proposal_template_estimate_id`, `proposal_template_system`) VALUES
 (1,	'2023-01-07 17:07:29',	'2022-05-22 09:15:49',	1,	'Default Template',	'#FFFFFF',	'#FFFFFF',	'<h2 style=\"font-family: Montserrat;\"><span style=\"color: #67757c; font-size: 14px;\">Thank you, on behalf of the entire </span><strong style=\"color: #67757c; font-size: 14px;\">{company_name}</strong><span style=\"color: #67757c; font-size: 14px;\"> team, for reaching out to us and giving us the opportunity to collaborate with you on your project. We are ready to provide you with the experience and expertise needed to complete your project on time and on budget.</span></h2>\r\n<br /><strong>Once again, thank you for the opportunity to earn your business.<br /></strong><br /><br /><br />\r\n<table style=\"border-collapse: collapse; width: 100%;\" border=\"1\">\r\n<tbody>\r\n<tr>\r\n<td style=\"width: 50%; border-color: #ffffff; text-align: left; vertical-align: top;\"><img src=\"public/documents/images/sample-1.jpg\" alt=\"\" width=\"389\" height=\"466\" /></td>\r\n<td style=\"width: 50%; border-color: #ffffff; vertical-align: top;\">\r\n<h3 style=\"font-family: Montserrat;\"><span style=\"text-decoration: underline;\">About Us</span></h3>\r\n<span style=\"font-family: Montserrat;\">We believe in creating websites that not only&nbsp;</span><span style=\"font-family: Montserrat;\">look amazing</span><span style=\"font-family: Montserrat;\">&nbsp;but also provide a fantastic user experience and are&nbsp;</span><span style=\"font-family: Montserrat;\">highly optimized</span><span style=\"font-family: Montserrat;\">&nbsp;to provide you with the best</span><span style=\"font-family: Montserrat;\">&nbsp;search ranking</span><span style=\"font-family: Montserrat;\">&nbsp;benefits possible. <br /><br /><strong>We are a full-stack development firm with experience in the following areas:</strong></span><br style=\"font-family: Montserrat;\" /><br style=\"font-family: Montserrat;\" />\r\n<ul>\r\n<li>\r\n<h5>Example Skill Set</h5>\r\n</li>\r\n<li>\r\n<h5>Example Skill Set</h5>\r\n</li>\r\n<li>\r\n<h5>Example Skill Set</h5>\r\n</li>\r\n<li>\r\n<h5>Example Skill Set</h5>\r\n</li>\r\n<li>\r\n<h5>Example Skill Set</h5>\r\n</li>\r\n<li>\r\n<h5>Example Skill Set</h5>\r\n</li>\r\n</ul>\r\n<br /><span style=\"font-family: Montserrat;\">We have over&nbsp;</span><span style=\"font-weight: 600; font-family: Montserrat;\">10 years</span><span style=\"font-family: Montserrat;\">&nbsp;of experience working with outstanding brands like yours. <br /><br />We are happy to provide you with references upon request.</span></td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<h3><span style=\"text-decoration: underline;\"><br /><br />Your Needs</span></h3>\r\nAfter reviewing your requirements and discussing with you at length about them, we\'ve created a vision for your website that we believe will improve your overall brand presence, resulting in more leads and conversions for your business.<br /><br />\r\n<ul>\r\n<li>\r\n<h5>Example Item</h5>\r\n</li>\r\n<li>\r\n<h5>Example Item</h5>\r\n</li>\r\n<li>\r\n<h5>Example Item</h5>\r\n</li>\r\n<li>\r\n<h5>Example Item</h5>\r\n</li>\r\n</ul>\r\n<br />\r\n<table style=\"border-collapse: collapse; width: 100%; height: 337px;\" border=\"1\">\r\n<tbody>\r\n<tr style=\"height: 337px;\">\r\n<td style=\"width: 50%; border-color: #ffffff; vertical-align: top; height: 337px;\">\r\n<h3><span style=\"text-decoration: underline;\"><br />Our Process</span></h3>\r\n<span style=\"font-family: Montserrat;\">We have devised a process that ensures a robust, yet fluid approach to completing your project on time, on budget, and beyond your expectation.</span><br style=\"font-family: Montserrat;\" /><br style=\"font-family: Montserrat;\" /><span style=\"text-decoration: underline;\"><span style=\"font-weight: 600;\">Here\'s what you can expect once your project begins.</span></span><br style=\"font-family: Montserrat;\" /><br style=\"font-family: Montserrat;\" />\r\n<ul style=\"font-family: Montserrat;\">\r\n<li>\r\n<h5>Example Process Step</h5>\r\n</li>\r\n<li>\r\n<h5>Example Process Step</h5>\r\n</li>\r\n<li>\r\n<h5>Example Process Step</h5>\r\n</li>\r\n<li>\r\n<h5>Example Process Step</h5>\r\n</li>\r\n</ul>\r\n</td>\r\n<td style=\"width: 50%; border-color: #ffffff; height: 337px; text-align: right;\"><img src=\"public/documents/images/sample-2.png\" alt=\"\" width=\"401\" height=\"266\" /></td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<h3><span style=\"text-decoration: underline;\"><br /><br />Project Milestones</span></h3>\r\nOur estimated timeline for your project is shown in the table below.<br /><br />\r\n<table style=\"border-collapse: collapse; width: 100%; height: 240px;\" border=\"1\">\r\n<tbody>\r\n<tr style=\"height: 48px;\">\r\n<th style=\"width: 50%; background-color: #efeeee; height: 48px;\"><strong>Milestone</strong></th>\r\n<th style=\"width: 50%; background-color: #efeeee; height: 48px;\"><strong>Target Date</strong></th>\r\n</tr>\r\n<tr style=\"height: 48px;\">\r\n<td style=\"width: 50%; height: 48px;\">Example milestone 1</td>\r\n<td style=\"width: 50%; height: 48px;\">01-10-2022</td>\r\n</tr>\r\n<tr style=\"height: 48px;\">\r\n<td style=\"width: 50%; height: 48px;\">Example milestone 2</td>\r\n<td style=\"width: 50%; height: 48px;\">01-23-2022</td>\r\n</tr>\r\n<tr style=\"height: 48px;\">\r\n<td style=\"width: 50%; height: 48px;\">Example milestone 3</td>\r\n<td style=\"width: 50%; height: 48px;\">02-15-2022</td>\r\n</tr>\r\n<tr style=\"height: 48px;\">\r\n<td style=\"width: 50%; height: 48px;\">Example milestone 4</td>\r\n<td style=\"width: 50%; height: 48px;\">03-12-2022</td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<h3><span style=\"text-decoration: underline;\"><br /><br />Project Pricing</span></h3>\r\nThe costs for your design project are listed in the table below.<br /><br />{pricing_table}<br />\r\n<h3><span style=\"text-decoration: underline;\"><br /><br />Meet The Team</span></h3>\r\n<p>We are a team of 8 and below are the people that will be working directly on your project.<br /><!--MEET THE TEACM [START]--></p>\r\n<table class=\"doc-meet-the-team\" style=\"height: autho;\" width=\"100%\">\r\n<tbody>\r\n<tr>\r\n<td style=\"width: 50%; background-color: #fbfcfd;\">\r\n<div class=\"row\">\r\n<div class=\"col-sm-12 col-md-4\"><img src=\"public/documents/images/sample-3.jpg\" alt=\"\" width=\"600\" height=\"600\" /></div>\r\n<div class=\"col-sm-6 col-md-8\">\r\n<h4>Jonathan Reed</h4>\r\n<strong>Project Lead</strong><br />75 Reed Street, London, U.K.<br /><strong>Tel:</strong> +44 123 456 7890<br /><strong>Email:</strong> john@example.com</div>\r\n</div>\r\n</td>\r\n<td class=\"spacer\">&nbsp;</td>\r\n<td style=\"width: 50%; background-color: #fbfcfd;\">\r\n<div class=\"row\">\r\n<div class=\"col-sm-12 col-md-4\"><img src=\"public/documents/images/sample-4.jpg\" alt=\"\" width=\"600\" height=\"600\" /></div>\r\n<div class=\"col-sm-6 col-md-8\">\r\n<h4>Jane Doney</h4>\r\n<strong>Web Designer</strong><br />75 Reed Street, London, U.K.<br /><strong>Tel:</strong> +44 123 456 7890<br /><strong>Email:</strong> jane@example.com</div>\r\n</div>\r\n</td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<br /><!--MEET THE TEACM [END]--> <!--MEET THE TEACM [START]-->\r\n<table class=\"doc-meet-the-team\" style=\"height: autho;\" width=\"100%\">\r\n<tbody>\r\n<tr>\r\n<td style=\"width: 50%; background-color: #fbfcfd;\">\r\n<div class=\"row\">\r\n<div class=\"col-sm-12 col-md-4\"><img src=\"public/documents/images/sample-5.jpg\" alt=\"\" width=\"600\" height=\"600\" /></div>\r\n<div class=\"col-sm-6 col-md-8\">\r\n<h4>David Patterson</h4>\r\n<strong>UX &amp; UI Designer</strong><br />75 Reed Street, London, U.K.<br /><strong>Tel:</strong> +44 123 456 7890<br /><strong>Email:</strong> david@example.com</div>\r\n</div>\r\n</td>\r\n<td class=\"spacer\">&nbsp;</td>\r\n<td style=\"width: 50%; background-color: #fbfcfd;\">\r\n<div class=\"row\">\r\n<div class=\"col-sm-12 col-md-4\"><img src=\"public/documents/images/sample-6.jpg\" alt=\"\" width=\"150\" height=\"150\" /></div>\r\n<div class=\"col-sm-6 col-md-8\">\r\n<h4>Amanda Lewis</h4>\r\n<strong>Full-Stack Developer</strong><br />75 Reed Street, London, U.K.<br /><strong>Tel:</strong> +44 123 456 7890<br /><strong>Email:</strong>&nbsp;amanda@example.com</div>\r\n</div>\r\n</td>\r\n</tr>\r\n</tbody>\r\n</table>',	NULL,	'no');
 
 DROP TABLE IF EXISTS `crm_recordatorios`;
@@ -2426,8 +2426,8 @@ CREATE TABLE `crm_suscripciones` (
 
 TRUNCATE `crm_suscripciones`;
 
-DROP TABLE IF EXISTS `crm_tablaDeConfig`;
-CREATE TABLE `crm_tablaDeConfig` (
+DROP TABLE IF EXISTS `crm_tabladeconfig`;
+CREATE TABLE `crm_tabladeconfig` (
   `tableconfig_id` int(11) NOT NULL AUTO_INCREMENT,
   `tableconfig_created` datetime NOT NULL,
   `tableconfig_updated` datetime NOT NULL,
@@ -2478,7 +2478,7 @@ CREATE TABLE `crm_tablaDeConfig` (
   KEY `tableconfig_table_name` (`tableconfig_table_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-TRUNCATE `crm_tablaDeConfig`;
+TRUNCATE `crm_tabladeconfig`;
 
 DROP TABLE IF EXISTS `crm_etiquetas`;
 CREATE TABLE `crm_etiquetas` (
@@ -2630,8 +2630,8 @@ CREATE TABLE `crm_tareas` (
 
 TRUNCATE `crm_tareas`;
 
-DROP TABLE IF EXISTS `crm_tareasAsignadas`;
-CREATE TABLE `crm_tareasAsignadas` (
+DROP TABLE IF EXISTS `crm_tareasasignadas`;
+CREATE TABLE `crm_tareasasignadas` (
   `tasksassigned_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '[truncate]',
   `tasksassigned_taskid` int(11) NOT NULL,
   `tasksassigned_userid` int(11) DEFAULT NULL,
@@ -2642,10 +2642,10 @@ CREATE TABLE `crm_tareasAsignadas` (
   KEY `tasksassigned_userid` (`tasksassigned_userid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='[truncate]';
 
-TRUNCATE `crm_tareasAsignadas`;
+TRUNCATE `crm_tareasasignadas`;
 
-DROP TABLE IF EXISTS `crm_tareasDependientes`;
-CREATE TABLE `crm_tareasDependientes` (
+DROP TABLE IF EXISTS `crm_tareasdependientes`;
+CREATE TABLE `crm_tareasdependientes` (
   `tasksdependency_id` int(11) NOT NULL AUTO_INCREMENT,
   `tasksdependency_created` int(11) NOT NULL,
   `tasksdependency_updated` int(11) NOT NULL,
@@ -2664,10 +2664,10 @@ CREATE TABLE `crm_tareasDependientes` (
   KEY `tasksdependency_type` (`tasksdependency_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-TRUNCATE `crm_tareasDependientes`;
+TRUNCATE `crm_tareasdependientes`;
 
-DROP TABLE IF EXISTS `crm_estadosDeTareas`;
-CREATE TABLE `crm_estadosDeTareas` (
+DROP TABLE IF EXISTS `crm_estadosdetareas`;
+CREATE TABLE `crm_estadosdetareas` (
   `taskstatus_id` int(11) NOT NULL AUTO_INCREMENT,
   `taskstatus_created` datetime DEFAULT NULL,
   `taskstatus_creatorid` int(11) DEFAULT NULL,
@@ -2679,8 +2679,8 @@ CREATE TABLE `crm_estadosDeTareas` (
   PRIMARY KEY (`taskstatus_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='[do not truncate]  expected to have 2 system default statuses (ID: 1 & 2) ''new'' & ''converted'' statuses ';
 
-TRUNCATE `crm_estadosDeTareas`;
-INSERT INTO `crm_estadosDeTareas` (`taskstatus_id`, `taskstatus_created`, `taskstatus_creatorid`, `taskstatus_updated`, `taskstatus_title`, `taskstatus_position`, `taskstatus_color`, `taskstatus_system_default`) VALUES
+TRUNCATE `crm_estadosdetareas`;
+INSERT INTO `crm_estadosdetareas` (`taskstatus_id`, `taskstatus_created`, `taskstatus_creatorid`, `taskstatus_updated`, `taskstatus_title`, `taskstatus_position`, `taskstatus_color`, `taskstatus_system_default`) VALUES
 (1,	NULL,	0,	'2021-09-26 11:13:40',	'New',	1,	'default',	'yes'),
 (2,	NULL,	0,	'2021-09-26 11:13:40',	'Completed',	4,	'success',	'yes'),
 (3,	NULL,	0,	'2021-09-26 11:13:40',	'In Progress',	2,	'info',	'no'),
@@ -2705,8 +2705,8 @@ CREATE TABLE `crm_impuesto` (
 
 TRUNCATE `crm_impuesto`;
 
-DROP TABLE IF EXISTS `crm_tiposDeImpuesto`;
-CREATE TABLE `crm_tiposDeImpuesto` (
+DROP TABLE IF EXISTS `crm_tiposdeimpuesto`;
+CREATE TABLE `crm_tiposdeimpuesto` (
   `taxrate_id` int(11) NOT NULL AUTO_INCREMENT,
   `taxrate_uniqueid` varchar(200) NOT NULL COMMENT 'Used in <js> for identification',
   `taxrate_created` datetime NOT NULL,
@@ -2722,8 +2722,8 @@ CREATE TABLE `crm_tiposDeImpuesto` (
   PRIMARY KEY (`taxrate_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='[truncate]';
 
-TRUNCATE `crm_tiposDeImpuesto`;
-INSERT INTO `crm_tiposDeImpuesto` (`taxrate_id`, `taxrate_uniqueid`, `taxrate_created`, `taxrate_updated`, `taxrate_creatorid`, `taxrate_name`, `taxrate_value`, `taxrate_type`, `taxrate_clientid`, `taxrate_estimateid`, `taxrate_invoiceid`, `taxrate_status`) VALUES
+TRUNCATE `crm_tiposdeimpuesto`;
+INSERT INTO `crm_tiposdeimpuesto` (`taxrate_id`, `taxrate_uniqueid`, `taxrate_created`, `taxrate_updated`, `taxrate_creatorid`, `taxrate_name`, `taxrate_value`, `taxrate_type`, `taxrate_clientid`, `taxrate_estimateid`, `taxrate_invoiceid`, `taxrate_status`) VALUES
 (1,	'zero-rated-tax-rate',	'2023-11-07 14:28:30',	'2023-11-07 14:28:30',	0,	'No Tax',	0.00,	'system',	NULL,	NULL,	NULL,	'enabled');
 
 DROP TABLE IF EXISTS `crm_tickets`;
@@ -2822,8 +2822,8 @@ CREATE TABLE `crm_tickets` (
 
 TRUNCATE `crm_tickets`;
 
-DROP TABLE IF EXISTS `crm_estadosDeTickets`;
-CREATE TABLE `crm_estadosDeTickets` (
+DROP TABLE IF EXISTS `crm_estadosdetickets`;
+CREATE TABLE `crm_estadosdetickets` (
   `ticketstatus_id` int(11) NOT NULL AUTO_INCREMENT,
   `ticketstatus_created` datetime DEFAULT NULL,
   `ticketstatus_creatorid` int(11) DEFAULT NULL,
@@ -2837,15 +2837,15 @@ CREATE TABLE `crm_estadosDeTickets` (
   PRIMARY KEY (`ticketstatus_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='[do not truncate]  expected to have 2 system default statuses (ID: 1 & 2) ''new'' & ''converted'' statuses ';
 
-TRUNCATE `crm_estadosDeTickets`;
-INSERT INTO `crm_estadosDeTickets` (`ticketstatus_id`, `ticketstatus_created`, `ticketstatus_creatorid`, `ticketstatus_updated`, `ticketstatus_title`, `ticketstatus_position`, `ticketstatus_color`, `ticketstatus_use_for_client_replied`, `ticketstatus_use_for_team_replied`, `ticketstatus_system_default`) VALUES
+TRUNCATE `crm_estadosdetickets`;
+INSERT INTO `crm_estadosdetickets` (`ticketstatus_id`, `ticketstatus_created`, `ticketstatus_creatorid`, `ticketstatus_updated`, `ticketstatus_title`, `ticketstatus_position`, `ticketstatus_color`, `ticketstatus_use_for_client_replied`, `ticketstatus_use_for_team_replied`, `ticketstatus_system_default`) VALUES
 (1,	'2022-12-11 12:20:22',	0,	'2022-12-14 16:22:30',	'Open',	1,	'info',	'yes',	'no',	'yes'),
 (2,	'2022-12-11 12:21:19',	0,	'2022-12-14 14:31:03',	'Closed',	4,	'default',	'no',	'no',	'yes'),
 (3,	'2022-12-11 12:23:56',	0,	'2022-12-14 14:23:53',	'On Hold',	2,	'warning',	'no',	'no',	'no'),
 (4,	'2022-12-11 12:24:30',	0,	'2022-12-14 14:24:40',	'Answered',	3,	'success',	'no',	'yes',	'no');
 
-DROP TABLE IF EXISTS `crm_respuestasDeTicket`;
-CREATE TABLE `crm_respuestasDeTicket` (
+DROP TABLE IF EXISTS `crm_respuestasdeticket`;
+CREATE TABLE `crm_respuestasdeticket` (
   `ticketreply_id` int(11) NOT NULL AUTO_INCREMENT,
   `ticketreply_created` datetime NOT NULL,
   `ticketreply_updated` datetime NOT NULL,
@@ -2859,10 +2859,10 @@ CREATE TABLE `crm_respuestasDeTicket` (
   KEY `ticketreply_clientid` (`ticketreply_clientid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='[truncate]';
 
-TRUNCATE `crm_respuestasDeTicket`;
+TRUNCATE `crm_respuestasdeticket`;
 
-DROP TABLE IF EXISTS `crm_lineasDeTiempo`;
-CREATE TABLE `crm_lineasDeTiempo` (
+DROP TABLE IF EXISTS `crm_lineasdetiempo`;
+CREATE TABLE `crm_lineasdetiempo` (
   `timeline_id` int(11) NOT NULL AUTO_INCREMENT,
   `timeline_eventid` int(11) NOT NULL,
   `timeline_resourcetype` varchar(50) DEFAULT NULL COMMENT 'invoices | projects | estimates | etc',
@@ -2873,7 +2873,7 @@ CREATE TABLE `crm_lineasDeTiempo` (
   KEY `timeline_resourceid` (`timeline_resourceid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='[truncate]';
 
-TRUNCATE `crm_lineasDeTiempo`;
+TRUNCATE `crm_lineasdetiempo`;
 
 DROP TABLE IF EXISTS `crm_temporizadores`;
 CREATE TABLE `crm_temporizadores` (
@@ -3079,7 +3079,7 @@ CREATE TABLE `crm_webforms` (
 
 TRUNCATE `crm_webforms`;
 
-DROP TABLE IF EXISTS `crm_asignacionDeWebforms`;
+DROP TABLE IF EXISTS `crm_asignaciondewebforms`;
 CREATE TABLE `crm_asignacionDeWebforms` (
   `webformassigned_id` int(11) NOT NULL AUTO_INCREMENT,
   `webformassigned_created` datetime NOT NULL,
@@ -3089,7 +3089,7 @@ CREATE TABLE `crm_asignacionDeWebforms` (
   PRIMARY KEY (`webformassigned_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-TRUNCATE `crm_asignacionDeWebforms`;
+TRUNCATE `crm_asignaciondewebforms`;
 
 DROP TABLE IF EXISTS `crm_webhooks`;
 CREATE TABLE `crm_webhooks` (
@@ -3115,8 +3115,8 @@ CREATE TABLE `crm_webhooks` (
 
 TRUNCATE `crm_webhooks`;
 
-DROP TABLE IF EXISTS `crm_plantillasDeWebmail`;
-CREATE TABLE `crm_plantillasDeWebmail` (
+DROP TABLE IF EXISTS `crm_plantillasdewebmail`;
+CREATE TABLE `crm_plantillasdewebmail` (
   `webmail_template_id` int(11) NOT NULL AUTO_INCREMENT,
   `webmail_template_created` datetime NOT NULL,
   `webmail_template_updated` datetime NOT NULL,
@@ -3127,6 +3127,6 @@ CREATE TABLE `crm_plantillasDeWebmail` (
   PRIMARY KEY (`webmail_template_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-TRUNCATE `crm_plantillasDeWebmail`;
+TRUNCATE `crm_plantillasdewebmail`;
 
 -- 2023-11-07 14:29:08
