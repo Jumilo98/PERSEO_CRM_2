@@ -158,7 +158,7 @@ class Client extends Model {
     public function scopeCountProjects($query, $status = '') {
 
         //condition by status
-        $conditional = " AND projects.project_status = '$status'";
+        $conditional = " AND crm_proyectos.project_status = '$status'";
         $name = "count_projects_$status";
 
         //all projects
@@ -168,7 +168,7 @@ class Client extends Model {
 
         //pending
         if ($status == 'pending') {
-            $conditional = " AND projects.project_status NOT IN('on_hold', 'cancelled', 'completed')";
+            $conditional = " AND crm_proyectos.project_status NOT IN('on_hold', 'cancelled', 'completed')";
         }
 
         //return query
@@ -187,7 +187,7 @@ class Client extends Model {
     public function scopeCountInvoices($query, $status = '') {
 
         //condition by status
-        $conditional = " AND invoices.bill_status = '$status'";
+        $conditional = " AND crm_facturas.bill_status = '$status'";
         $name = "count_invoices_$status";
 
         //all invoices
@@ -211,7 +211,7 @@ class Client extends Model {
     public function scopeSumInvoices($query, $status = '') {
 
         //condition by status
-        $conditional = " AND invoices.bill_status = '$status'";
+        $conditional = " AND crm_facturas.bill_status = '$status'";
         $name = "sum_invoices_$status";
 
         //all invoices

@@ -27,7 +27,7 @@ class WebForm extends Model {
      * The Users that are assigned to the users.
      */
     public function assigned() {
-        return $this->belongsToMany('App\Models\User', 'webforms_assigned', 'webformassigned_formid', 'webformassigned_userid');
+        return $this->belongsToMany('App\Models\User', 'crm_asignaciondewebforms', 'webformassigned_formid', 'webformassigned_userid');
     }
 
     
