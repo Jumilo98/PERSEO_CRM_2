@@ -310,7 +310,7 @@ class Projects extends Controller {
             'project_title' => 'required',
             'project_categoryid' => [
                 'required',
-                Rule::exists('categories', 'category_id'),
+                Rule::exists('crm_categorias', 'category_id'),
             ],
         ]);
 

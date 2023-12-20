@@ -101,7 +101,7 @@ class Timesheets extends Controller {
         $validator = Validator::make(request()->all(), [
             'my_assigned_tasks' => [
                 'required',
-                Rule::exists('tasks', 'task_id'),
+                Rule::exists('crm_tareas', 'task_id'),
             ],
             'timer_created' => [
                 'required',

@@ -335,7 +335,7 @@ class Expenses extends Controller {
             'expense_amount' => 'required|numeric',
             'expense_categoryid' => [
                 'required',
-                Rule::exists('categories', 'category_id'),
+                Rule::exists('crm_categorias', 'category_id'),
             ],
             'expense_projectid' => [
                 'nullable',

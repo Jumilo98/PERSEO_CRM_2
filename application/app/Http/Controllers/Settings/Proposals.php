@@ -79,7 +79,7 @@ class Proposals extends Controller {
         //are we updating next ID
         if (request()->filled('next_id')) {
             if (request('next_id') != request('next_id_current')) {
-                DB::select("ALTER TABLE proposals AUTO_INCREMENT = " . request('next_id'));
+                DB::select("ALTER TABLE crm_propuestas AUTO_INCREMENT = " . request('next_id'));
             }
         }
 

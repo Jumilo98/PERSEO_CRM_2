@@ -87,7 +87,7 @@ class LeadStoreUpdate extends FormRequest {
             ],
             'lead_status' => [
                 'required',
-                Rule::exists('leads_status', 'leadstatus_id'),
+                Rule::exists('crm_clientespotencialesestado', 'leadstatus_id'),
             ],
             'lead_description' => [
                 'nullable',
@@ -98,7 +98,7 @@ class LeadStoreUpdate extends FormRequest {
             ],
             'lead_categoryid' => [
                 'required',
-                Rule::exists('categories', 'category_id'),
+                Rule::exists('crm_categorias', 'category_id'),
             ],
             'lead_last_contacted' => [
                 'nullable',

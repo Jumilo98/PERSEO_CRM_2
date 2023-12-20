@@ -435,7 +435,7 @@ class Subscriptions extends Controller {
             'subscription_title' => 'required',
             'subscription_categoryid' => [
                 'required',
-                Rule::exists('categories', 'category_id'),
+                Rule::exists('crm_categorias', 'category_id'),
             ],
         ], $messages);
 

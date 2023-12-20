@@ -54,7 +54,7 @@ class PaymentStoreUpdate extends FormRequest {
             $rules += [
                 'payment_invoiceid' => [
                     'required',
-                    Rule::exists('invoices', 'bill_invoiceid'),
+                    Rule::exists('crm_facturas', 'bill_invoiceid'),
                 ],
             ];
         }

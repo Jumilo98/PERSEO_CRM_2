@@ -56,7 +56,7 @@ class TicketStoreUpdate extends FormRequest {
             $rules += [
                 'ticket_clientid' => [
                     'required',
-                    Rule::exists('clients', 'client_id'),
+                    Rule::exists('crm_clientes', 'client_id'),
                 ],
                 'ticket_projectid' => [
                     'nullable',
@@ -78,7 +78,7 @@ class TicketStoreUpdate extends FormRequest {
             $rules += [
                 'ticket_projectid' => [
                     'nullable',
-                    Rule::exists('projects', 'project_id'),
+                    Rule::exists('crm_proyectos', 'project_id'),
                 ],
             ];
         }

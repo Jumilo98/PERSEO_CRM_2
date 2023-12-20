@@ -150,7 +150,7 @@ class Documents extends Controller {
             ],
             'doc_categoryid' => [
                 'required',
-                Rule::exists('categories', 'category_id'),
+                Rule::exists('crm_categorias', 'category_id'),
             ],
         ], $messages);
 

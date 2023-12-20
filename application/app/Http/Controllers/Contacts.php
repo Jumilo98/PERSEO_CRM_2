@@ -134,11 +134,11 @@ class Contacts extends Controller {
             'email' => [
                 'required',
                 'email',
-                Rule::unique('users', 'email'),
+                Rule::unique('crm_usuarios', 'email'),
             ],
             'clientid' => [
                 'required',
-                Rule::exists('clients', 'client_id'),
+                Rule::exists('crm_clientes', 'client_id'),
             ],
         ], $messages);
 
@@ -250,7 +250,7 @@ class Contacts extends Controller {
             'email' => [
                 'required',
                 'email',
-                Rule::unique('users', 'email')->ignore($id, 'id'),
+                Rule::unique('crm_usuarios', 'email')->ignore($id, 'id'),
             ],
         ]);
 

@@ -82,7 +82,7 @@ class ItemStoreUpdate extends FormRequest {
             ],
             'item_categoryid' => [
                 'required',
-                Rule::exists('categories', 'category_id'),
+                Rule::exists('crm_categorias', 'category_id'),
             ],
         ];
 

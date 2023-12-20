@@ -93,7 +93,7 @@ class Invoices extends Controller {
         //are we updating next ID
         if (request()->filled('next_id')) {
             if (request('next_id') != request('next_id_current')) {
-                DB::select("ALTER TABLE invoices AUTO_INCREMENT = " . request('next_id'));
+                DB::select("ALTER TABLE crm_facturas AUTO_INCREMENT = " . request('next_id'));
             }
         }
 

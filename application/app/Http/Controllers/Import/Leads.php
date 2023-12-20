@@ -111,7 +111,7 @@ class Leads extends Controller {
         $validator = Validator::make(request()->all(), [
             'lead_status' => [
                 'required',
-                Rule::exists('leads_status', 'leadstatus_id'),
+                Rule::exists('crm_clientespotencialesestado', 'leadstatus_id'),
             ],
         ]);
 

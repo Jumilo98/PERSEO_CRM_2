@@ -107,7 +107,7 @@ class OrphanedRecordsCron {
         ------------------------------------------------------------------------------------------ */
         if (Schema::hasColumn('crm_pagos', 'payment_type')) {
             \App\Models\Payment::whereNotIn('payment_invoiceid', function ($query) {
-                $query->select('bill_invoiceid')->from('invoices');
+                $query->select('bill_invoiceid')->from('crm_facturas');
             })->Where('payment_type', 'invoice')->delete();
         }
 
@@ -117,7 +117,7 @@ class OrphanedRecordsCron {
         ------------------------------------------------------------------------------------------ */
         if (Schema::hasColumn('crm_pagos', 'payment_type')) {
             \App\Models\Payment::whereNotIn('payment_subscriptionid', function ($query) {
-                $query->select('subscription_id')->from('subscriptions');
+                $query->select('subscription_id')->from('crm_suscripciones');
             })->Where('payment_type', 'subscription')->delete();
         }
 

@@ -64,11 +64,11 @@ class InvoiceStoreUpdate extends FormRequest {
             $rules += [
                 'bill_clientid' => [
                     'required',
-                    Rule::exists('clients', 'client_id'),
+                    Rule::exists('crm_clientes', 'client_id'),
                 ],
                 'bill_projectid' => [
                     'nullable',
-                    Rule::exists('projects', 'project_id'),
+                    Rule::exists('crm_proyectos', 'project_id'),
                 ],
             ];
         }
@@ -123,7 +123,7 @@ class InvoiceStoreUpdate extends FormRequest {
             ],
             'bill_categoryid' => [
                 'required',
-                Rule::exists('categories', 'category_id'),
+                Rule::exists('crm_categorias', 'category_id'),
             ],
             'tags' => [
                 'bail',

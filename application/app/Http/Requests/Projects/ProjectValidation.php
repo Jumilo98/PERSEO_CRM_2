@@ -50,7 +50,7 @@ class ProjectValidation extends FormRequest {
             $rules += [
                 'project_clientid' => [
                     'required',
-                    Rule::exists('clients', 'client_id')],
+                    Rule::exists('crm_clientes', 'client_id')],
             ];
         }
 
@@ -99,7 +99,7 @@ class ProjectValidation extends FormRequest {
             ],
             'project_categoryid' => [
                 'required',
-                Rule::exists('categories', 'category_id'),
+                Rule::exists('crm_categorias', 'category_id'),
             ],
             'manager' => [
                 'nullable',

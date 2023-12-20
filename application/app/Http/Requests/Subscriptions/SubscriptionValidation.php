@@ -54,11 +54,11 @@ class SubscriptionValidation extends FormRequest {
         $rules += [
             'subscription_categoryid' => [
                 'required',
-                Rule::exists('categories', 'category_id'),
+                Rule::exists('crm_categorias', 'category_id'),
             ],
             'subscription_clientid' => [
                 'required',
-                Rule::exists('clients', 'client_id'),
+                Rule::exists('crm_clientes', 'client_id'),
             ],
             'subscription_projectid' => [
                 'nullable',

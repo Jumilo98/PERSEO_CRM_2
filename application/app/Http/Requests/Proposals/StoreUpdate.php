@@ -60,7 +60,7 @@ class StoreUpdate extends FormRequest {
                 'doc_client_id' => [
                     'nullable',
                     new NoTags,
-                    Rule::exists('clients', 'client_id'),
+                    Rule::exists('crm_clientes', 'client_id'),
                     function ($attribute, $value, $fail) {
                         if ($value == '' && request('doc_lead_id') == '') {
                             return $fail(__('lang.client_or_lead_required'));
@@ -70,7 +70,7 @@ class StoreUpdate extends FormRequest {
                 'doc_lead_id' => [
                     'nullable',
                     new NoTags,
-                    Rule::exists('leads', 'lead_id'),
+                    Rule::exists('crm_clientespotenciales', 'lead_id'),
                     function ($attribute, $value, $fail) {
                         if ($value == '' && request('doc_client_id') == '') {
                             return $fail(__('lang.client_or_lead_required'));
@@ -99,7 +99,7 @@ class StoreUpdate extends FormRequest {
             ],
             'doc_categoryid' => [
                 'required',
-                Rule::exists('categories', 'category_id'),
+                Rule::exists('crm_categorias', 'category_id'),
             ],
         ];
 

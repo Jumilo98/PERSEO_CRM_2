@@ -105,7 +105,7 @@ class Lead extends Model {
      * The Users that are assigned to the Task.
      */
     public function assigned() {
-        return $this->belongsToMany('App\Models\User', 'crm_clientespotencialesestado', 'leadsassigned_leadid', 'leadsassigned_userid');
+        return $this->belongsToMany('App\Models\User', 'crm_clientespotencialesasignados', 'leadsassigned_leadid', 'leadsassigned_userid');
     }
 
     /**

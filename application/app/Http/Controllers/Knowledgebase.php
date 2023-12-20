@@ -156,7 +156,7 @@ class Knowledgebase extends Controller {
             ],
             'knowledgebase_categoryid' => [
                 'required',
-                Rule::exists('kb_categories', 'kbcategory_id'),
+                Rule::exists('crm_kb_categorias', 'kbcategory_id'),
             ],
         ], $messages);
 
@@ -319,7 +319,7 @@ class Knowledgebase extends Controller {
             ],
             'knowledgebase_categoryid' => [
                 'required',
-                Rule::exists('kb_categories', 'kbcategory_id'),
+                Rule::exists('crm_kb_categorias', 'kbcategory_id'),
             ],
         ], $messages);
 

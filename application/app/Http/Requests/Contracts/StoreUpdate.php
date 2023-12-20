@@ -59,12 +59,12 @@ class StoreUpdate extends FormRequest {
                 'doc_client_id' => [
                     'required',
                     new NoTags,
-                    Rule::exists('clients', 'client_id'),
+                    Rule::exists('crm_clientes', 'client_id'),
                 ],
                 'doc_project_id' => [
                     'nullable',
                     new NoTags,
-                    Rule::exists('projects', 'project_id'),
+                    Rule::exists('crm_proyectos', 'project_id'),
                 ],
             ];
         }
@@ -91,7 +91,7 @@ class StoreUpdate extends FormRequest {
             'doc_categoryid' => [
                 'required',
                 new NoTags,
-                Rule::exists('categories', 'category_id'),
+                Rule::exists('crm_categorias', 'category_id'),
             ],
         ];
 

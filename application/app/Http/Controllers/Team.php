@@ -131,7 +131,7 @@ class Team extends Controller {
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required|email|unique:users,email',
-            'role_id' => 'required|exists:roles,role_id',
+            'role_id' => 'required|exists:crm_roles,role_id',
         ], $messages);
 
         //errors
@@ -256,9 +256,9 @@ class Team extends Controller {
             'last_name' => 'required',
             'email' => [
                 'required',
-                Rule::unique('users', 'email')->ignore($id, 'id'),
+                Rule::unique('crm_usuarios', 'email')->ignore($id, 'id'),
             ],
-            'role_id' => 'nullable|exists:roles,role_id',
+            'role_id' => 'nullable|exists:crm_roles,role_id',
             'password' => 'nullable|confirmed|min:5',
         ], $messages);
 

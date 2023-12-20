@@ -82,7 +82,7 @@ class ExpenseStoreUpdate extends FormRequest {
             ],
             'expense_categoryid' => [
                 'required',
-                Rule::exists('categories', 'category_id'),
+                Rule::exists('crm_categorias', 'category_id'),
             ],
             'expense_projectid' => [
                 'nullable',
