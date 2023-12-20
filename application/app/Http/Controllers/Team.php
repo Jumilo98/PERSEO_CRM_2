@@ -130,7 +130,7 @@ class Team extends Controller {
         $validator = Validator::make(request()->all(), [
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required|email|unique:users,email',
+            'email' => 'required|email|unique:crm_usuarios,email',
             'role_id' => 'required|exists:crm_roles,role_id',
         ], $messages);
 

@@ -275,7 +275,7 @@ class Authenticate extends Controller {
             'last_name' => 'required',
             'client_company_name' => 'required',
             'password' => 'required|confirmed|min:6',
-            'email' => 'email|required|unique:users,email',
+            'email' => 'email|required|unique:crm_usuarios,email',
         ], $messages);
 
         //errors
