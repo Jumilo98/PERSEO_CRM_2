@@ -76,7 +76,7 @@ class ClientsImport implements ToModel, WithStartRow, WithHeadingRow, WithValida
             'email' => [
                 'required',
                 'email',
-                'unique:users,email'
+                'unique:crm_usuarios,email'
             ],
         ];
     }

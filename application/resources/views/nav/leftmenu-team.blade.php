@@ -135,14 +135,14 @@
                         </span>
                     </a>
                     <ul aria-expanded="false" class="collapse">
-                        <!--invoices --REVIEW
+                        <!--invoices --REVIEW-->
                         @if(config('visibility.modules.invoices'))
                         <li class="sidenav-submenu {{ $page['submenu_invoices'] ?? '' }}" id="submenu_invoices">
                             <a href="/invoices"
                                 class=" {{ $page['submenu_invoices'] ?? '' }}">{{ cleanLang(__('lang.invoices')) }}</a>
                         </li>
                         @endif
-                        -->
+                        
                         
 
                         @if(config('visibility.modules.payments'))

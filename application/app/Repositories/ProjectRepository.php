@@ -61,7 +61,7 @@ class ProjectRepository {
 
         //count al tasks
         $projects->selectRaw("(SELECT filefolder_id
-                                      FROM crm_archivosadjuntos
+                                      FROM crm_archivodecarpetas
                                       WHERE filefolder_projectid = crm_proyectos.project_id
                                       LIMIT 1)
                                       AS default_folder_id");

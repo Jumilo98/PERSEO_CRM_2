@@ -202,7 +202,7 @@ class TicketRepository {
 
         //eager load
         $tickets->with([
-            'crm_archivosadjuntos.creator',
+            'attachments.creator',
         ]);
 
         //eager load counts
