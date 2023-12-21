@@ -57,7 +57,7 @@ class ClientStoreValidation extends FormRequest {
                 'email' => [
                     'required',
                     'email',
-                    'unique:users,email',
+                    'unique:crm_usuarios,email',
                 ],
             ];
         }
