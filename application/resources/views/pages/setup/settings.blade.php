@@ -1,16 +1,16 @@
 <div class="setup-inner-steps setup-requirements">
 
-    <h5 class="text-info"> Admin User Details </h5>
+    <h5 class="text-info"> Configuracion del usuario administrador </h5>
     <form class="form-horizontal form-material" id="setupForm" name="setupForm">
         <div class="form-group m-t-40 row">
-            <label for="example-text-input" class="col-4 col-form-label">Company Name</label>
+            <label for="example-text-input" class="col-4 col-form-label">Nombre de la empresa</label>
             <div class="col-8">
                 <input class="form-control form-control-sm" type="text" value="" id="settings_company_name"
                     name="settings_company_name">
             </div>
         </div>
         <div class="form-group m-t-40 row">
-            <label for="example-text-input" class="col-4 col-form-label">Timezone</label>
+            <label for="example-text-input" class="col-4 col-form-label">Zona horaria</label>
             <div class="col-8">
                 <select class="select2-basic-with-search form-control form-control-sm" id="settings_system_timezone"
                     name="settings_system_timezone" data-allow-clear="false">
@@ -471,7 +471,7 @@
         <div class="x-button text-right p-t-20">
             <button class="btn waves-effect waves-light btn-info btn-extra-padding" data-button-loading-annimation="yes"
                 data-button-disable-on-click="yes" data-type="form" data-ajax-type="post" data-form-id="setupForm"
-                id="continueButton" type="submit" data-url="{{url('setup/settings') }}">Continue</button>
+                id="continueButton" type="submit" data-url="{{url('setup/settings') }}">Continuar</button>
         </div>
     </form>
 

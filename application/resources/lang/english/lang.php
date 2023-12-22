@@ -121,7 +121,7 @@ return [
     'app_version_could_not_be_veried' => "Your app version could not be verified",
     'app' => "App",
     'application_backup_instructions' => "You can backup your application via your web hosting control panel (e.g. Cpanel)",
-    'application_error' => "A system error occurred whilst trying to process this request",
+    'application_error' => "Se ha producido un error del sistema al intentar procesar esta solicitud",
     'apply_filter' => "Apply Filter",
     'apply' => "Apply",
     'april_short' => "Apr",

@@ -1,11 +1,11 @@
 <div class="setup-inner-steps setup-requirements">
 
-    <h5 class="text-info"> Server - PHP Requirements </h5>
+    <h5 class="text-info"> Servidor - Requerimientos PHP </h5>
     <table class="table table-sm table-bordered m-b-40">
         <!--check-->
         <tr>
             <td class="p-l-15">
-                PHP Supported Version 7.3 | 7.4 |  8.0 | 8.1 - <strong>Your Version <span class="badge-pill badge-info">{{ phpversion() }}</span></strong>
+                Versión de PHP soportada 7.3 | 7.4 |  8.0 | 8.1 - <strong>Tu Versión <span class="badge-pill badge-info">{{ phpversion() }}</span></strong>
             </td>
             <td class="x-td-checks">
                 @if($requirements['php_version'])
@@ -18,7 +18,7 @@
         <!--check-->
         <tr>
             <td class="p-l-15">
-                MySQL Database (mysqli)
+                Base de Datos MySQL (mysqli)
             </td>
             <td class="x-td-checks">
                 @if($requirements['mysql'])
@@ -31,7 +31,7 @@
         <!--check-->
         <tr>
             <td class="p-l-15">
-                BCMath PHP Extension
+                Extensión PHP BCMath 
             </td>
             <td class="x-td-checks">
                 @if($requirements['bcmath'])
@@ -44,7 +44,7 @@
         <!--check-->
         <tr>
             <td class="p-l-15">
-                Ctype PHP Extension
+                Extensión PHP Ctype 
             </td>
             <td class="x-td-checks">
                 @if($requirements['ctype'])
@@ -57,7 +57,7 @@
         <!--check-->
         <tr>
             <td class="p-l-15">
-                JSON PHP Extension
+                Extensión PHP JSON
             </td>
             <td class="x-td-checks">
                 @if($requirements['json'])
@@ -70,7 +70,7 @@
         <!--check-->
         <tr>
             <td class="p-l-15">
-                Mbstring PHP Extension
+              Extensión PHP Mbstring
             </td>
             <td class="x-td-checks">
                 @if($requirements['mbstring'])
@@ -83,7 +83,7 @@
         <!--check-->
         <tr>
             <td class="p-l-15">
-                OpenSSL PHP Extension
+              Extensión PHP OpenSSL 
             </td>
             <td class="x-td-checks">
                 @if($requirements['openssl'])
@@ -96,7 +96,7 @@
         <!--check-->
         <tr>
             <td class="p-l-15">
-                PDO PHP Extension
+             Extensión PHP PDO 
             </td>
             <td class="x-td-checks">
                 @if($requirements['pdo'])
@@ -109,7 +109,7 @@
         <!--check-->
         <tr>
             <td class="p-l-15">
-                Tokenizer PHP Extension
+                Extensión PHP Tokenizer
             </td>
             <td class="x-td-checks">
                 @if($requirements['tokenizer'])
@@ -122,7 +122,7 @@
         <!--check-->
         <tr>
             <td class="p-l-15">
-                XML PHP Extension
+                Extensión PHP XML 
             </td>
             <td class="x-td-checks">
                 @if($requirements['xml'])
@@ -135,7 +135,7 @@
         <!--check-->
         <tr>
             <td class="p-l-15">
-                FILEINFO PHP Extension
+                Extensión PHP FILEINFO
             </td>
             <td class="x-td-checks">
                 @if($requirements['fileinfo'])
@@ -161,7 +161,7 @@
         </tr>
     </table>
 
-    <h5 class="text-info"> Folders - Writable Permission</h5>
+    <h5 class="text-info"> Carpetas - Permiso de escritura</h5>
     <table class="table table-sm table-bordered">
         <!--/updates-->
         <tr>
@@ -480,7 +480,7 @@
     </table>
 
 
-    <h5 class="text-info"> Files - Writable Permission</h5>
+    <h5 class="text-info"> Archivos - Permiso de escritura</h5>
     <table class="table table-sm table-bordered">
         <!--/application/.env-->
         <tr>
@@ -504,18 +504,17 @@
         <!--warning-->
         <div class="alert alert-danger text-left">
             <h3 class="text-warning"><i class="fa fa-exclamation-triangle"></i> Error</h3>
-            One or more of the minimum requirements have not been met. You can contact your web hosting provider for
-            help (you can provide them with a screenshot of this screen). You can also refer to our <a
-                href="https://growcrm.io/documentation/2-installation/"> documentation</a> for more information.
-            You can also send us a support email at <strong>support@growcrm.io </strong>
+            No se cumplen uno o varios de los requisitos mínimos. Puede ponerse en contacto con su proveedor de
+            ayuda (puede proporcionarles una captura de esta pantalla).
+            También puede enviarnos un correo electrónico de asistencia a <strong> desarrollo@perseo.com </strong>
         </div>
         <!--view server info-->
         <a type="button" class="btn waves-effect waves-light btn-outline-secondary" href="{{url('setup/serverinfo') }}"
-            target="_blank">View Server Info</a>
+            target="_blank">Ver información del servidor</a>
         @else
         <button type="button" class="btn waves-effect waves-light btn-info btn-extra-padding js-ajax-request"
             data-button-loading-annimation="yes" data-button-disable-on-click="yes"
-            data-url="{{url('setup/database') }}">Continue</button>
+            data-url="{{url('setup/database') }}">Continuar</button>
         @endif
     </div>
 

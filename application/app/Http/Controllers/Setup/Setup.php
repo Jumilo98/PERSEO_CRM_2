@@ -552,7 +552,7 @@ class Setup extends Controller
 
         $page = [
             'page' => 'setup',
-            'meta_title' => 'Application Setup',
+            'meta_title' => 'Instalación Perseo CRM',
         ];
         return $page;
     }
