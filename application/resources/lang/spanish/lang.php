@@ -1137,7 +1137,7 @@ return [
 'sign_in_to_your_account' => "Iniciar sesión en su cuenta",
 'sign_in' => "Iniciar sesión",
 'sign_up_for_your_account' => "¡Regístrese para obtener su nueva cuenta hoy!",
-'sign_up' => "Inscribirse",
+'sign_up' => "Registrarse",
 'signature' => "Firma",
 'signed' => "Firmado",
 'size' => "Tamaño",

@@ -46,7 +46,5 @@
                 data-type="form" data-ajax-type="post" data-form-id="setupForm" id="continueButton" type="submit"
                 data-url="{{url('setup/database') }}">Continuar</button>
         </div>
-    </form>
-
-
+    </form>    
 </div>

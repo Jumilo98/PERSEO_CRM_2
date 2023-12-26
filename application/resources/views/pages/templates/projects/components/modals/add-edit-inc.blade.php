@@ -321,6 +321,7 @@
 @endif
 <!--/#CUSTOMER FIELDS [collapsed]-->
 
+<!-- mostrara el checkbox con el que se redirecciona a la plantilla del proyecto --REVIEW
 @if(config('visibility.project_show_project_option'))
 <div class="form-group form-group-checkbox row">
     <div class="col-12 text-left p-t-5">
@@ -330,4 +331,5 @@
     </div>
 </div>
 @endif
+-->
 <!--/#[billing details]-->

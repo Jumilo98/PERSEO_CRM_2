@@ -3,9 +3,11 @@
 
     <!--splash images-->
     <div class="x-splash-images">
+        <!-- icono csv oculto --REVIEW
         <span class="x-icons">
             <img src="{{ url('public/images/file-icons/icon-csv.svg') }}" alt="CSV FILE" />
         </span>
+        -->
         <span class="x-icons">
             <img src="{{ url('public/images/file-icons/icon-xlsx.svg') }}" alt="XLSX FILE" />
         </span>
@@ -21,7 +23,8 @@
                         <h4>{{ cleanLang(__('lang.drag_drop_single_file')) }}</h4>
                     </div>
                     <div>
-                        <h6>(CVS or XLSX)</h6>
+                        <!-- XlSX or CSV antes estaba asi --REVIEW -->
+                        <h6>(XLSX)</h6>
                     </div>
                 </div>
             </div>

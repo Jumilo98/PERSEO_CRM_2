@@ -496,8 +496,7 @@
             </td>
         </tr>
     </table>
-
-
+    
     <!--continue-->
     <div class="x-button text-right p-t-20">
         @if($error['count'] > 0)
@@ -511,7 +510,7 @@
         <!--view server info-->
         <a type="button" class="btn waves-effect waves-light btn-outline-secondary" href="{{url('setup/serverinfo') }}"
             target="_blank">Ver información del servidor</a>
-        @else
+        @else        
         <button type="button" class="btn waves-effect waves-light btn-info btn-extra-padding js-ajax-request"
             data-button-loading-annimation="yes" data-button-disable-on-click="yes"
             data-url="{{url('setup/database') }}">Continuar</button>

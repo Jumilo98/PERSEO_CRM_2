@@ -20,11 +20,13 @@
         Si deseas visitar más de nuestros servicios entrar a nuestra página de <strong>PERSEO</strong>. Esto desde el siguiente enlace. 
     </div>
 
-    <div class="cronjob">
+    <div class="cronjob"> 
         <label class="col-12 control-label col-form-label">Enlace Página Perseo</label>
-        <input class="col-12 form-control form-control-sm" type="text" value="{{ $cronjob_path }}" disabled>
+        <!--link acortado de Perseo Web-->
+        <a href="https://n9.cl/02ehb" target="_blank">
+            <button  style="background-color: #58C3BB; color: white;" class="col-12 form-control form-control-sm text-center">Sitio Web Perseo</button>
+        </a>     
     </div>
-
 
     <div class="x-button m-t-20">
         <a href="{{ url('/login') }}" class="btn waves-effect waves-light btn-block btn-info">Ir a mi panel de control</a>
