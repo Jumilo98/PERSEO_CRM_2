@@ -1082,7 +1082,7 @@ return [
 'save_canned_reply_as_a_template' => "Guardar como plantilla",
 'save_changes' => "Guardar cambios",
 'save_product' => "Guardar producto",
-'save' => "Ahorrar",
+'save' => "Guardar",
 'search_term' => "Término de búsqueda",
 'search' => "Buscar",
 'second_reminder' => "Segundo recordatorio",

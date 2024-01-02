@@ -1186,3 +1186,6 @@ Route::resource('cs/affiliates/earnings', 'CS_Affiliates\Earnings');
 
 //AFFILATE PROFIT
 Route::get("/cs/affiliate/my/earnings", "CS_Affiliates\Profit@index");
+
+//Ruta de pruebas
+Route::get('/prueba' ,'PerseoPc\Prueba@pruebaF') ;
