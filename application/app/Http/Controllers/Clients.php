@@ -28,6 +28,7 @@ use App\Repositories\CategoryRepository;
 use App\Repositories\ClientRepository;
 use App\Repositories\CustomFieldsRepository;
 use App\Repositories\DestroyRepository;
+use App\Repositories\PerseoPc\DestroyPerseoPc;
 use App\Repositories\TagRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
@@ -163,7 +164,8 @@ class Clients extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(ClientStoreValidation $request) {
-        //dd("hola prro", $request->get('client_company_name'));
+        
+        //dd("hola prro", $request);
         //custom field validation
         if ($messages = $this->customFieldValidationFailed()) {
             abort(409, $messages);
@@ -430,14 +432,15 @@ class Clients extends Controller {
      * @param int $id client id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DestroyRepository $destroyrepo, $id) {
+    public function destroy(DestroyRepository $destroyrepo, $id, DestroyPerseoPc $destroypc) {
 
         //delete client
         $destroyrepo->destroyClient($id);
-
+        $destroypc->destroyClient($id);
         //reponse payload
         $payload = [
             'client_id' => $id,
+            'clientesid' => $id,
         ];
 
         //generate a response

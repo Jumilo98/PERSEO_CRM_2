@@ -181,12 +181,26 @@
                         name="client_billing_street" value="{{ $client->client_billing_street ?? '' }}">
                 </div>
             </div>
-            <div class="form-group row">
+            <!--<div class="form-group row">
                 <label
                     class="col-sm-12 col-lg-3 text-left control-label col-form-label">{{ cleanLang(__('lang.city')) }}</label>
                 <div class="col-sm-12 col-lg-9">
-                    <input type="text" class="form-control form-control-sm" id="client_billing_city"
-                        name="client_billing_city" value="{{ $client->client_billing_city ?? '' }}">
+                    <select name="client_billing_city" id="client_billing_city" class="form-control form-control-sm">
+                        
+                    </select>
+                </div>
+            </div>
+            -->
+            <div class="form-group row">
+                <label for="example-month-input"
+                    class="col-sm-12 col-lg-3 col-form-label text-left">{{ cleanLang(__('lang.city')) }}</label>
+                <div class="col-sm-12 col-lg-9">
+                    @php $selected_country = $client->client_billing_country ?? ''; @endphp
+                    <select class="select2-basic form-control form-control-sm" id="client_billing_city"
+                        name="client_billing_city">
+                        <option></option>
+                        @include('misc.country-list')
+                    </select>
                 </div>
             </div>
             <div class="form-group row">

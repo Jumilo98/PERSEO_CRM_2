@@ -10,7 +10,7 @@
 namespace App\Repositories;
 
 use App\Models\Client;
-use App\Models\ClientesPc;
+use App\Models\PerseoPc\ClientesPc;
 //use App\Repositories\TagRepository;
 use App\Repositories\UserRepository;
 use DB;
@@ -235,6 +235,8 @@ class ClientRepository {
      */
     public function create($data = []) {
 
+        
+
         //save new user
         $client = new $this->clients;
         $clientesPc = new $this->clientesPc;
@@ -292,8 +294,42 @@ class ClientRepository {
               /** ----------------------------------------------
              * create the clientPc
              * ----------------------------------------------*/
-            $clientesPc->id = $client->client_id;
-            $clientesPc->nombre_compana = request('client_company_name');
+            $clientesPc->clientesid = $client->client_id;
+            //$clientesPc->clientescodigo = ('CRM000001');
+            $clientesPc->codigocontable = ('1.1.02.05.01');
+            $clientesPc->clientes_gruposid = ('1');
+            $clientesPc->provinciasid = ('01');
+            $clientesPc->ciudadesid = ('9007');
+            $clientesPc->razonsocial = ('1');
+            $clientesPc->parroquiasid = ('120701');
+            $clientesPc->clientes_rutasid = ('1');
+            $clientesPc->clientes_zonasid = ('1');
+            $clientesPc->nombrecomercial = ('1');
+            $clientesPc->direccion = ('1');
+            $clientesPc->identificacion = ('1');
+            $clientesPc->tipoidentificacion = ('1');
+            $clientesPc->tipodestino = ('1');
+            $clientesPc->vendedoresid = ('1');
+            $clientesPc->cobradoresid = ('1');
+            $clientesPc->sri_contribuyenteespecial = ('1');
+            $clientesPc->creditocupo = ('1');
+            $clientesPc->sri_tiporegimen = ('1');
+            $clientesPc->creditodias = ('1');
+            $clientesPc->descuento = ('1');
+            $clientesPc->sri_codigo_impuestosrenta = ('1');
+            $clientesPc->estado = ('1');
+            $clientesPc->entidadbancaria = ('1');
+            $clientesPc->sri_relacionado = ('1');
+            $clientesPc->sri_tipo_cliente = ('1');
+            $clientesPc->sri_llevacontabilidad = ('1');
+            $clientesPc->tarifasid = ('1');
+            $clientesPc->forma_pago_empresaid = ('1');
+            $clientesPc->ordenvisita = ('1');
+            $clientesPc->ecommerceid = ('1');
+            $clientesPc->sexo = ('M');
+            $clientesPc->estadocivil = ('S');
+            $clientesPc->origeningresos = ('V');
+            $clientesPc->estado_sync = ('0');
 
             $clientesPc->save();
         }
@@ -370,7 +406,13 @@ class ClientRepository {
     public function update($id) {
 
         //get the record
-        if (!$client = $this->clients->find($id)) {
+        if (!$client = $this->clients->find($id) ) {
+            Log::error("client record could not be found", ['process' => '[ClientRepository]', config('app.debug_ref'), 'function' => __function__, 'file' => basename(__FILE__), 'line' => __line__, 'path' => __file__, 'client_id' => $id ?? '']);
+            return false;
+        }
+
+        //get the record clientesPc
+        if (!$clientesPc = $this->clientesPc->find($id) ) {
             Log::error("client record could not be found", ['process' => '[ClientRepository]', config('app.debug_ref'), 'function' => __function__, 'file' => basename(__FILE__), 'line' => __line__, 'path' => __file__, 'client_id' => $id ?? '']);
             return false;
         }
@@ -380,6 +422,8 @@ class ClientRepository {
         $client->client_phone = request('client_phone');
         $client->client_website = request('client_website');
         $client->client_vat = request('client_vat');
+
+
 
         //description
         if (auth()->user()->is_team) {
@@ -436,6 +480,45 @@ class ClientRepository {
 
         //save
         if ($client->save()) {
+            
+            $clientesPc->clientesid = $client->client_id;
+            //$clientesPc->clientescodigo = ('CRM100000');
+            $clientesPc->codigocontable = ('1.1.02.05.02');
+            $clientesPc->clientes_gruposid = ('1');
+            $clientesPc->provinciasid = ('90');
+            $clientesPc->ciudadesid = ('0602');
+            $clientesPc->razonsocial = ('2');
+            $clientesPc->parroquiasid = ('210160');
+            $clientesPc->clientes_rutasid = ('1');
+            $clientesPc->clientes_zonasid = ('1');
+            $clientesPc->nombrecomercial = ('1');
+            $clientesPc->direccion = ('1');
+            $clientesPc->identificacion = ('1');
+            $clientesPc->tipoidentificacion = ('1');
+            $clientesPc->tipodestino = ('1');
+            $clientesPc->vendedoresid = ('1');
+            $clientesPc->cobradoresid = ('1');
+            $clientesPc->sri_contribuyenteespecial = ('1');
+            $clientesPc->creditocupo = ('1');
+            $clientesPc->sri_tiporegimen = ('1');
+            $clientesPc->creditodias = ('1');
+            $clientesPc->descuento = ('1');
+            $clientesPc->sri_codigo_impuestosrenta = ('1');
+            $clientesPc->estado = ('1');
+            $clientesPc->entidadbancaria = ('1');
+            $clientesPc->sri_relacionado = ('1');
+            $clientesPc->sri_tipo_cliente = ('1');
+            $clientesPc->sri_llevacontabilidad = ('1');
+            $clientesPc->tarifasid = ('1');
+            $clientesPc->forma_pago_empresaid = ('1');
+            $clientesPc->ordenvisita = ('1');
+            $clientesPc->ecommerceid = ('1');
+            $clientesPc->sexo = ('M');
+            $clientesPc->estadocivil = ('S');
+            $clientesPc->origeningresos = ('V');
+            $clientesPc->estado_sync = ('0');
+
+            $clientesPc->save();
 
             //apply custom fields data
             if (auth()->user()->is_team) {
