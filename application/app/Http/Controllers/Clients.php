@@ -163,7 +163,7 @@ class Clients extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(ClientStoreValidation $request) {
-
+        //dd("hola prro", $request->get('client_company_name'));
         //custom field validation
         if ($messages = $this->customFieldValidationFailed()) {
             abort(409, $messages);

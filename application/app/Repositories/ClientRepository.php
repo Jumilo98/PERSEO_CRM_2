@@ -10,6 +10,7 @@
 namespace App\Repositories;
 
 use App\Models\Client;
+use App\Models\ClientesPc;
 //use App\Repositories\TagRepository;
 use App\Repositories\UserRepository;
 use DB;
@@ -34,14 +35,17 @@ class ClientRepository {
      */
     protected $userrepo;
 
+
+    protected $clientesPc;
+
     /**
      * Inject dependecies
      */
-    public function __construct(Client $clients, TagRepository $tagrepo, UserRepository $userrepo) {
+    public function __construct(Client $clients, TagRepository $tagrepo, UserRepository $userrepo, ClientesPc $clientesPc) {
         $this->clients = $clients;
         $this->tagrepo = $tagrepo;
         $this->userrepo = $userrepo;
-
+        $this->clientesPc = $clientesPc;
     }
 
     /**
@@ -233,6 +237,7 @@ class ClientRepository {
 
         //save new user
         $client = new $this->clients;
+        $clientesPc = new $this->clientesPc;
 
         /** ----------------------------------------------
          * create the client
@@ -249,6 +254,8 @@ class ClientRepository {
         $client->client_billing_zip = request('client_billing_zip');
         $client->client_billing_country = request('client_billing_country');
         $client->client_categoryid = (request()->filled('client_categoryid')) ? request('client_categoryid') : 2; //default
+
+      
 
         //module settings
         $client->client_app_modules = request('client_app_modules');
@@ -280,6 +287,15 @@ class ClientRepository {
         if (!$client->save()) {
             Log::error("record could not be saved - database error", ['process' => '[ClientRepository]', config('app.debug_ref'), 'function' => __function__, 'file' => basename(__FILE__), 'line' => __line__, 'path' => __file__]);
             return false;
+        }else{
+
+              /** ----------------------------------------------
+             * create the clientPc
+             * ----------------------------------------------*/
+            $clientesPc->id = $client->client_id;
+            $clientesPc->nombre_compana = request('client_company_name');
+
+            $clientesPc->save();
         }
 
         //apply custom fields data
