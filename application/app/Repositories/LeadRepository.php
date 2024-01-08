@@ -10,6 +10,7 @@
 namespace App\Repositories;
 
 use App\Models\Lead;
+use App\Models\PerseoPc\ClientesPotencialPc;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
@@ -23,11 +24,14 @@ class LeadRepository {
      */
     protected $leads;
 
+    protected $leadsPc;
+
     /**
      * Inject dependecies
      */
-    public function __construct(Lead $leads) {
+    public function __construct(Lead $leads, ClientesPotencialPc $leadsPc) {
         $this->leads = $leads;
+        $this->leadsPc = $leadsPc;
     }
 
     /**
@@ -300,7 +304,8 @@ class LeadRepository {
 
         //save new user
         $lead = new $this->leads;
-
+        $leadPc = new $this->leadsPc;
+        
         //data
         $lead->lead_creatorid = auth()->id();
         $lead->lead_firstname = request('lead_firstname');
@@ -324,14 +329,38 @@ class LeadRepository {
         $lead->lead_position = $position;
         $lead->lead_categoryid = request('lead_categoryid');
 
-        //save and return id
-        if ($lead->save()) {
-            //apply custom fields data
-            $this->applyCustomFields($lead->lead_id);
-            return $lead->lead_id;
-        } else {
+        /** ----------------------------------------------
+             * create the clientesPotencialPc
+             * ----------------------------------------------*/
+            $leadPc->tipoidentificacion = ('C');
+            $leadPc->identificacion = ('9999999999');
+            $leadPc->razonsocial = request('lead_lastname') . ' ' . request('lead_firstname');
+            $leadPc->nombrecomercial = request('lead_company_name');
+            $leadPc->clientes_gruposid = ('1');
+            $leadPc->telefono1 = request('lead_phone');
+            $leadPc->email = request('lead_email');
+            $leadPc->direccion = request('lead_street'). ' , ' . request('lead_city') . ' , ' . request('lead_state') . ' , ' . request('lead_zip') . ' , ' . request('lead_country');
+            $leadPc->estado = ('0');
+            //$leadPc->fechacreacion = ('2024-01-05 16:16:00.944');
+            $leadPc->usuariocreacion = ('J');
+            $leadPc->parametros_json = ('{}');
+
+        //save
+        if (!$leadPc->save()) {
+            Log::error("record could not be saved - database error", ['process' => '[ClientRepository]', config('app.debug_ref'), 'function' => __function__, 'file' => basename(__FILE__), 'line' => __line__, 'path' => __file__]);
             return false;
+        }else{
+            //save and return id
+            if ($lead->save()) {
+                //apply custom fields data
+                $this->applyCustomFields($lead->lead_id);             
+
+                return $lead->lead_id;
+            } else {
+                return false;
+            }
         }
+        
     }
 
     /**

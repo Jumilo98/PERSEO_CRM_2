@@ -36,6 +36,15 @@
                     placeholder="" value="{{ $lead->lead_lastname ?? '' }}">
             </div>
         </div>
+        <!--company name-->
+        <div class="form-group row">
+            <label
+                class="col-sm-12 col-lg-3 text-left control-label col-form-label required">{{ cleanLang(__('lang.company_name')) }}*</label>
+            <div class="col-sm-12 col-lg-9">
+                <input type="text" class="form-control form-control-sm" id="lead_company_name"
+                    name="lead_company_name" placeholder="" value="{{ $lead->lead_company_name ?? '' }}">
+            </div>
+        </div>
         <!--telephone-->
         <div class="form-group row">
             <label
@@ -312,15 +321,7 @@
         <!--address and organisation-->
         <div class="hidden" id="add_lead_address_section">
 
-            <!--company name-->
-            <div class="form-group row">
-                <label
-                    class="col-sm-12 col-lg-3 text-left control-label col-form-label">{{ cleanLang(__('lang.company_name')) }}</label>
-                <div class="col-sm-12 col-lg-9">
-                    <input type="text" class="form-control form-control-sm" id="lead_company_name"
-                        name="lead_company_name" placeholder="" value="{{ $lead->lead_company_name ?? '' }}">
-                </div>
-            </div>
+            
 
             <!--street-->
             <div class="form-group row">

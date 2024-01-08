@@ -294,7 +294,7 @@ class ClientRepository {
               /** ----------------------------------------------
              * create the clientPc
              * ----------------------------------------------*/
-            $clientesPc->clientesid = $client->client_id;
+            //$clientesPc->clientesid = ($client->client_id);
             //$clientesPc->clientescodigo = ('CRM000001');
             $clientesPc->codigocontable = ('1.1.02.05.01');
             $clientesPc->clientes_gruposid = ('1');
@@ -481,7 +481,7 @@ class ClientRepository {
         //save
         if ($client->save()) {
             
-            $clientesPc->clientesid = $client->client_id;
+            //$clientesPc->clientesid = $client->client_id;
             //$clientesPc->clientescodigo = ('CRM100000');
             $clientesPc->codigocontable = ('1.1.02.05.02');
             $clientesPc->clientes_gruposid = ('1');

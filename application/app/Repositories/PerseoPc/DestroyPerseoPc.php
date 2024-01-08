@@ -32,4 +32,24 @@ class DestroyPerseoPc {
 
         return true;
     }
+
+    public function destroyClientePotencial($clientes_prospectosid) {
+
+        //validate client
+        if (!is_numeric($clientes_prospectosid)) {
+            Log::error("validation error - invalid params", ['process' => '[destroy][client]', config('app.debug_ref'), 'function' => __function__, 'file' => basename(__FILE__), 'line' => __line__, 'path' => __file__]);
+            return false;
+        }
+
+        //get client and validate
+        if (!$clientesPotencialesPc = \App\Models\PerseoPc\ClientesPotencialPc::Where('clientes_prospectosid', $clientes_prospectosid)->first()) {
+            Log::error("record could not be found", ['process' => '[destroy][client]', config('app.debug_ref'), 'function' => __function__, 'file' => basename(__FILE__), 'line' => __line__, 'path' => __file__]);
+            return false;
+        }
+
+        //delete client
+        $clientesPotencialesPc->delete();
+
+        return true;
+    }
 }

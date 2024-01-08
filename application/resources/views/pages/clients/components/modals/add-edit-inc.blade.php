@@ -195,11 +195,11 @@
                 <label for="example-month-input"
                     class="col-sm-12 col-lg-3 col-form-label text-left">{{ cleanLang(__('lang.city')) }}</label>
                 <div class="col-sm-12 col-lg-9">
-                    @php $selected_country = $client->client_billing_country ?? ''; @endphp
-                    <select class="select2-basic form-control form-control-sm" id="client_billing_city"
-                        name="client_billing_city">
-                        <option></option>
-                        @include('misc.country-list')
+                    @php $selected_city = $client->client_billing_city ?? ''; @endphp
+                    <select class="select2-basic form-control form-control-sm" id="client_billing_city" name="client_billing_city">
+                        @foreach(\App\Models\PerseoPc\ProvinciasPc::get() as $provincia)
+                            <option value="{{ $provincia->provinciasid }}">{{ $provincia->provincia }}</option> 
+                        @endforeach
                     </select>
                 </div>
             </div>

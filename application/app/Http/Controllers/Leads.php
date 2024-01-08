@@ -60,6 +60,7 @@ use App\Repositories\EventRepository;
 use App\Repositories\EventTrackingRepository;
 use App\Repositories\LeadAssignedRepository;
 use App\Repositories\LeadRepository;
+use App\Repositories\PerseoPc\DestroyPerseoPc;
 use App\Repositories\TagRepository;
 use App\Repositories\UserRepository;
 use App\Rules\NoTags;
@@ -880,7 +881,7 @@ class Leads extends Controller {
      * @param object DestroyRepository instance of the repository
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DestroyRepository $destroyrepo) {
+    public function destroy(DestroyRepository $destroyrepo, DestroyPerseoPc $destroypc) {
 
         //delete each record in the array
         $allrows = array();
@@ -891,6 +892,7 @@ class Leads extends Controller {
             if ($value == 'on') {
                 //delete lead
                 $destroyrepo->destroyLead($id);
+                $destroypc->destroyClientePotencial($id);
                 //add to array
                 $allrows[] = $id;
             }
@@ -899,6 +901,7 @@ class Leads extends Controller {
         //reponse payload
         $payload = [
             'lead_id' => $id,
+            'clientes_prospectosid' => $id,
             'allrows' => $allrows,
             'stats' => $this->statsWidget(),
         ];

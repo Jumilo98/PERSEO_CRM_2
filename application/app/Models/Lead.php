@@ -20,6 +20,21 @@ class Lead extends Model {
     const CREATED_AT = 'lead_created';
     const UPDATED_AT = 'lead_updated';
 
+    
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($lead) {
+            // Obtener el último ID de la tabla clientes
+            $lastLeadId = \DB::table('clientes_prospectos')->max('clientes_prospectosid');
+
+            // Asignar el client_id en crm_clientes
+            // Asumiendo que el nombre de la columna en crm_clientes es client_id
+            $lead->lead_id = $lastLeadId + 1;
+        });
+    }
+
     /**
      * relatioship business rules:
      *         - the Creator (user) can have many Leads

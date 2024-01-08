@@ -23,6 +23,7 @@ use App\Http\Responses\Clients\ShowResponse;
 use App\Http\Responses\Clients\StoreResponse;
 use App\Http\Responses\Clients\UpdateDetailsResponse;
 use App\Http\Responses\Clients\UpdateResponse;
+use App\Models\PerseoPc\ProvinciasPc;
 use App\Repositories\AttachmentRepository;
 use App\Repositories\CategoryRepository;
 use App\Repositories\ClientRepository;
@@ -133,7 +134,7 @@ class Clients extends Controller {
         //show views
         return new IndexResponse($payload);
     }
-
+    
     /**
      * Show the form for creating a new client
      * @return \Illuminate\Http\Response

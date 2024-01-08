@@ -20,6 +20,22 @@ class Client extends Model {
     const CREATED_AT = 'client_created';
     const UPDATED_AT = 'client_updated';
 
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($client) {
+            // Obtener el último ID de la tabla clientes
+            $lastClientId = \DB::table('clientes')->max('clientesid');
+
+            // Asignar el client_id en crm_clientes
+            // Asumiendo que el nombre de la columna en crm_clientes es client_id
+            $client->client_id = $lastClientId + 1;
+        });
+    }
+  
+
     /**
      * relatioship business rules:
      *         - the Creator (user) can have many Clients
