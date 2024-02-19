@@ -77,7 +77,8 @@
 
 <!--[PRINTING]-->
 @if(config('visibility.page_rendering') == 'print-page')
-<script src="public/js/dynamic/print.js?v={{ config('system.versioning') }}"></script>
+<!-- REVIEW: PASANTE -->
+<script src="public/js/dynamic/print.js"></script>
 @endif
 
 </html>

@@ -2,6 +2,18 @@
 <div class="row" id="js-trigger-clients-modal-add-edit" data-payload="{{ $page['section'] ?? '' }}">
     <div class="col-lg-12">
 
+        @if(isset($page['section']) && $page['section'] == 'create')
+            <!--identification-->
+            <div class="form-group row">
+                <label
+                    class="col-sm-12 col-lg-3 text-left control-label col-form-label required">Identificación*</label>
+                <div class="col-sm-12 col-lg-9">
+                    <input type="text" class="form-control form-control-sm" id="identification" name="identification"
+                        placeholder="">
+                </div>
+            </div>
+        @endif
+
         <div class="form-group row">
             <label
                 class="col-sm-12 col-lg-3 text-left control-label col-form-label required">{{ cleanLang(__('lang.company_name')) }}*</label>
@@ -69,6 +81,13 @@
                 class="col-sm-12 col-lg-3 text-left control-label col-form-label required">{{ cleanLang(__('lang.email_address')) }}*</label>
             <div class="col-sm-12 col-lg-9">
                 <input type="text" class="form-control form-control-sm" id="email" name="email" placeholder="">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label
+                class="col-sm-12 col-lg-3 text-left control-label col-form-label">{{ cleanLang(__('lang.telephone')) }}*</label>
+            <div class="col-sm-12 col-lg-9">
+                <input type="text" class="form-control form-control-sm" id="client_phone" name="client_phone">
             </div>
         </div>
 
@@ -231,14 +250,7 @@
                     </select>
                 </div>
             </div>
-            <div class="form-group row">
-                <label
-                    class="col-sm-12 col-lg-3 text-left control-label col-form-label">{{ cleanLang(__('lang.telephone')) }}</label>
-                <div class="col-sm-12 col-lg-9">
-                    <input type="text" class="form-control form-control-sm" id="client_phone" name="client_phone"
-                        value="{{ $client->client_phone ?? '' }}">
-                </div>
-            </div>
+            
             <div class="form-group row">
                 <label
                     class="col-sm-12 col-lg-3 text-left control-label col-form-label">{{ cleanLang(__('lang.website')) }}</label>

@@ -27,5 +27,6 @@
     <input type="hidden" name="signature_code" id="signature_code">
 </div>
 
-<script src="public/vendor/js/signaturepad/signature_pad.min.js?v={{ config('system.versioning') }}"></script>
-<script src="public/js/dynamic/sign.document.js?v={{ config('system.versioning') }}"></script>
+<!-- REVIEW: PASANTE -->
+<script src="public/vendor/js/signaturepad/signature_pad.min.js"></script>
+<script src="public/js/dynamic/sign.document.js"></script>

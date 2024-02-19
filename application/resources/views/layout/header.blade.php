@@ -12,8 +12,9 @@
     <!--BASEURL-->
     <base href="{{ url('/') }}" target="_self">
 
+    <!-- REVIEW: PASANTE -->
     <!--JQUERY & OTHER HEADER JS-->
-    <script src="public/vendor/js/vendor.header.js?v={{ config('system.versioning') }}"></script>
+    <script src="public/vendor/js/vendor.header.js"></script>
 
     <!--BOOTSTRAP-->
     <link href="public/vendor/css/bootstrap/bootstrap.min.css" rel="stylesheet">
@@ -34,11 +35,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 
+    <!-- REVIEW: PASANTE -->
     <!--VENDORS CSS-->
-    <link rel="stylesheet" href="public/vendor/css/vendor.css?v={{ config('system.versioning') }}">
+    <link rel="stylesheet" href="public/vendor/css/vendor.css">
 
+    <!-- REVIEW: PASANTE -->
     <!--ICONS-->
-    <link rel="stylesheet" href="public/vendor/fonts/growcrm-icons/styles.css?v={{ config('system.versioning') }}">
+    <link rel="stylesheet" href="public/vendor/fonts/growcrm-icons/styles.css">
 
     <!--THEME STYLE-->
     <!--use the default theme for all external pages (e.g. proposals, cotracts etc) -->
@@ -55,11 +58,13 @@
     @endif
     @endif
 
+    <!-- REVIEW: PASANTE -->
     <!--USERS CUSTON CSS FILE-->
-    <link href="public/css/custom.css?v={{ config('system.versioning') }}" rel="stylesheet">
+    <link href="public/css/custom.css" rel="stylesheet">
 
+    <!-- REVIEW: PASANTE -->
     <!--PRINTING CSS-->
-    <link href="public/css/print.css?v={{ config('system.versioning') }}" rel="stylesheet">
+    <link href="public/css/print.css" rel="stylesheet">
 
     <!-- Favicon icon -->
     <link rel="apple-touch-icon" sizes="57x57" href="public/images/favicon/apple-icon-57x57.png">
@@ -170,8 +175,9 @@
         NX.array_4 = [];
     </script>
 
+    <!-- REVIEW: PASANTE -->
     <!--boot js-->
-    <script src="public/js/core/head.js?v={{ config('system.versioning') }}"></script>
+    <script src="public/js/core/head.js"></script>
 
     <!--stripe payments js-->
     @if(@config('visibility.stripe_js'))

@@ -2,6 +2,18 @@
     <h3>{{ cleanLang(__('lang.convert_to_a_customer')) }}</h3>
     <div class="line p-b-25"></div>
 
+    <input type="hidden" name="convert_lead" value="1">
+
+    <!-- identification -->
+    <div class="form-group row">
+        <label
+            class="col-sm-12 col-lg-3 text-left control-label col-form-label required">Identificación*</label>
+        <div class="col-sm-12 col-lg-9">
+            <input type="text" class="form-control form-control-sm" id="convert_lead_identification" name="identification"
+                placeholder="" value="{{ $lead->lead_identification ?? '' }}">
+        </div>
+    </div>
+    
     <!--first name-->
     <div class="form-group row">
         <label

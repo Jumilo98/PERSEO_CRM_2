@@ -2503,11 +2503,12 @@ function runtimeContractStatusColors($value = '', $type = 'label') {
  * return lead name with title
  * @return string
  */
+/* REVIEW
 function runtimeLeadNameTitle($lead_firstname = '', $lead_lastname = '', $lead_title = '') {
 
     return $lead_firstname . ' ' . $lead_lastname;
 
-}
+}*/
 
 /**
  * get the cover image for projects for task covers

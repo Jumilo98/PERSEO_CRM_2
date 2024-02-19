@@ -1315,6 +1315,7 @@ CREATE TABLE `crm_clientespotenciales` (
   `lead_creatorid` int(11) DEFAULT NULL,
   `lead_updatorid` int(11) DEFAULT NULL,
   `lead_categoryid` int(11) DEFAULT 3,
+  `lead_identification` varchar(13) DEFAULT NULL,
   `lead_firstname` varchar(100) DEFAULT NULL,
   `lead_lastname` varchar(100) DEFAULT NULL,
   `lead_email` varchar(150) DEFAULT NULL,

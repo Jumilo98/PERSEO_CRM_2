@@ -13,6 +13,7 @@ class TaskStatus extends Model {
      * @CREATED_AT string - creation date column
      * @UPDATED_AT string - updated date column
      */
+    
     protected $table = 'crm_estadosdetareas';
     protected $primaryKey = 'taskstatus_id';
     protected $guarded = ['taskstatus_id'];

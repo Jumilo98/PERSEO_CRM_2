@@ -13,6 +13,7 @@ class CategoryUser extends Model {
      * @CREATED_AT string - creation date column
      * @UPDATED_AT string - updated date column
      */
+    
     protected $table = 'crm_categoriausuarios';
     protected $primaryKey = 'categoryuser_id';
     protected $guarded = ['categoryuser_id'];

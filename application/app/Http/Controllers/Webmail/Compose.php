@@ -73,6 +73,7 @@ class Compose extends Controller {
                 }
             }
         }
+        
 
         //sending to a specified recipient(s) - [client]
         if (request('resource_type') == 'user' && is_numeric(request('resource_id'))) {
@@ -85,7 +86,8 @@ class Compose extends Controller {
                 $recipients['specified'] = true;
             }
         }
-
+        
+        
         //sending to a specified recipient(s) - [lead]
         if (request('resource_type') == 'lead' && is_numeric(request('resource_id'))) {
             if ($lead = \App\Models\Lead::Where('lead_id', request('resource_id'))->first()) {

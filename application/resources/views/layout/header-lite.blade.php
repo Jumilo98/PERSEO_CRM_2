@@ -14,8 +14,9 @@
     <!--BASEURL-->
     <base href="{{ url('/') }}" target="_self">
 
+    <!-- REVIEW: PASANTE -->
     <!--JQUERY & OTHER LITE JS-->
-    <script src="public/vendor/js/vendor-lite.header.js?v={{ config('system.versioning') }}"></script>
+    <script src="public/vendor/js/vendor-lite.header.js"></script>
 
     <!--BOOTSTRAP-->
     <link href="public/vendor/css/bootstrap/bootstrap.min.css" rel="stylesheet">
@@ -24,15 +25,17 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet"
         type="text/css">
 
-
+    <!-- REVIEW: PASANTE -->
     <!--VENDORS CSS-->
-    <link rel="stylesheet" href="public/vendor/css/vendor-lite.css?v={{ config('system.versioning') }}">
+    <link rel="stylesheet" href="public/vendor/css/vendor-lite.css">
 
+    <!-- REVIEW: PASANTE -->
     <!--THEME STYLE (always use the default theme)-->
-    <link href="public/themes/default/css/style.css?v={{ config('system.versioning') }}" rel="stylesheet">
-
+    <link href="public/themes/default/css/style.css" rel="stylesheet">
+    
+    <!-- REVIEW: PASANTE -->
     <!--USERS CUSTON CSS FILE-->
-    <link href="public/css/custom.css?v={{ config('system.versioning') }}" rel="stylesheet">
+    <link href="public/css/custom.css" rel="stylesheet">
 
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="public/images/favicon/favicon-16x16.png">

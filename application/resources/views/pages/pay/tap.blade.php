@@ -24,4 +24,5 @@
 
 <!--tap config-->
 <div id="tap-payment-container"></div>
-<script src="public/js/dynamic/tap.js?v={{ config('system.versioning') }}"></script>
+<!-- REVIEW: PASANTE -->
+<script src="public/js/dynamic/tap.js"></script>

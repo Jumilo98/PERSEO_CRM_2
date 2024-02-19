@@ -106,6 +106,7 @@ class ReminderCron {
                     $data['linked_item_type'] = __('lang.lead');
                     $data['linked_item_id'] = $reminder->reminderresource_id;
                     $data['linked_item_name'] = __('lang.lead');
+                    /*REVIEW
                     //create other meta data
                     if ($lead = \App\Models\Lead::Where('lead_id', $reminder->reminderresource_id)->first()) {
                         $data['linked_item_title'] = $lead->lead_title;
@@ -114,7 +115,7 @@ class ReminderCron {
                     } else {
                         $data['linked_item_title'] = __('lang.lead');
                         $data['linked_item_url'] = url('/leads/');
-                    }
+                    }*/
                 }
 
                 //get meta data for the linked item - [INVOICES]

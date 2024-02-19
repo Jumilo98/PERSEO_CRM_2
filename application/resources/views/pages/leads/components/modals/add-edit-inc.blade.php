@@ -9,6 +9,16 @@
         </div>
         @endif
 
+        <!--identification-->
+        <div class="form-group row">
+            <label
+                class="col-sm-12 col-lg-3 text-left control-label col-form-label required">Identificación*</label>
+            <div class="col-sm-12 col-lg-9">
+                <input type="text" class="form-control form-control-sm" id="lead_identification" name="lead_identification"
+                    placeholder="" value="{{ $lead->lead_identification ?? '' }}">
+            </div>
+        </div>
+
         <!--title-->
         <div class="form-group row">
             <label
@@ -54,13 +64,31 @@
                     value="{{ $lead->lead_phone ?? '' }}">
             </div>
         </div>
+        
         <!--email-->
         <div class="form-group row">
             <label
-                class="col-sm-12 col-lg-3 text-left control-label col-form-label">{{ cleanLang(__('lang.email_address')) }}</label>
+                class="col-sm-12 col-lg-3 text-left control-label col-form-label">{{ cleanLang(__('lang.email_address')) }}*</label>
             <div class="col-sm-12 col-lg-9">
                 <input type="text" class="form-control form-control-sm" id="lead_email" name="lead_email" placeholder=""
                     value="{{ $lead->lead_email ?? '' }}">
+            </div>
+        </div>
+        
+        <!-- REVIEW: PASANTE -->
+        <!--estado-->
+
+        <div class="form-group row">
+            <label
+                class="col-sm-12 col-lg-3 text-left control-label col-form-label">Estado*</label>
+            <div class="col-sm-12 col-lg-9">
+                <select class="form-control form-control-sm"
+                    name="estado" id="estado" value="{{ $lead->estado ?? '' }}">
+                    <option value="0">Prospecto</option>
+                    <option value="1">Negociación</option>
+                    <option value="2">Venta Concretada</option>
+                    <option value="3">Venta Perdida</option>
+                </select>
             </div>
         </div>
 

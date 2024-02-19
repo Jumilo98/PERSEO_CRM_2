@@ -203,12 +203,13 @@ class LeadsImport implements ToModel, WithStartRow, WithHeadingRow, WithValidati
     public function rules(): array
     {
         return [
+            /*REVIEW
             'firstname' => [
                 'required',
             ],
             'lastname' => [
                 'required',
-            ],
+            ],*/
             'title' => [
                 'required',
             ],   

@@ -336,6 +336,7 @@ class Formbuilder extends Controller {
         ];
         array_push($obj, $arr);
 
+        /*REVIEW
         //add the first name (required fields)
         $arr = [
             'name' => 'lead_firstname',
@@ -346,7 +347,7 @@ class Formbuilder extends Controller {
             'icon' => 'formbuilder-custom-field-icon lead_firstname required',
             'className' => 'form-control',
             'values' => [],
-        ];
+        ];*/
         array_push($obj, $arr);
 
         //return the array

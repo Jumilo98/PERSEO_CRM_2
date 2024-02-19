@@ -13,6 +13,7 @@ class LeadAssigned extends Model {
      * @CREATED_AT string - creation date column
      * @UPDATED_AT string - updated date column
      */
+    
     protected $table = 'crm_clientespotencialesasignados';
     protected $primaryKey = 'leadsassigned_id';
     protected $guarded = ['leadsassigned_id'];

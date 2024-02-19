@@ -199,6 +199,7 @@ class Webform extends Controller {
         //get the json form payload
         $fields = json_decode(json_decode($webform->webform_builder_payload));
 
+        /*REVIEW
         //extrach the form field names and their required states
         foreach ($fields as $field) {
             if (in_array($field->type, $valid)) {
@@ -213,7 +214,7 @@ class Webform extends Controller {
                 }
                 array_push($obj, $var);
             }
-        }
+        }*/
 
         return $obj;
     }
@@ -244,6 +245,7 @@ class Webform extends Controller {
                 'tooltip' => html_entity_decode($field->description ?? ''),
             ];
 
+            /*REVIEW
             //create text field
             if ($field->type == 'text') {
                 //force first name and last name to be required
@@ -251,7 +253,7 @@ class Webform extends Controller {
                     $payload['required'] = true;
                 }
                 $html .= view('pages/webform/elements/text', compact('payload'))->render();
-            }
+            }*/
 
             //create textarea field
             if ($field->type == 'textarea') {

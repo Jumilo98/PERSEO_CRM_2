@@ -13,6 +13,7 @@ class LeadStatus extends Model {
      * @CREATED_AT string - creation date column
      * @UPDATED_AT string - updated date column
      */
+    
     protected $table = 'crm_clientespotencialesestado';
     protected $primaryKey = 'leadstatus_id';
     protected $guarded = ['leadstatus_id'];

@@ -50,6 +50,7 @@ class LeadStoreUpdate extends FormRequest {
          * ------------------------------------------------------*/
         //validate
         $rules += [
+            // REVIEW: PASANTE DESARROLLADOR
             'lead_title' => [
                 'required',
                 new NoTags,
@@ -62,9 +63,17 @@ class LeadStoreUpdate extends FormRequest {
                 'required',
                 new NoTags,
             ],
+            'lead_identification' => [
+                'required',
+                new NoTags,
+            ],
             'lead_email' => [
-                'nullable',
+                'required',
                 'email',
+            ],
+            'estado' => [
+                'required',
+                new NoTags,
             ],
             'lead_value' => [
                 'nullable',
@@ -105,11 +114,11 @@ class LeadStoreUpdate extends FormRequest {
                 'date',
             ],
             'lead_company_name' => [
-                'nullable',
+                'required',
                 new NoTags,
             ],
             'lead_phone' => [
-                'nullable',
+                'required',
                 new NoTags,
             ],
             'lead_street' => [

@@ -19,6 +19,7 @@ class Lineitem extends Model {
      * @CREATED_AT string - creation date column
      * @UPDATED_AT string - updated date column
      */
+    
     protected $table = 'crm_lineadearticulos';
     protected $primaryKey = 'lineitem_id';
     protected $dateFormat = 'Y-m-d H:i:s';

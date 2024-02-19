@@ -17,6 +17,7 @@ class User extends Authenticatable {
      * @CREATED_AT string - creation date column
      * @UPDATED_AT string - updated date column
      */
+    
     protected $table = 'crm_usuarios';
     protected $primaryKey = 'id';
     protected $dateFormat = 'Y-m-d H:i:s';

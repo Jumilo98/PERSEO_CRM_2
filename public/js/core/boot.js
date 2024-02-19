@@ -1867,13 +1867,15 @@ NX.toggleSettingsLeftMenu = function ($self) {
  * -----------------------------------------------------------*/
 NX.convertLeadForm = function ($self, action) {
 
+    console.log($("#lead_company_name").val());
     //update form with actual content
+    $("#convert_lead_identification").val($("#card-lead-identification-containter").html());
     $("#convert_lead_firstname").val($("#card-lead-firstname-containter").html());
     $("#convert_lead_lastname").val($("#card-lead-lastname-containter").html());
     $("#convert_lead_email").val($("#card-lead-email").html());
     $("#convert_lead_phone").val($("#card-lead-phone").html());
     $("#convert_lead_job_position").val($("#lead_job_position").val());
-    $("#convert_lead_company_name").val($("#lead_company_name").val());
+    $("#convert_lead_company_name").val($('#card-lead-company-name-containter').val());
     $("#convert_lead_website").val($("#lead_website").val());
     $("#convert_lead_street").val($("#lead_street").val());
     $("#convert_lead_city").val($("#lead_city").val());

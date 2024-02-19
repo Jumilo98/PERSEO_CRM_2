@@ -17,7 +17,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Log;
 
-class LeadRepository {
+class LeadRepository
+{
 
     /**
      * The leads repository instance.
@@ -29,7 +30,8 @@ class LeadRepository {
     /**
      * Inject dependecies
      */
-    public function __construct(Lead $leads, ClientesPotencialPc $leadsPc) {
+    public function __construct(Lead $leads, ClientesPotencialPc $leadsPc)
+    {
         $this->leads = $leads;
         $this->leadsPc = $leadsPc;
     }
@@ -39,7 +41,8 @@ class LeadRepository {
      * @param int $id optional for getting a single, specified record
      * @return object lead collection
      */
-    public function search($id = '', $data = []) {
+    public function search($id = '', $data = [])
+    {
 
         $leads = $this->leads->newQuery();
 
@@ -252,12 +255,12 @@ class LeadRepository {
             }
             //others
             switch (request('orderby')) {
-            case 'status':
-                $leads->orderBy('leadstatus_title', request('sortorder'));
-                break;
-            case 'lead_category_name':
-                $leads->orderBy('category_name', request('sortorder'));
-                break;
+                case 'status':
+                    $leads->orderBy('leadstatus_title', request('sortorder'));
+                    break;
+                case 'lead_category_name':
+                    $leads->orderBy('category_name', request('sortorder'));
+                    break;
             }
         } else {
             //default sorting
@@ -294,73 +297,113 @@ class LeadRepository {
      * @param array $position new record position
      * @return mixed object|bool
      */
-    public function create($position = '') {
-
+    public function create($position = '')
+    {
         //validate
         if (!is_numeric($position)) {
-            Log::error("validation error - invalid params", ['process' => '[LeadRepository]', config('app.debug_ref'), 'function' => __function__, 'file' => basename(__FILE__), 'line' => __line__, 'path' => __file__, 'project_id' => 1]);
+            Log::error("validation error - invalid params", ['process' => '[LeadRepository]', config('app.debug_ref'), 'function' => __FUNCTION__, 'file' => basename(__FILE__), 'line' => __LINE__, 'path' => __FILE__, 'project_id' => 1]);
             return false;
         }
 
-        //save new user
+        $leadPcAux = ClientesPotencialPc::where('identificacion', request('lead_identification'))->first();
+
+        $identificationType = 'C';
+
+        if (is_numeric(request('lead_identification')))
+            $identificationType = (strlen(request('lead_identification')) == 10) ? 'C' : 'R';
+        else
+            $identificationType = 'P';
+        
         $lead = new $this->leads;
         $leadPc = new $this->leadsPc;
-        
-        //data
-        $lead->lead_creatorid = auth()->id();
-        $lead->lead_firstname = request('lead_firstname');
-        $lead->lead_lastname = request('lead_lastname');
-        $lead->lead_email = request('lead_email');
-        $lead->lead_phone = request('lead_phone');
-        $lead->lead_job_position = request('lead_job_position');
-        $lead->lead_company_name = request('lead_company_name');
-        $lead->lead_website = request('lead_website');
-        $lead->lead_street = request('lead_street');
-        $lead->lead_city = request('lead_city');
-        $lead->lead_state = request('lead_state');
-        $lead->lead_zip = request('lead_zip');
-        $lead->lead_country = request('lead_country');
-        $lead->lead_source = request('lead_source');
-        $lead->lead_title = request('lead_title');
-        $lead->lead_description = request('lead_description');
-        $lead->lead_value = request('lead_value');
-        $lead->lead_last_contacted = request('lead_last_contacted'); //or \Carbon\Carbon::now()
-        $lead->lead_status = request('lead_status');
-        $lead->lead_position = $position;
-        $lead->lead_categoryid = request('lead_categoryid');
 
-        /** ----------------------------------------------
+        if (!$leadPcAux) {
+            //save new user
+
+            //data
+            $lead->lead_creatorid = auth()->id();
+            $lead->lead_identification = request('lead_identification');
+            //$lead->lead_identification_type = $identificationType;
+            $lead->lead_firstname = request('lead_firstname');
+            $lead->lead_lastname = request('lead_lastname');
+            $lead->lead_email = request('lead_email');
+            $lead->lead_phone = request('lead_phone');
+            $lead->lead_job_position = request('lead_job_position');
+            $lead->lead_company_name = request('lead_company_name');
+            $lead->lead_website = request('lead_website');
+            $lead->lead_street = request('lead_street');
+            $lead->lead_city = request('lead_city');
+            $lead->lead_state = request('lead_state');
+            $lead->lead_zip = request('lead_zip');
+            $lead->lead_country = request('lead_country');
+            $lead->lead_source = request('lead_source');
+            $lead->lead_title = request('lead_title');
+            $lead->lead_description = request('lead_description');
+            $lead->lead_value = request('lead_value');
+            $lead->lead_last_contacted = request('lead_last_contacted'); //or \Carbon\Carbon::now()
+            $lead->lead_status = request('lead_status');
+            $lead->lead_position = $position;
+            $lead->lead_categoryid = request('lead_categoryid');
+
+            /** ----------------------------------------------
              * create the clientesPotencialPc
              * ----------------------------------------------*/
-            $leadPc->tipoidentificacion = ('C');
-            $leadPc->identificacion = ('9999999999');
+
+            $leadPc->tipoidentificacion = $identificationType;
+            $leadPc->identificacion = request('lead_identification');
             $leadPc->razonsocial = request('lead_lastname') . ' ' . request('lead_firstname');
             $leadPc->nombrecomercial = request('lead_company_name');
-            $leadPc->clientes_gruposid = ('1');
+            $leadPc->clientes_gruposid = 1;
             $leadPc->telefono1 = request('lead_phone');
             $leadPc->email = request('lead_email');
-            $leadPc->direccion = request('lead_street'). ' , ' . request('lead_city') . ' , ' . request('lead_state') . ' , ' . request('lead_zip') . ' , ' . request('lead_country');
-            $leadPc->estado = ('0');
-            //$leadPc->fechacreacion = ('2024-01-05 16:16:00.944');
-            $leadPc->usuariocreacion = ('J');
-            $leadPc->parametros_json = ('{}');
+            $leadPc->direccion = request('lead_street') . ' , ' . request('lead_city') . ' , ' . request('lead_state') . ' , ' . request('lead_zip') . ' , ' . request('lead_country');
+            $leadPc->estado = request('estado');
 
-        //save
-        if (!$leadPc->save()) {
-            Log::error("record could not be saved - database error", ['process' => '[ClientRepository]', config('app.debug_ref'), 'function' => __function__, 'file' => basename(__FILE__), 'line' => __line__, 'path' => __file__]);
-            return false;
-        }else{
-            //save and return id
-            if ($lead->save()) {
-                //apply custom fields data
-                $this->applyCustomFields($lead->lead_id);             
+            $leadPc->usuariocreacion = auth()->user()->id;
+            $leadPc->parametros_json = '{}';
 
-                return $lead->lead_id;
-            } else {
+            //save
+            if (!$leadPc->save()) {
+                Log::error("record could not be saved - database error", ['process' => '[ClientRepository]', config('app.debug_ref'), 'function' => __FUNCTION__, 'file' => basename(__FILE__), 'line' => __LINE__, 'path' => __FILE__]);
                 return false;
             }
+        } else {
+            $names = explode(" ", $leadPcAux->razonsocial);
+
+            if (count($names) == 1)
+                $names[1] = $names[0];
+
+            $lead->lead_creatorid = $leadPcAux->usuariocreacion;
+            $lead->lead_identification = $leadPcAux->identificacion;
+            $lead->lead_firstname = $names[1];
+            $lead->lead_lastname = $names[0];
+            $lead->lead_email = $leadPcAux->email;
+            $lead->lead_phone = $leadPcAux->telefono1;
+            //$lead->lead_job_position = request('lead_job_position');
+            $lead->lead_company_name = $leadPcAux->nombrecomercial;
+            /*$lead->lead_website = request('lead_website');
+            $lead->lead_street = request('lead_street');
+            $lead->lead_city = request('lead_city');
+            $lead->lead_state = request('lead_state');
+            $lead->lead_zip = request('lead_zip');
+            $lead->lead_country = request('lead_country');
+            $lead->lead_source = request('lead_source');
+            $lead->lead_title = request('lead_title');
+            $lead->lead_description = request('lead_description');
+            $lead->lead_value = request('lead_value');
+            $lead->lead_last_contacted = request('lead_last_contacted'); //or \Carbon\Carbon::now()
+            $lead->lead_status = request('lead_status');
+            $lead->lead_categoryid = request('lead_categoryid');*/
+            $lead->lead_position = $position;
         }
-        
+
+        if (!$lead->save()) {
+            Log::error("record could not be saved - database error", ['process' => '[ClientRepository]', config('app.debug_ref'), 'function' => __FUNCTION__, 'file' => basename(__FILE__), 'line' => __LINE__, 'path' => __FILE__]);
+            return false;
+        }
+
+        $this->applyCustomFields($lead->lead_id);
+        return $lead->lead_id;
     }
 
     /**
@@ -368,11 +411,12 @@ class LeadRepository {
      * @param int $id record id
      * @return mixed int|bool
      */
-    public function update($id) {
+    public function update($id)
+    {
 
         //get the record
         if (!$lead = $this->leads->find($id)) {
-            Log::error("record could not be found", ['process' => '[LeadAssignedRepository]', config('app.debug_ref'), 'function' => __function__, 'file' => basename(__FILE__), 'line' => __line__, 'path' => __file__, 'lead_id' => $id ?? '']);
+            Log::error("record could not be found", ['process' => '[LeadAssignedRepository]', config('app.debug_ref'), 'function' => __FUNCTION__, 'file' => basename(__FILE__), 'line' => __LINE__, 'path' => __FILE__, 'lead_id' => $id ?? '']);
             return false;
         }
 
@@ -416,7 +460,8 @@ class LeadRepository {
      * @param string $searchterm
      * @return array
      */
-    public function autocompleteFeed($status = '', $limit = '', $searchterm = '') {
+    public function autocompleteFeed($status = '', $limit = '', $searchterm = '')
+    {
 
         //validation
         if ($searchterm == '') {
@@ -457,7 +502,8 @@ class LeadRepository {
      * @param string $searchterm
      * @return array
      */
-    public function autocompleteFeedNames($status = '', $limit = '', $searchterm = '') {
+    public function autocompleteFeedNames($status = '', $limit = '', $searchterm = '')
+    {
 
         //validation
         if ($searchterm == '') {
@@ -494,7 +540,8 @@ class LeadRepository {
     /**
      * update model wit custom fields data (where enabled)
      */
-    public function applyCustomFields($id = '') {
+    public function applyCustomFields($id = '')
+    {
 
         //custom fields
         $fields = \App\Models\CustomField::Where('customfields_type', 'leads')->get();
@@ -513,7 +560,8 @@ class LeadRepository {
      * clone a leads
      * @return bool
      */
-    public function cloneLead($lead = '', $data = []) {
+    public function cloneLead($lead = '', $data = [])
+    {
 
         //we are copying
         $new_lead = $lead->replicate();

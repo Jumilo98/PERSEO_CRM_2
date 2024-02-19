@@ -6,9 +6,10 @@
 
 <div id="webform-builder-wraper" class="p-t-40">
 
+<!-- REVIEW: PASANTE -->
     <!-- FORM BUILDER JAVASCRIPT-->
-    <script src="public/vendor/js/formbuilder/form-builder.min.js?v={{ config('system.versioning') }}"></script>
-    <script src="public/js/webforms/webforms.js?v={{ config('system.versioning') }}"></script>
+    <script src="public/vendor/js/formbuilder/form-builder.min.js"></script>
+    <script src="public/js/webforms/webforms.js"></script>
 
     <div class="webform-builder-container" id="webform-builder-container">
 

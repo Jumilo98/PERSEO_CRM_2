@@ -13,27 +13,13 @@ class Client extends Model {
      * @CREATED_AT string - creation date column
      * @UPDATED_AT string - updated date column
      */
+    
     protected $table = 'crm_clientes';
     protected $primaryKey = 'client_id';
     protected $dateFormat = 'Y-m-d H:i:s';
-    protected $guarded = ['client_id'];
+    protected $guarded = [ 'client_id' ];
     const CREATED_AT = 'client_created';
     const UPDATED_AT = 'client_updated';
-
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($client) {
-            // Obtener el último ID de la tabla clientes
-            $lastClientId = \DB::table('clientes')->max('clientesid');
-
-            // Asignar el client_id en crm_clientes
-            // Asumiendo que el nombre de la columna en crm_clientes es client_id
-            $client->client_id = $lastClientId + 1;
-        });
-    }
   
 
     /**

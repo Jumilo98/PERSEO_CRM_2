@@ -1677,8 +1677,10 @@ function NXArticleCreate() {
 function NXLeadConvert() {
     $("#convertLeadForm").validate({
         rules: {
+            // REVIEW: PASANTE - DESARROLLADOR
             first_name: 'required',
             last_name: 'required',
+            identification: 'required',
             client_company_name: 'required',
             email: 'required'
         },
@@ -1707,9 +1709,14 @@ function NXLeadCreate() {
     $("#commonModalForm").validate().destroy();
     $("#commonModalForm").validate({
         rules: {
+            // REVIEW: PASANTE
             lead_title: "required",
             lead_firstname: "required",
-            lead_lastname: "required"
+            lead_lastname: "required",
+            lead_company_name: "required",
+            lead_identification: "required",
+            lead_phone: "required",
+            lead_group: "required",
         },
         submitHandler: function (form) {
             nxAjaxUxRequest($("#commonModalSubmitButton"));
@@ -2500,10 +2507,12 @@ function NXAddEditClients() {
         $("#commonModalForm").validate().destroy();
         $("#commonModalForm").validate({
             rules: {
+                identification: "required",
                 client_company_name: "required",
                 first_name: "required",
                 last_name: "required",
                 email: "required",
+                client_phone: "required",
             },
             submitHandler: function (form) {
                 //ajax form, so initiate ajax request here

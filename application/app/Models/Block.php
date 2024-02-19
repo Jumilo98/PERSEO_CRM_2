@@ -14,6 +14,7 @@ class Block extends Model {
      * @UPDATED_AT string - updated date column
      */
 
+    
     protected $table = 'blocks';
     protected $primaryKey = 'block_id';
     protected $dateFormat = 'Y-m-d H:i:s';

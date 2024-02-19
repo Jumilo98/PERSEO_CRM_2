@@ -48,6 +48,9 @@ class ClientStoreValidation extends FormRequest {
          * ------------------------------------------------------*/
         if ($this->getMethod() == 'POST') {
             $rules += [
+                'identification' => [
+                    'required',
+                ],
                 'first_name' => [
                     'required',
                 ],
@@ -58,6 +61,11 @@ class ClientStoreValidation extends FormRequest {
                     'required',
                     'email',
                     'unique:crm_usuarios,email',
+                ],
+                'client_phone' => [
+                    'required',
+                    'numeric',
+                    //'unique:crm_usuarios,client_phone',
                 ],
             ];
         }

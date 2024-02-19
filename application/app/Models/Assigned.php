@@ -22,6 +22,7 @@ class Assigned extends Model {
      * @CREATED_AT string - creation date column
      * @UPDATED_AT string - updated date column
      */
+    
     protected $table = 'assigned';
     protected $primaryKey = 'assigned_id';
     protected $dateFormat = 'Y-m-d H:i:s';

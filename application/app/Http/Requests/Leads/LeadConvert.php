@@ -43,7 +43,11 @@ class LeadConvert extends FormRequest {
          * validation rules
          * ------------------------------------------------------*/
         $rules = [
-            'first_name' => [
+            'identification' => [
+                'required',
+                new NoTags,
+            ],
+            'first_name' => [   
                 'required',
                 new NoTags,
             ],

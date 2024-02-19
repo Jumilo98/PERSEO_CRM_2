@@ -34,7 +34,21 @@
             <span class="x-highlight">{{ $lead->lead_firstname }} {{ $lead->lead_lastname }}</span>
             @endif
         </div>
+
+        <input id="card-lead-company-name-containter" type="hidden" value="{{ $lead->lead_company_name }}">
+        
+        <!--Identification-->
+        <div class="x-element text-center font-14" id="card-lead-element-container-name">
+            @if($lead->permission_edit_lead)
+            <span class="x-highlight x-editable js-card-settings-button-static" id="card-lead-name" data-container=".card-modal" tabindex="0"
+                data-popover-content="card-lead-identification-popover" data-title="{{ cleanLang(__('lang.identification')) }}">
+                <span id="card-lead-identification-containter">{{ $lead->lead_identification }}</span>
+            @else
+            <span class="x-highlight">{{ $lead->lead_identification }}</span>
+            @endif
+        </div>
         <!--value-->
+
         <div class="x-element"><i class="mdi mdi-cash-multiple"></i> <span>{{ cleanLang(__('lang.value')) }}: </span>
             @if($lead->permission_edit_lead)
             <span class="x-highlight x-editable js-card-settings-button-static" data-container=".card-modal" id="card-lead-value" tabindex="0"

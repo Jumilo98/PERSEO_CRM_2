@@ -9,6 +9,7 @@ class EmailLog extends Model {
     /**
      * @primaryKey string - primry key column.
      */
+    
     protected $table = 'crm_correoelectronico';
     protected $primaryKey = 'emaillog_id';
     protected $dateFormat = 'Y-m-d H:i:s';

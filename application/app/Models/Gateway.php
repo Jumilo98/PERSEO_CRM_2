@@ -13,6 +13,7 @@ class Gateway extends Model {
      * @CREATED_AT string - creation date column
      * @UPDATED_AT string - updated date column
      */
+    
     protected $primaryKey = 'gateway_id';
     protected $dateFormat = 'Y-m-d H:i:s';
     const CREATED_AT = 'gateway_created';

@@ -13,6 +13,7 @@ class TicketStatus extends Model {
      * @CREATED_AT string - creation date column
      * @UPDATED_AT string - updated date column
      */
+    
     protected $table = 'crm_estadosdetickets';
     protected $primaryKey = 'ticketstatus_id';
     protected $guarded = ['ticketstatus_id'];

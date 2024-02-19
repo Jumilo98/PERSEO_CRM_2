@@ -13,6 +13,7 @@ class EventTracking extends Model {
      * @CREATED_AT string - creation date column
      * @UPDATED_AT string - updated date column
      */
+    
     protected $table = 'crm_seguimientodeeventos';
     protected $primaryKey = 'eventtracking_id';
     protected $guarded = ['eventtracking_id'];

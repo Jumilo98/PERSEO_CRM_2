@@ -57,7 +57,7 @@ NX.notification = function (obj) {
 	if (typeof noty === 'function') {
 
 		//default duration
-		var duration = 3000;
+		var duration = 5000;
 
 		var position = (typeof NX.notification_position != 'undefined' && NX.notification_position != '') ? NX.notification_position : 'bottomLeft';
 		var error_duration = (typeof NX.notification_error_duration != 'undefined' && NX.notification_error_duration != '') ? NX.notification_error_duration : duration;

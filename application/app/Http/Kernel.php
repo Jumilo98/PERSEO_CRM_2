@@ -344,5 +344,6 @@ class Kernel extends HttpKernel {
         //[growcrm] - [reports]
         'reportsMiddlewareShow' => \App\Http\Middleware\Reports\Show::class,
 
+        'conexion' => \App\Http\Middleware\Conexion::class,
     ];
 }

@@ -13,7 +13,7 @@ class Subscription extends Model {
      * @CREATED_AT string - creation date column
      * @UPDATED_AT string - updated date column
      */
-
+    
     //protected $table = 'projects_assigned';
     protected $table = 'crm_suscripciones';
     protected $primaryKey = 'subscription_id';

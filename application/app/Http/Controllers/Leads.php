@@ -1875,6 +1875,7 @@ class Leads extends Controller {
         $leads = $this->leadrepo->search($id);
         $lead = $leads->first();
 
+        /*REVIEW
         //validate
         $validator = Validator::make(request()->all(), [
             'lead_firstname' => [
@@ -1886,6 +1887,7 @@ class Leads extends Controller {
                 new NoTags,
             ],
         ]);
+        
 
         //validation errors
         if ($validator->fails()) {
@@ -1903,10 +1905,11 @@ class Leads extends Controller {
                 'error_message' => $messages,
             ]);
         }
-
+        */
+        /*REVIEW
         //validate
         $lead->lead_firstname = request('lead_firstname');
-        $lead->lead_lastname = request('lead_lastname');
+        $lead->lead_lastname = request('lead_lastname');*/
         $lead->save();
 
         //get refreshed & reprocess
@@ -1915,9 +1918,9 @@ class Leads extends Controller {
 
         //reponse payload
         $payload = [
-            'type' => 'update-name',
+            'type' => 'update-name', /*REVIEW
             'firstname' => $lead->lead_firstname,
-            'firstlast' => $lead->lead_lastname,
+            'firstlast' => $lead->lead_lastname,*/
             'leads' => $leads,
         ];
 
@@ -2645,6 +2648,7 @@ class Leads extends Controller {
         ];
 
         //show the form
+        //dd(new ConvertDetailsResponse($payload));
         return new ConvertDetailsResponse($payload);
 
     }
@@ -2657,13 +2661,20 @@ class Leads extends Controller {
      * @return object
      */
     public function convertLead(LeadConvert $request, ClientRepository $clientrepo, UserRepository $userrepo, $id) {
-
         //get the lead
         $leads = $this->leadrepo->search($id);
         $lead = $leads->first();
 
         //create new customer
         if (\App\Models\Client::where('client_created_from_leadid', $id)->exists()) {
+            abort(409, __('lang.client_already_exists'));
+        }
+
+        if (\App\Models\Client::where('client_identification', $request->identification)->exists()) {
+            abort(409, __('lang.client_already_exists'));
+        }
+
+        if (\App\Models\PerseoPc\ClientesPc::where('identificacion', $request->identification)->exists()) {
             abort(409, __('lang.client_already_exists'));
         }
 

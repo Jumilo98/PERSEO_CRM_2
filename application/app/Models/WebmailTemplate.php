@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class WebmailTemplate extends Model {
-
+class WebmailTemplate extends Model
+{
     /**
      * @primaryKey string - primry key column.
      * @dateFormat string - date storage format
@@ -13,7 +13,7 @@ class WebmailTemplate extends Model {
      * @CREATED_AT string - creation date column
      * @UPDATED_AT string - updated date column
      */
-
+    
     protected $table = 'crm_plantillasdewebmail';
     protected $primaryKey = 'webmail_template_id';
     protected $dateFormat = 'Y-m-d H:i:s';
