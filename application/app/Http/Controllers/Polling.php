@@ -44,7 +44,7 @@ class Polling extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function generalPoll() {
-
+        //dd('generalPoll');
         //get users unread notifications
         $notifications_count = $this->trackingrepo->countUnread();
 

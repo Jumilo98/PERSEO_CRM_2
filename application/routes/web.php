@@ -1,9 +1,9 @@
 <?php
 
-/*$base = Request::segment(1);
+$base = Request::segment(1);
 
 if ($base) {
-    Route::group(['prefix' => $base, 'middleware' => ['conexion:' . $base]], function () {*/
+    Route::group(['prefix' => $base, 'middleware' => ['conexion:' . $base]], function () {
         //TESTING [DEV]
         Route::get("test", "Test@index");
         Route::post("test", "Test@index");
@@ -19,8 +19,8 @@ if ($base) {
         Route::post("/login", "Authenticate@logInAction");
         Route::get("/forgotpassword", "Authenticate@forgotPassword");
         Route::post("/forgotpassword", "Authenticate@forgotPasswordAction");
-        Route::get("/signup", "Authenticate@signUp");
-        Route::post("/signup", "Authenticate@signUpAction");
+        Route::get("/signup", "Authenticate@signUp")->name('signup');
+        Route::post("/signup", "Authenticate@signUpAction")->name('signup');
         Route::get("/resetpassword", "Authenticate@resetPassword");
         Route::post("/resetpassword", "Authenticate@resetPasswordAction");
         Route::get("/access", "Authenticate@directLoginAccess"); //SAAS
@@ -1196,6 +1196,5 @@ if ($base) {
 
         //Ruta de pruebas
         Route::get('/prueba', 'PerseoPc\Prueba@pruebaF');
-    /*});
+    });
 }
-*/
