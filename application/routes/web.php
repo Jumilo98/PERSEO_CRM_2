@@ -14,7 +14,7 @@ Route::any('home', 'Home@index')->name('home');
 Route::get("/login", "Authenticate@logIn")->name('login');
 Route::post("/login", "Authenticate@logInAction");
 Route::get("/forgotpassword", "Authenticate@forgotPassword");
-Route::post("/forgotpassword", "Authenticate@forgotPasswordAction");
+Route::post("/forgotpassword", "Authenticate@forgot.password.action");
 Route::get("/signup", "Authenticate@signUp");
 Route::post("/signup", "Authenticate@signUpAction");
 Route::get("/resetpassword", "Authenticate@resetPassword");
@@ -684,11 +684,12 @@ Route::resource('settings/taxrates', 'Settings\Taxrates');
 
 //SETTINGS - ESTIMATES
 Route::group(['prefix' => 'settings/estimates'], function () {
-    Route::get("/", "Settings\Estimates@index");
-    Route::put("/", "Settings\Estimates@update")->middleware(['demoModeCheck']);
-    Route::get("/automation", "Settings\Estimates@automation");
-    Route::put("/automation", "Settings\Estimates@automationUpdate");
+    Route::get("/", "Settings\Estimates@index")->name('settings.estimates.index');
+    Route::put("/", "Settings\Estimates@update")->middleware(['demoModeCheck'])->name('settings.estimates.update');
+    Route::get("/automation", "Settings\Estimates@automation")->name('settings.estimates.automation');
+    Route::put("/automation", "Settings\Estimates@automationUpdate")->name('settings.estimates.automationUpdate');
 });
+
 
 //SETTINGS - CONTRACTS
 Route::group(['prefix' => 'settings/contracts'], function () {
